@@ -47,6 +47,7 @@
   <Project Path="FMODUnityResonanceEditor.csproj" />
   <Project Path="Unity.Multiplayer.Center.Common.csproj" />
   <Project Path="FMODUnityEditor.csproj" />
+  <Project Path="Assembly-CSharp-firstpass.csproj" />
   <Project Path="FMODUnity.csproj" />
   <Project Path="Unity.InputSystem.ForUI.csproj" />
   <Project Path="Unity.AI.Navigation.csproj" />
