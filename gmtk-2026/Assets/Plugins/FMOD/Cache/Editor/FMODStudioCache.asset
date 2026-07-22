@@ -15,7 +15,7 @@ MonoBehaviour:
   Path: ../FMOD/gmtk-2026/Build/Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 639203279528213506
+  lastModified: 639203234448878888
   FileSizes:
   - Name: Desktop
     Value: 724
@@ -42,7 +42,7 @@ MonoBehaviour:
   StringsBanks:
   - {fileID: -4349636076865716551}
   cacheVersion: 131860
-  cacheTime: 639203279528213506
+  cacheTime: 639203234448878888
   SerializableEventsDict: []
 --- !u!114 &3392596129534006581
 MonoBehaviour:
@@ -59,7 +59,7 @@ MonoBehaviour:
   Path: ../FMOD/gmtk-2026/Build/Desktop/Master.bank
   Name: Master
   StudioPath: bank:/Master
-  lastModified: 639203279528213506
+  lastModified: 639203234448863705
   FileSizes:
   - Name: Desktop
     Value: 1074
