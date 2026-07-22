@@ -536,8 +536,8 @@ MonoBehaviour:
   switchSettingsMigration: 1
   HasSourceProject: 1
   HasPlatforms: 1
-  sourceProjectPath: FMOD/gmtk-2026/gmtk-2026.fspro
-  sourceBankPath: FMOD/gmtk-2026/Build
+  sourceProjectPath: ../FMOD/gmtk-2026/gmtk-2026.fspro
+  sourceBankPath: ../FMOD/gmtk-2026/Build
   sourceBankPathUnformatted: 
   BankRefreshCooldown: 5
   ShowBankRefreshWindow: 1
