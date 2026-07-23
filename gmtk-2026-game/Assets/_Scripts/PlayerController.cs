@@ -13,6 +13,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float minPitch = -85f;
     [SerializeField] private float maxPitch = 85f;
     [SerializeField] private bool invertY = false;
+    [SerializeField] private float gravityStrengthMult = 1f;
+    [SerializeField] private float gravityVelocity = 0;
 
     private CharacterController controller;
     private Vector2 moveInput;
@@ -40,6 +42,15 @@ public class PlayerController : MonoBehaviour
     {
         HandleLook();
         HandleMove();
+        if (!controller.isGrounded)
+        {
+            gravityVelocity += Physics.gravity.y * Time.deltaTime * gravityStrengthMult;
+            controller.Move(new Vector3(0, gravityVelocity, 0) * Time.deltaTime);
+        }
+        else
+        {
+            gravityVelocity = 0;
+        }
     }
 
     public void OnMove(InputAction.CallbackContext context)
