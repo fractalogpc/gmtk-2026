@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!114 &-4349636076865716551
+--- !u!114 &-3467919530555639096
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -15,7 +15,7 @@ MonoBehaviour:
   Path: ../FMOD/gmtk-2026/Build/Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 639203279528213506
+  lastModified: 639203280878954186
   FileSizes:
   - Name: Desktop
     Value: 724
@@ -33,18 +33,18 @@ MonoBehaviour:
   m_Name: FMODStudioCache
   m_EditorClassIdentifier: FMODUnityEditor::FMODUnity.EventCache
   EditorBanks:
-  - {fileID: -4349636076865716551}
-  - {fileID: 3392596129534006581}
+  - {fileID: -3467919530555639096}
+  - {fileID: 1348851966522137572}
   EditorEvents: []
   EditorParameters: []
   MasterBanks:
-  - {fileID: 3392596129534006581}
+  - {fileID: 1348851966522137572}
   StringsBanks:
-  - {fileID: -4349636076865716551}
+  - {fileID: -3467919530555639096}
   cacheVersion: 131860
-  cacheTime: 639203279528213506
+  cacheTime: 639203280878954186
   SerializableEventsDict: []
---- !u!114 &3392596129534006581
+--- !u!114 &1348851966522137572
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -59,7 +59,7 @@ MonoBehaviour:
   Path: ../FMOD/gmtk-2026/Build/Desktop/Master.bank
   Name: Master
   StudioPath: bank:/Master
-  lastModified: 639203279528213506
+  lastModified: 639203280878924229
   FileSizes:
   - Name: Desktop
     Value: 1074

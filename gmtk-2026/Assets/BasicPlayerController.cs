@@ -3,6 +3,8 @@ using UnityEngine.InputSystem;
 
 public class BasicPlayerController : MonoBehaviour
 {
+    public static BasicPlayerController Instance { get; private set; }
+
     public Vector3 movementInput;
 
     public float speed = 5f;
@@ -11,6 +13,19 @@ public class BasicPlayerController : MonoBehaviour
     public float arrivalThreshold = 0.05f;
 
     private Vector3? clickTarget;
+
+    private void Awake()
+    {
+        Instance = this;
+    }
+
+    private void Start()
+    {
+        if (GameManager.Instance != null)
+        {
+            GameManager.Instance.ApplyPlayerState(transform);
+        }
+    }
 
     public void OnMove(InputAction.CallbackContext context)
     {
@@ -36,6 +51,12 @@ public class BasicPlayerController : MonoBehaviour
 
         if (Physics.Raycast(ray, out RaycastHit hit, Mathf.Infinity, clickMask))
         {
+            Interactable interactable = hit.collider.GetComponentInParent<Interactable>();
+            if (interactable != null && interactable.TryInteract(transform.position))
+            {
+                return;
+            }
+
             Vector3 target = hit.point;
             target.y = transform.position.y;
             clickTarget = target;
