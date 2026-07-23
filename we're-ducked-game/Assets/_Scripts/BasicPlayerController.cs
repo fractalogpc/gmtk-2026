@@ -14,6 +14,8 @@ public class BasicPlayerController : MonoBehaviour
 
     private Vector3? clickTarget;
 
+    private Interactable bufferedInteractable; // If you click on an interactable object but are out of range, this holds it until you move into range.
+
     private void Awake()
     {
         Instance = this;
@@ -43,6 +45,8 @@ public class BasicPlayerController : MonoBehaviour
     {
         if (!context.performed) return;
 
+        bufferedInteractable = null;
+
         Camera cam = targetCamera != null ? targetCamera : Camera.main;
         if (cam == null) return;
 
@@ -52,9 +56,14 @@ public class BasicPlayerController : MonoBehaviour
         if (Physics.Raycast(ray, out RaycastHit hit, Mathf.Infinity, clickMask))
         {
             Interactable interactable = hit.collider.GetComponentInParent<Interactable>();
-            if (interactable != null && interactable.TryInteract(transform.position))
+            if (interactable)
             {
-                return;
+                if (interactable.TryInteract(transform.position))
+                {
+                    clickTarget = null;
+                    return;
+                }
+                bufferedInteractable = interactable;
             }
 
             Vector3 target = hit.point;
@@ -67,7 +76,15 @@ public class BasicPlayerController : MonoBehaviour
     {
         if (movementInput.sqrMagnitude > 0f)
         {
+            bufferedInteractable = null;
             transform.Translate(movementInput * speed * Time.deltaTime);
+            return;
+        }
+
+        if (bufferedInteractable != null && bufferedInteractable.TryInteract(transform.position))
+        {
+            bufferedInteractable = null;
+            clickTarget = null;
             return;
         }
 

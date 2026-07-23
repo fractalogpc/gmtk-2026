@@ -958,7 +958,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 88a6f0f7ed70fc8448b82ad9940741dc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
-  interactRange: 3
+  interactRange: 2.5
   onInteract:
     m_PersistentCalls:
       m_Calls:
