@@ -2131,6 +2131,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4937538223127287431}
+  - component: {fileID: 7592265044286790173}
   m_Layer: 0
   m_Name: Targeting Console
   m_TagString: Untagged
@@ -2163,6 +2164,23 @@ Transform:
   - {fileID: 5680156750845004190}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7592265044286790173
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8569129564166649987}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bd8a69916e551244c869d19287062602, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::TargetingConsole
+  targetText: {fileID: 8378440250357073018}
+  gunText: {fileID: 2902953571993832493}
+  leverAzimuth: {fileID: 3813443587064463489}
+  leverElevation: {fileID: 8966362705440105331}
+  countdownClock: {fileID: 1880637182733103745}
 --- !u!1 &8790135752825898003
 GameObject:
   m_ObjectHideFlags: 0
@@ -3096,6 +3114,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 9952982998084672, guid: 9ce6dfc59ad6b88469d7f8f46f6a6ca0, type: 3}
   m_PrefabInstance: {fileID: 3211303077761274052}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &8966362705440105331 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5836168676315050935, guid: 9ce6dfc59ad6b88469d7f8f46f6a6ca0, type: 3}
+  m_PrefabInstance: {fileID: 3211303077761274052}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 32039e48f10ebe84a811e5b1d838fa74, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Lever
 --- !u!1001 &3418126424471234380
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4753,6 +4782,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9ce6dfc59ad6b88469d7f8f46f6a6ca0, type: 3}
+--- !u!114 &3813443587064463489 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5836168676315050935, guid: 9ce6dfc59ad6b88469d7f8f46f6a6ca0, type: 3}
+  m_PrefabInstance: {fileID: 7210877362135446326}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 32039e48f10ebe84a811e5b1d838fa74, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Lever
 --- !u!4 &7219678048356097910 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 9952982998084672, guid: 9ce6dfc59ad6b88469d7f8f46f6a6ca0, type: 3}
