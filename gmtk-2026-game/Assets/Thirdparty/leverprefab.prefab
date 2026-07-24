@@ -434,12 +434,13 @@ MonoBehaviour:
   rotationAxis: {x: 0, y: 0, z: 1}
   minAngle: -90
   maxAngle: 90
-  startAngle: 0
+  zeroAngle: 0
   useHorizontalInput: 0
   leverSpeed: 50
   snappingEnabled: 1
-  snapIncrement: 5
-  inputSensitivity: 1
+  snapDivisions: 11
+  resetOnRelease: 1
+  inputSensitivity: 0.5
   onValueChanged:
     m_PersistentCalls:
       m_Calls: []

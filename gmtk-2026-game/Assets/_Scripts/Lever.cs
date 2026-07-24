@@ -8,12 +8,14 @@ public class Lever : MonoBehaviour, IInteractable
     [SerializeField] private Vector3 rotationAxis = Vector3.right;
     [SerializeField] private float minAngle = -45f;
     [SerializeField] private float maxAngle = 45f;
-    [SerializeField] private float startAngle = 0f;
+    [SerializeField] private float zeroAngle = 0f;
     [SerializeField] private bool useHorizontalInput = false;
     [SerializeField] private float leverSpeed = 20f;
     [Header("Settings")]
     [SerializeField] private bool snappingEnabled = false;
-    [SerializeField] private float snapIncrement = 5f;
+    [Tooltip("Divides the range between min and max angle into this amount of increments")]
+    [SerializeField] private float snapDivisions = 5f;
+    [SerializeField] private bool resetOnRelease = false;
     [Header("Input")]
     [SerializeField] private float inputSensitivity = 1f;
 
@@ -23,9 +25,11 @@ public class Lever : MonoBehaviour, IInteractable
     [SerializeField] private UnityEvent onReachedMax;
     [SerializeField] private UnityEvent onReachedMin;
     private Quaternion initialRotation;
+    private float snapIncrement => (maxAngle - minAngle) / snapDivisions;
     public float CurrentAngle => snappingEnabled ? Mathf.Round(RawCurrentAngle / snapIncrement) * snapIncrement : RawCurrentAngle;
     public float RawCurrentAngle { get; private set; }
-    public float NormalizedValue => Mathf.InverseLerp(minAngle, maxAngle, RawCurrentAngle);
+    public float NormalizedValue => Mathf.InverseLerp(minAngle, maxAngle, CurrentAngle);
+    public float RawNormalizedValue => Mathf.InverseLerp(minAngle, maxAngle, RawCurrentAngle);
 
     public void SetInteractable(bool interactable)
     {
@@ -48,6 +52,10 @@ public class Lever : MonoBehaviour, IInteractable
 
     public InteractionSettings OnInteractEnd(InteractionData data)
     {
+        if (resetOnRelease)
+        {
+            RawCurrentAngle = Mathf.Clamp(zeroAngle, minAngle, maxAngle);
+        }
         return new InteractionSettings(lockCameraAndMovement: false);
     }
 
@@ -67,7 +75,7 @@ public class Lever : MonoBehaviour, IInteractable
 
     private void Start()
     {
-        RawCurrentAngle = Mathf.Clamp(startAngle, minAngle, maxAngle);
+        RawCurrentAngle = Mathf.Clamp(zeroAngle, minAngle, maxAngle);
         initialRotation = leverPivot.localRotation;
         leverPivot.localRotation = initialRotation * Quaternion.AngleAxis(RawCurrentAngle, rotationAxis);
     }
