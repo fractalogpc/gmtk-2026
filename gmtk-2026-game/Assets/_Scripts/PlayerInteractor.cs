@@ -26,7 +26,7 @@ public class PlayerInteractor : MonoBehaviour
     private void Update()
     {
         if (currentInteractable == null) return;
-        currentInteractable.OnInteractDrag(BuildData(GetAimRay()));
+        ApplyInteractionSettings(currentInteractable.OnInteractDrag(BuildData(GetAimRay())));
     }
 
     private void TryStart()
@@ -39,13 +39,28 @@ public class PlayerInteractor : MonoBehaviour
         if (interactable == null) return;
 
         currentInteractable = interactable;
-        currentInteractable.OnInteractStart(BuildData(ray, hit));
+        ApplyInteractionSettings(currentInteractable.OnInteractStart(BuildData(ray, hit)));
+    }
+
+    private void ApplyInteractionSettings(InteractionSettings settings)
+    {
+        PlayerInput input = GetComponent<PlayerInput>();
+        if (settings.lockCameraAndMovement)
+        {
+            input.actions.FindAction("Look").Disable();
+            input.actions.FindAction("Move").Disable();
+        }
+        else
+        {
+            input.actions.FindAction("Look").Enable();
+            input.actions.FindAction("Move").Enable();
+        }
     }
 
     private void EndInteraction()
     {
         if (currentInteractable == null) return;
-        currentInteractable.OnInteractEnd(BuildData(GetAimRay()));
+        ApplyInteractionSettings(currentInteractable.OnInteractEnd(BuildData(GetAimRay())));
         currentInteractable = null;
     }
 
