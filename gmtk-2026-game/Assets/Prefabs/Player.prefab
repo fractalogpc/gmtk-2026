@@ -82,6 +82,8 @@ MonoBehaviour:
   minPitch: -85
   maxPitch: 85
   invertY: 0
+  gravityStrengthMult: 1
+  gravityVelocity: 0
 --- !u!114 &6746815798634827295
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -96,6 +98,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PlayerInteractor
   playerCamera: {fileID: 0}
   interactDistance: 3
+  staticViewInteractDistance: 100
   interactLayers:
     serializedVersion: 2
     m_Bits: 1
@@ -145,7 +148,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 5142837842679503649}
         m_TargetAssemblyTypeName: PlayerController, Assembly-CSharp
-        m_MethodName: OnMove
+        m_MethodName: OnLook
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -237,6 +240,30 @@ MonoBehaviour:
       m_Calls: []
     m_ActionId: 9caa3d8a-6b2f-4e8e-8bad-6ede561bd9be
     m_ActionName: UI/TrackedDeviceOrientation
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 71644359-e98b-4728-b85f-7eb4543956f2
+    m_ActionName: 'Player/Progress Dialogue[/Keyboard/space,/Keyboard/enter,/Mouse/leftButton]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 92bdca1f-1776-4996-929a-b5d25a009b28
+    m_ActionName: 'Player/Mouse[/Mouse/delta]'
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 6746815798634827295}
+        m_TargetAssemblyTypeName: PlayerInteractor, Assembly-CSharp
+        m_MethodName: OnCancel
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 56279fab-b177-427e-87ef-8690d683db24
+    m_ActionName: 'Player/Cancel[/Keyboard/escape]'
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: Keyboard&Mouse
   m_DefaultActionMap: Player
@@ -254,7 +281,7 @@ GameObject:
   - component: {fileID: 2392938737942563602}
   - component: {fileID: 4942398791343451635}
   m_Layer: 0
-  m_Name: CinemachineCamera
+  m_Name: PlayerCamera
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -288,7 +315,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Unity.Cinemachine::Unity.Cinemachine.CinemachineCamera
   Priority:
-    Enabled: 0
+    Enabled: 1
     m_Value: 0
   OutputChannel: 1
   StandbyUpdate: 2
@@ -455,7 +482,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &2919120724347004605
 Transform:
   m_ObjectHideFlags: 0
@@ -564,7 +591,7 @@ GameObject:
   - component: {fileID: 4502735367010818041}
   - component: {fileID: 6902522100573970357}
   m_Layer: 5
-  m_Name: Canvas
+  m_Name: Player UI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

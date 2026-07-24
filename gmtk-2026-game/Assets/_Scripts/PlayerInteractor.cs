@@ -6,11 +6,13 @@ public class PlayerInteractor : MonoBehaviour
     [Header("Raycast")]
     [SerializeField] private Camera playerCamera;
     [SerializeField] private float interactDistance = 3f;
+    [SerializeField] private float staticViewInteractDistance = 100f;
     [SerializeField] private LayerMask interactLayers = ~0;
     [Tooltip("Only colliders with this tag will be considered interactable. Leave empty to accept any IInteractable.")]
     [SerializeField] private string interactableTag = "Interactable";
 
     private IInteractable currentInteractable;
+    private IStaticCamera activeStaticView;
     private PlayerInput playerInput;
 
     private void Awake()
@@ -25,10 +27,17 @@ public class PlayerInteractor : MonoBehaviour
         else if (context.canceled) EndInteraction();
     }
 
+    public void OnCancel(InputAction.CallbackContext context)
+    {
+        if (!context.started) return;
+        if (currentInteractable != null) EndInteraction();
+        if (activeStaticView != null) ExitStaticView();
+    }
+
     private void Update()
     {
         if (currentInteractable == null) return;
-        ApplyInteractionSettings(currentInteractable.DuringInteract(BuildData(GetAimRay(), GetMouseDelta())));
+        ApplyInteractionSettings(currentInteractable.DuringInteract(BuildData(GetInteractRay(), GetMouseDelta())));
     }
 
     private Vector2 GetMouseDelta()
@@ -42,40 +51,84 @@ public class PlayerInteractor : MonoBehaviour
 
     private void TryStart()
     {
-        Ray ray = GetAimRay();
-        if (!Physics.Raycast(ray, out RaycastHit hit, interactDistance, interactLayers)) return;
+        Ray ray = GetInteractRay();
+        float distance = activeStaticView != null ? staticViewInteractDistance : interactDistance;
+        if (!Physics.Raycast(ray, out RaycastHit hit, distance, interactLayers)) return;
         if (!string.IsNullOrEmpty(interactableTag) && !hit.collider.CompareTag(interactableTag)) return;
+
+        if (activeStaticView == null)
+        {
+            IStaticCamera staticView = hit.collider.GetComponentInParent<IStaticCamera>();
+            if (staticView != null && staticView.StaticCamera != null)
+            {
+                EnterStaticView(staticView);
+                return;
+            }
+        }
 
         IInteractable interactable = hit.collider.GetComponentInParent<IInteractable>();
         if (interactable == null) return;
+        if (interactable is MonoBehaviour mb && !mb.enabled) return;
 
         currentInteractable = interactable;
         ApplyInteractionSettings(currentInteractable.OnInteractStart(BuildData(ray, hit)));
     }
 
-    private void ApplyInteractionSettings(InteractionSettings settings)
+    private void EnterStaticView(IStaticCamera view)
     {
-        if (settings.lockCameraAndMovement)
+        activeStaticView = view;
+        view.StaticCamera.gameObject.SetActive(true);
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
+        SetPlayerControlEnabled(false);
+        view.OnEnterView();
+    }
+
+    private void ExitStaticView()
+    {
+        activeStaticView.OnExitView();
+        activeStaticView.StaticCamera.gameObject.SetActive(false);
+        activeStaticView = null;
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+        SetPlayerControlEnabled(true);
+    }
+
+    private void SetPlayerControlEnabled(bool enabled)
+    {
+        InputAction look = playerInput.actions.FindAction("Look");
+        InputAction move = playerInput.actions.FindAction("Move");
+        if (enabled)
         {
-            playerInput.actions.FindAction("Look").Disable();
-            playerInput.actions.FindAction("Move").Disable();
+            look?.Enable();
+            move?.Enable();
         }
         else
         {
-            playerInput.actions.FindAction("Look").Enable();
-            playerInput.actions.FindAction("Move").Enable();
+            look?.Disable();
+            move?.Disable();
         }
+    }
+
+    private void ApplyInteractionSettings(InteractionSettings settings)
+    {
+        if (activeStaticView != null) return;
+        SetPlayerControlEnabled(!settings.lockCameraAndMovement);
     }
 
     private void EndInteraction()
     {
         if (currentInteractable == null) return;
-        ApplyInteractionSettings(currentInteractable.OnInteractEnd(BuildData(GetAimRay(), GetMouseDelta())));
+        ApplyInteractionSettings(currentInteractable.OnInteractEnd(BuildData(GetInteractRay(), GetMouseDelta())));
         currentInteractable = null;
     }
 
-    private Ray GetAimRay()
+    private Ray GetInteractRay()
     {
+        if (activeStaticView != null && Mouse.current != null && Camera.main != null)
+        {
+            return Camera.main.ScreenPointToRay(Mouse.current.position.ReadValue());
+        }
         Transform cam = playerCamera != null ? playerCamera.transform : transform;
         return new Ray(cam.position, cam.forward);
     }

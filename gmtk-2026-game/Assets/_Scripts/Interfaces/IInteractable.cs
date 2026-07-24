@@ -17,6 +17,15 @@ public interface IInteractable
     /// </summary>
     /// <param name="data"></param>
     InteractionSettings OnInteractEnd(InteractionData data);
+
+    /// <summary>
+    /// Enable or disable this interactable's script (not the GameObject).
+    /// Default implementation toggles MonoBehaviour.enabled.
+    /// </summary>
+    void SetInteractionEnabled(bool enabled)
+    {
+        if (this is MonoBehaviour mb) mb.enabled = enabled;
+    }
 }
 
 [System.Serializable]
