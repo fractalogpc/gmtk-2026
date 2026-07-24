@@ -2929,7 +2929,6 @@ MonoBehaviour:
   azimuthChangeText: {fileID: 7457115948887309354}
   leverElevation: {fileID: 8966362705440105331}
   elevationChangeText: {fileID: 1817515111853780001}
-  countdownClock: {fileID: 1880637182733103745}
   azimuthDPSMin: -10
   azimuthDPSMax: 10
   elevationDPSMin: -10

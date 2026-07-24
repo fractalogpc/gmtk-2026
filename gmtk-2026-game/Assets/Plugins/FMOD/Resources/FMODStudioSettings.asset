@@ -56,8 +56,9 @@ MonoBehaviour:
       Value: 0
       HasValue: 0
     Plugins:
-      Value: []
-      HasValue: 0
+      Value:
+      - phonon_fmod
+      HasValue: 1
     StaticPlugins:
       Value: []
       HasValue: 0
@@ -529,7 +530,7 @@ MonoBehaviour:
   sourceProjectPath: ../FMOD/gmtk-2026/gmtk-2026.fspro
   sourceBankPath: ../FMOD/gmtk-2026/Build
   sourceBankPathUnformatted: 
-  BankRefreshCooldown: 5
+  BankRefreshCooldown: 1
   ShowBankRefreshWindow: 1
   AutomaticEventLoading: 1
   BankLoadType: 0
@@ -858,7 +859,8 @@ MonoBehaviour:
       Value: 0
       HasValue: 0
     Plugins:
-      Value: []
+      Value:
+      - phonon_fmod
       HasValue: 1
     StaticPlugins:
       Value: []
