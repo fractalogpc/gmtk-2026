@@ -14319,10 +14319,10 @@ MonoBehaviour:
   - Testing 987654321
   - Testing abcdefghijklmnopqrstuvwxyz
   - Testing zyxwuvtsrqponmlkjihgfedcba
-  playerInput: {fileID: 0}
+  playerInput: {fileID: 2265253249554138869}
   textSpeed: 0.1
   progressCooldown: 0.1
-  dialogBox: {fileID: 0}
+  dialogBox: {fileID: 882770649}
 --- !u!114 &1573595023
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -20392,6 +20392,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 41ac7d59838590341ab96e405592c7b3, type: 3}
+--- !u!114 &2265253249554138869 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3141113252137267755, guid: 41ac7d59838590341ab96e405592c7b3, type: 3}
+  m_PrefabInstance: {fileID: 2265253249554138868}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.InputSystem::UnityEngine.InputSystem.PlayerInput
 --- !u!1001 &2632152461468910801
 PrefabInstance:
   m_ObjectHideFlags: 0
