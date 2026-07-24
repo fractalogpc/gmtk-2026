@@ -10,7 +10,7 @@ public class Lever : MonoBehaviour, IInteractable
     [SerializeField] private float maxAngle = 45f;
     [SerializeField] private float startAngle = 0f;
     [SerializeField] private bool useHorizontalInput = false;
-    [SerializeField] private float leverSpeed = 10f;
+    [SerializeField] private float leverSpeed = 20f;
     [Header("Settings")]
     [SerializeField] private bool snappingEnabled = false;
     [SerializeField] private float snapIncrement = 5f;
@@ -77,14 +77,14 @@ public class Lever : MonoBehaviour, IInteractable
             if (!Mathf.Approximately(lastCurrentAngle, CurrentAngle)) SendEvents(); 
             float snappedAngle = Mathf.Round(RawCurrentAngle / snapIncrement) * snapIncrement;
             Quaternion targetRotation = initialRotation * Quaternion.AngleAxis(snappedAngle, rotationAxis);
-            leverPivot.localRotation = Quaternion.Slerp(leverPivot.localRotation, targetRotation, Time.deltaTime * 10f);
+            leverPivot.localRotation = Quaternion.Slerp(leverPivot.localRotation, targetRotation, Time.deltaTime * leverSpeed);
             lastCurrentAngle = CurrentAngle;
         }
         else
         {
             if (!Mathf.Approximately(lastRawAngle, RawCurrentAngle)) SendEvents();
             Quaternion targetRotation = initialRotation * Quaternion.AngleAxis(RawCurrentAngle, rotationAxis);
-            leverPivot.localRotation = Quaternion.Slerp(leverPivot.localRotation, targetRotation, Time.deltaTime * 10f);
+            leverPivot.localRotation = Quaternion.Slerp(leverPivot.localRotation, targetRotation, Time.deltaTime * leverSpeed);
             lastRawAngle = RawCurrentAngle;
         }
     }
