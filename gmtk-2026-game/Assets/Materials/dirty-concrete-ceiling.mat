@@ -37,6 +37,10 @@ Material:
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
+    - _AO:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _Albedo:
         m_Texture: {fileID: 2800000, guid: 034ce6d57f7190a4084f82941389d850, type: 3}
         m_Scale: {x: 1, y: 1}
@@ -129,6 +133,7 @@ Material:
     - _GlossMapScale: 0
     - _Glossiness: 0
     - _GlossyReflections: 0
+    - _HasAO: 0
     - _Metallic: 0
     - _MetallicFloat: 0
     - _OcclusionStrength: 1
