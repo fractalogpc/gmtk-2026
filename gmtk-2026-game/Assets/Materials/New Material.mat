@@ -129,7 +129,7 @@ Material:
     - _WorkflowMode: 1
     - _XRMotionVectorsPass: 1
     - _ZWrite: 1
-    - _crt_speed: 0.5
+    - _crt_speed: 0.25
     - _line_distance: 0.04
     - _noise_strength: 0.13
     m_Colors:
