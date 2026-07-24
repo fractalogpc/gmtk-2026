@@ -436,8 +436,8 @@ MonoBehaviour:
   maxAngle: 90
   startAngle: 0
   useHorizontalInput: 0
-  leverSpeed: 10
-  snappingEnabled: 0
+  leverSpeed: 50
+  snappingEnabled: 1
   snapIncrement: 5
   inputSensitivity: 1
   onValueChanged:
