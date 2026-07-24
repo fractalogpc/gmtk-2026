@@ -35,17 +35,16 @@ public class Countdown : MonoBehaviour
     {
         if (countdownText != null)
         {
-            countdownText.text = currentCountdownTime.ToString("F1");
+            countdownText.text = currentCountdownTime.ToString("F2");
         }
     }
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        SetCountdownTime(countdownTime);
         UpdateCountdownText();
     }
 
-    // Update is called once per frame
     void Update()
     {
         currentCountdownTime -= countdownSpeed * Time.deltaTime;
