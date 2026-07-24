@@ -34,6 +34,10 @@ public class Lever : MonoBehaviour, IInteractable
     public void SetInteractable(bool interactable)
     {
         gameObject.tag = interactable ? "Interactable" : "Untagged";
+        if (resetOnRelease && !interactable)
+        {
+            RawCurrentAngle = Mathf.Clamp(zeroAngle, minAngle, maxAngle);
+        }
     }
     public InteractionSettings OnInteractStart(InteractionData data)
     {

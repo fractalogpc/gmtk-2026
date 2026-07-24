@@ -4548,6 +4548,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a95326e66b32c2045bf92c22e6b59b3d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GameManager
+  targetingConsole: {fileID: 6645482078999691035}
+  countdown: {fileID: 2865407346528988531}
+  fireLever: {fileID: 4247042953601168272}
+  successLight: {fileID: 4247042953601168271}
+  timeToImpact: 10
+  randomAzimuthMin: -180
+  randomAzimuthMax: 180
+  randomElevationMin: 5
+  randomElevationMax: 85
+  resultTime: 3
 --- !u!1001 &716739729
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -13563,6 +13573,17 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 9070563560731443646, guid: 9bcfda04cb8b9c848aec614a86110382, type: 3}
   m_PrefabInstance: {fileID: 4247042953601168270}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &2865407346528988531 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1880637182733103745, guid: 9bcfda04cb8b9c848aec614a86110382, type: 3}
+  m_PrefabInstance: {fileID: 4247042953601168270}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2865407346528988529}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 52a138c63da8aac4aa94d4bc733b6bae, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::NixieClock
 --- !u!4 &2868692288501097786 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1181583777689693925, guid: 4d07a36914b695140828b7cf79b6b8a7, type: 3}
@@ -13698,6 +13719,28 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9bcfda04cb8b9c848aec614a86110382, type: 3}
+--- !u!114 &4247042953601168271 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7498298146264968867, guid: 9bcfda04cb8b9c848aec614a86110382, type: 3}
+  m_PrefabInstance: {fileID: 4247042953601168270}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 787442b38e734b44c92c798c8b18773b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SuccessLight
+--- !u!114 &4247042953601168272 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4612470081183424791, guid: 9bcfda04cb8b9c848aec614a86110382, type: 3}
+  m_PrefabInstance: {fileID: 4247042953601168270}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 27958cb8d4ae82e45851aba8e751afb8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::FireLever
 --- !u!1001 &5670267144387979567
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -13804,6 +13847,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4937538223127287431, guid: 9bcfda04cb8b9c848aec614a86110382, type: 3}
   m_PrefabInstance: {fileID: 4247042953601168270}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &6645482078999691035 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7592265044286790173, guid: 9bcfda04cb8b9c848aec614a86110382, type: 3}
+  m_PrefabInstance: {fileID: 4247042953601168270}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bd8a69916e551244c869d19287062602, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::TargetingConsole
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

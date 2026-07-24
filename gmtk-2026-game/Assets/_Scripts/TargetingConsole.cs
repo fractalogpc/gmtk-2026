@@ -9,12 +9,26 @@ public class TargetingConsole : MonoBehaviour
     [SerializeField] private TextMeshProUGUI azimuthChangeText;
     [SerializeField] private Lever leverElevation;
     [SerializeField] private TextMeshProUGUI elevationChangeText;
-    [SerializeField] private NixieClock countdownClock;
     [SerializeField] private float azimuthDPSMin, azimuthDPSMax;
     [SerializeField] private float elevationDPSMin, elevationDPSMax;
+    public float GunAzimuth => gunAzimuth;
+    public float GunElevation => gunElevation;
     private float gunAzimuth;
     private float gunElevation;
 
+    public void SetLocked(bool isLocked)
+    {
+        leverAzimuth.SetInteractable(!isLocked);
+        leverElevation.SetInteractable(!isLocked);
+        if (isLocked)
+        {
+            gunText.text = "CONTROLS LOCKED\nFIRE COMMAND SENT";
+        }
+        else
+        {
+            UpdateGunText();
+        }
+    }
     public void SetTargetValues(float azimuth, float elevation)
     {
         targetText.text = $"FIRING ORDERS\n________________\n{azimuth:F2} AZIM\n{elevation:F2} ELEV";

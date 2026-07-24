@@ -16,6 +16,7 @@ public class NixieClock : MonoBehaviour
     [SerializeField] private Material offMaterial;
     [SerializeField] private Material onMaterial;
 
+    public float Timer => timer;
     private float timer = 0f;
 
     public void StartTimer(float countdown)
@@ -23,9 +24,14 @@ public class NixieClock : MonoBehaviour
         timer = countdown;
     }
 
+    public void StopTimer()
+    {
+        timer = 0f;
+    }
+
     private void Start()
     {
-        StartTimer(60f); // Start with a 60-second countdown
+        StopTimer();
     }
 
     private void Update()

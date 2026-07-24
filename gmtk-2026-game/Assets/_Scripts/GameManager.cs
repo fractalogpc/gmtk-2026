@@ -20,7 +20,7 @@ public class GameManager : MonoBehaviour
 
     [Header("References")]
     [SerializeField] private TargetingConsole targetingConsole;
-    [SerializeField] private Countdown countdown;
+    [SerializeField] private NixieClock countdown;
     [SerializeField] private FireLever fireLever;
     [SerializeField] private SuccessLight successLight;
     [SerializeField] private TargetRequirements currentTarget;
@@ -37,15 +37,28 @@ public class GameManager : MonoBehaviour
 
     private IEnumerator GameCoroutine()
     {
-        currentTarget = new TargetRequirements(randomAzimuthMin, randomAzimuthMax, randomElevationMin, randomElevationMax);
-        targetingConsole.SetTargetValues(currentTarget.azimuth, currentTarget.elevation);
-        while (!fireLever.IsFired)
+        while (true)
         {
-            yield return null;
+            currentTarget = new TargetRequirements(randomAzimuthMin, randomAzimuthMax, randomElevationMin, randomElevationMax);
+            targetingConsole.SetTargetValues(currentTarget.azimuth, currentTarget.elevation);
+            while (!fireLever.IsFired)
+            {
+                yield return null;
+            }
+            targetingConsole.SetLocked(true);
+            countdown.StartTimer(timeToImpact);
+            while (countdown.Timer > 0f)
+            {
+                yield return null;
+            }
+            bool isSuccess = Mathf.Abs(targetingConsole.GunAzimuth - currentTarget.azimuth) <= currentTarget.tolerance &&
+                            Mathf.Abs(targetingConsole.GunElevation - currentTarget.elevation) <= currentTarget.tolerance;
+            successLight.SetSuccess(isSuccess);
+            yield return new WaitForSeconds(resultTime);
+            successLight.Reset();
+            fireLever.ResetFireState();
+            targetingConsole.SetLocked(false);
         }
-
-
-
     }
 
     private void Start()
