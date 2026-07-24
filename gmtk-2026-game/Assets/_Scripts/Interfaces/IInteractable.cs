@@ -33,7 +33,6 @@ public struct InteractionSettings
 public struct InteractionData
 {
     public Transform interactor;
-    public Vector3 hitPoint;
-    public Vector3 hitNormal;
+    public Vector2 mouseDelta;
     public Ray ray;
 }

@@ -11,9 +11,11 @@ public class PlayerInteractor : MonoBehaviour
     [SerializeField] private string interactableTag = "Interactable";
 
     private IInteractable currentInteractable;
+    private PlayerInput playerInput;
 
     private void Awake()
     {
+        playerInput = GetComponent<PlayerInput>();
         if (playerCamera == null) playerCamera = Camera.main;
     }
 
@@ -26,7 +28,16 @@ public class PlayerInteractor : MonoBehaviour
     private void Update()
     {
         if (currentInteractable == null) return;
-        ApplyInteractionSettings(currentInteractable.DuringInteract(BuildData(GetAimRay())));
+        ApplyInteractionSettings(currentInteractable.DuringInteract(BuildData(GetAimRay(), GetMouseDelta())));
+    }
+
+    private Vector2 GetMouseDelta()
+    {
+        if (playerInput == null || playerInput.currentControlScheme != "Keyboard&Mouse")
+        {
+            return Vector2.zero;
+        }
+        return playerInput.actions.FindAction("Mouse").ReadValue<Vector2>();
     }
 
     private void TryStart()
@@ -44,23 +55,22 @@ public class PlayerInteractor : MonoBehaviour
 
     private void ApplyInteractionSettings(InteractionSettings settings)
     {
-        PlayerInput input = GetComponent<PlayerInput>();
         if (settings.lockCameraAndMovement)
         {
-            input.actions.FindAction("Look").Disable();
-            input.actions.FindAction("Move").Disable();
+            playerInput.actions.FindAction("Look").Disable();
+            playerInput.actions.FindAction("Move").Disable();
         }
         else
         {
-            input.actions.FindAction("Look").Enable();
-            input.actions.FindAction("Move").Enable();
+            playerInput.actions.FindAction("Look").Enable();
+            playerInput.actions.FindAction("Move").Enable();
         }
     }
 
     private void EndInteraction()
     {
         if (currentInteractable == null) return;
-        ApplyInteractionSettings(currentInteractable.OnInteractEnd(BuildData(GetAimRay())));
+        ApplyInteractionSettings(currentInteractable.OnInteractEnd(BuildData(GetAimRay(), GetMouseDelta())));
         currentInteractable = null;
     }
 
@@ -70,14 +80,13 @@ public class PlayerInteractor : MonoBehaviour
         return new Ray(cam.position, cam.forward);
     }
 
-    private InteractionData BuildData(Ray ray)
+    private InteractionData BuildData(Ray ray, Vector2 mouseDelta)
     {
         return new InteractionData
         {
             interactor = transform,
+            mouseDelta = mouseDelta,
             ray = ray,
-            hitPoint = ray.origin + ray.direction * interactDistance,
-            hitNormal = -ray.direction
         };
     }
 
@@ -87,8 +96,6 @@ public class PlayerInteractor : MonoBehaviour
         {
             interactor = transform,
             ray = ray,
-            hitPoint = hit.point,
-            hitNormal = hit.normal
         };
     }
 }
