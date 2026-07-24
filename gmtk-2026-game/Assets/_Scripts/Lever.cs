@@ -27,6 +27,10 @@ public class Lever : MonoBehaviour, IInteractable
     public float RawCurrentAngle { get; private set; }
     public float NormalizedValue => Mathf.InverseLerp(minAngle, maxAngle, RawCurrentAngle);
 
+    public void SetInteractable(bool interactable)
+    {
+        gameObject.tag = interactable ? "Interactable" : "Untagged";
+    }
     public InteractionSettings OnInteractStart(InteractionData data)
     {
         lastRawAngle = RawCurrentAngle;
