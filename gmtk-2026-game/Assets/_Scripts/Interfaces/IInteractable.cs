@@ -6,17 +6,27 @@ public interface IInteractable
     /// Called on the first frame the player starts interacting with this object.
     /// </summary>
     /// <param name="data"></param>
-    void OnInteractStart(InteractionData data);
+    InteractionSettings OnInteractStart(InteractionData data);
     /// <summary>
     /// Called every frame while the player is interacting with this object.
     /// </summary>
     /// <param name="data"></param>
-    void OnInteractDrag(InteractionData data);
+    InteractionSettings OnInteractDrag(InteractionData data);
     /// <summary>
     /// Called on the first frame the player stops interacting with this object.
     /// </summary>
     /// <param name="data"></param>
-    void OnInteractEnd(InteractionData data);
+    InteractionSettings OnInteractEnd(InteractionData data);
+}
+
+[System.Serializable]
+public struct InteractionSettings
+{
+    public bool lockCameraAndMovement;
+    public InteractionSettings(bool lockCameraAndMovement)
+    {
+        this.lockCameraAndMovement = lockCameraAndMovement;
+    }
 }
 
 [System.Serializable]
