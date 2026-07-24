@@ -3,47 +3,54 @@ using TMPro;
 using System.Collections;
 using UnityEngine.InputSystem;
 using GLTFast.Schema;
+using DG.Tweening;
 
 public class DialogController : MonoBehaviour
 {
-    // String var for Dialog text >
-    public string[] lines;
-    // Temporary image var for testing dialogue functionality >
-    public Sprite tempSprite;
-
     // Player input reference for progress key >
     [SerializeField] PlayerInput playerInput;
     // Speed of typewriter anim >
     [SerializeField] float textSpeed;
     // What the Cooldown timer is set too >
     [SerializeField] float progressCooldown;
-    // Object Reference for enableing and disableing Dialog Box >
-    [SerializeField] GameObject dialogueBox;
     // Reference to text component for Dialog >
     [SerializeField] TextMeshProUGUI textComponent;
+    // Object Reference for enableing and disableing Dialog Box >
+    [SerializeField] GameObject dialogueBox;
+    // Destination for tweening animation >
+    [SerializeField] Vector3 tweenDestination;
     // Reference to image gameobject for the person speaking during dialogue >
     [SerializeField] GameObject dialogueImage;
+    // Reference to Dialog Object for testing >
+    [SerializeField] DialogObject testDialog;
+    // Speed of the Tween for Dialogue box >
+    [SerializeField] float dialogueAppearAnimSpeed;
 
+    // String var for Dialog text >
+    string[] lines;
     // Index var for typewriter anim >
     int index;
     // Cooldown timer for dialog progress key >
     float coolDown;
     // Image component reference for dialogue >
     UnityEngine.UI.Image image;
+    // Bool for preventing code from running when it shouldn't >
+    bool dialogueVisible;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        dialogueVisible = false;
         textComponent.text = string.Empty;
         image = dialogueImage.GetComponent<UnityEngine.UI.Image>();
         dialogueBox.SetActive(false);
-        //StartDialogue();
+        //StartDialogue(testDialog);
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (playerInput.actions["Progress Dialogue"].IsPressed() && coolDown <= 0)
+        if (playerInput.actions["Progress Dialogue"].IsPressed() && coolDown <= 0 && dialogueVisible)
         {
             if (textComponent.text == lines[index])
             {
@@ -60,11 +67,14 @@ public class DialogController : MonoBehaviour
     }
 
     // This is called by another script to start a dialogue
-    public void StartDialogue()
+    public void StartDialogue(DialogObject dialogue)
     {
         dialogueBox.SetActive(true);
-        image.sprite = tempSprite;
+        dialogueVisible = true;
+        image.sprite = dialogue.sprite;
+        lines = dialogue.dialogue;
         index = 0;
+        dialogueBox.transform.DOMove(tweenDestination, dialogueAppearAnimSpeed);
         StartCoroutine(TypewriterAnim());
     }
 
@@ -90,6 +100,7 @@ public class DialogController : MonoBehaviour
         else
         {
             dialogueBox.SetActive(false);
+            dialogueVisible = false;
         }
     }
 }
