@@ -40,6 +40,6 @@ Material:
     - _PixelizationStrength: 1080
     - _PosterizationStrength: 15.83
     m_Colors:
-    - _PixelationAspect: {r: 100, g: 1000, b: 0, a: 0}
+    - _PixelationAspect: {r: 500, g: 500, b: 0, a: 0}
   m_BuildTextureStacks: []
   m_AllowLocking: 1

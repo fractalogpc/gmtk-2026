@@ -119,9 +119,6 @@
         },
         {
             "m_Id": "2a70646bb6f24b85ae8ff403a714da36"
-        },
-        {
-            "m_Id": "a7f48ca7962c4d82b83f4e80543bae1a"
         }
     ],
     "m_GroupDatas": [
@@ -583,9 +580,6 @@
         "m_Blocks": [
             {
                 "m_Id": "e94ce7592bc34a1aa0898e67a4495074"
-            },
-            {
-                "m_Id": "a7f48ca7962c4d82b83f4e80543bae1a"
             }
         ]
     },
@@ -1028,7 +1022,7 @@
         "m_Id": "a0125da78bc241c096443c7599dda99c"
     },
     "m_AllowMaterialOverride": false,
-    "m_SurfaceType": 1,
+    "m_SurfaceType": 0,
     "m_ZTestMode": 4,
     "m_ZWriteControl": 2,
     "m_AlphaMode": 0,
@@ -1545,8 +1539,8 @@
     "m_ObjectId": "4ad1b431b4b74fb7a94955dd5fe3a362",
     "m_Title": "Snow",
     "m_Position": {
-        "x": -2718.0,
-        "y": 404.9999694824219
+        "x": -2718.000244140625,
+        "y": 405.00006103515627
     }
 }
 
@@ -1693,7 +1687,7 @@
     "m_ObjectId": "55f42fe55dce4cc19c4896f2184c8173",
     "m_Title": "Scanlines",
     "m_Position": {
-        "x": -1993.0001220703125,
+        "x": -1993.000244140625,
         "y": -548.0000610351563
     }
 }
@@ -2141,22 +2135,6 @@
 
 {
     "m_SGVersion": 0,
-    "m_Type": "UnityEditor.ShaderGraph.Vector1MaterialSlot",
-    "m_ObjectId": "72a67e8f1aa7439986e228699225b3d3",
-    "m_Id": 0,
-    "m_DisplayName": "Alpha",
-    "m_SlotType": 0,
-    "m_Hidden": false,
-    "m_ShaderOutputName": "Alpha",
-    "m_StageCapability": 2,
-    "m_Value": 1.0,
-    "m_DefaultValue": 1.0,
-    "m_Labels": [],
-    "m_LiteralMode": false
-}
-
-{
-    "m_SGVersion": 0,
     "m_Type": "UnityEditor.ShaderGraph.PropertyNode",
     "m_ObjectId": "72f594fc29224245baac0067ecf7af52",
     "m_Group": {
@@ -2537,8 +2515,8 @@
     "m_ObjectId": "96e21faa9dfb40a3802a3c6a621a697b",
     "m_Title": "Vignette",
     "m_Position": {
-        "x": -1519.0,
-        "y": 923.0
+        "x": -1519.0001220703125,
+        "y": 923.0000610351563
     }
 }
 
@@ -2745,40 +2723,6 @@
         "w": 0.0
     },
     "m_LiteralMode": false
-}
-
-{
-    "m_SGVersion": 0,
-    "m_Type": "UnityEditor.ShaderGraph.BlockNode",
-    "m_ObjectId": "a7f48ca7962c4d82b83f4e80543bae1a",
-    "m_Group": {
-        "m_Id": ""
-    },
-    "m_Name": "SurfaceDescription.Alpha",
-    "m_DrawState": {
-        "m_Expanded": true,
-        "m_Position": {
-            "serializedVersion": "2",
-            "x": 0.0,
-            "y": 0.0,
-            "width": 0.0,
-            "height": 0.0
-        }
-    },
-    "m_Slots": [
-        {
-            "m_Id": "72a67e8f1aa7439986e228699225b3d3"
-        }
-    ],
-    "synonyms": [],
-    "m_Precision": 0,
-    "m_PreviewExpanded": true,
-    "m_DismissedVersion": 0,
-    "m_PreviewMode": 0,
-    "m_CustomColors": {
-        "m_SerializableColors": []
-    },
-    "m_SerializedDescriptor": "SurfaceDescription.Alpha"
 }
 
 {
