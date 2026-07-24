@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.03.00">
+	<object class="ParameterPreset" id="{e0c5ad80-1155-45de-a67e-be1200d0fe48}">
+		<property name="name">
+			<value>Type</value>
+		</property>
+		<relationship name="folder">
+			<destination>{4d66e914-92ab-47d0-9992-d8a25e7b3acb}</destination>
+		</relationship>
+		<relationship name="parameter">
+			<destination>{5c9d45cd-18be-4fcd-8a27-0ecd77396c2c}</destination>
+		</relationship>
+	</object>
+	<object class="GameParameter" id="{5c9d45cd-18be-4fcd-8a27-0ecd77396c2c}">
+		<property name="parameterType">
+			<value>2</value>
+		</property>
+		<property name="maximum">
+			<value>2</value>
+		</property>
+		<property name="enumerationLabels">
+			<value>Smooth</value>
+			<value>Snapping</value>
+		</property>
+		<property name="initialValue">
+			<value>0</value>
+		</property>
+	</object>
+</objects>
