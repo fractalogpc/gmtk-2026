@@ -28,7 +28,7 @@ public class DialogController : MonoBehaviour
     void Start()
     {
         textComponent.text = string.Empty;
-        StartDialogue();
+        // StartDialogue();
     }
 
     // Update is called once per frame
@@ -50,8 +50,9 @@ public class DialogController : MonoBehaviour
         coolDown += -1*Time.deltaTime;
     }
 
-    void StartDialogue()
+    public void StartDialogue()
     {
+        dialogBox.SetActive(true);
         index = 0;
         StartCoroutine(TypewriterAnim());
     }
