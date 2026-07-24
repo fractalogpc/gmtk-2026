@@ -2,13 +2,14 @@ using UnityEngine;
 using TMPro;
 using System.Collections;
 using UnityEngine.InputSystem;
+using GLTFast.Schema;
 
 public class DialogController : MonoBehaviour
 {
-    // Reference to textComponent for Dialog >
-    public TextMeshProUGUI textComponent;
     // String var for Dialog text >
     public string[] lines;
+    // Temporary image var for testing dialogue functionality >
+    public Sprite tempSprite;
 
     // Player input reference for progress key >
     [SerializeField] PlayerInput playerInput;
@@ -17,18 +18,26 @@ public class DialogController : MonoBehaviour
     // What the Cooldown timer is set too >
     [SerializeField] float progressCooldown;
     // Object Reference for enableing and disableing Dialog Box >
-    [SerializeField] GameObject dialogBox;
+    [SerializeField] GameObject dialogueBox;
+    // Reference to text component for Dialog >
+    [SerializeField] TextMeshProUGUI textComponent;
+    // Reference to image gameobject for the person speaking during dialogue >
+    [SerializeField] GameObject dialogueImage;
 
     // Index var for typewriter anim >
     int index;
     // Cooldown timer for dialog progress key >
     float coolDown;
+    // Image component reference for dialogue >
+    UnityEngine.UI.Image image;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         textComponent.text = string.Empty;
-        // StartDialogue();
+        image = dialogueImage.GetComponent<UnityEngine.UI.Image>();
+        dialogueBox.SetActive(false);
+        //StartDialogue();
     }
 
     // Update is called once per frame
@@ -50,13 +59,16 @@ public class DialogController : MonoBehaviour
         coolDown += -1*Time.deltaTime;
     }
 
+    // This is called by another script to start a dialogue
     public void StartDialogue()
     {
-        dialogBox.SetActive(true);
+        dialogueBox.SetActive(true);
+        image.sprite = tempSprite;
         index = 0;
         StartCoroutine(TypewriterAnim());
     }
 
+    // This is called by StartDialogue(); to display text with a basic typewriter anim
     IEnumerator TypewriterAnim()
     {
         foreach (char c in lines[index].ToCharArray())
@@ -66,6 +78,7 @@ public class DialogController : MonoBehaviour
         }
     }
 
+    // This is called in update to proceed to the next line of dialogue/end dialogue
     void NextLine()
     {
         if (index < lines.Length - 1)
@@ -76,7 +89,7 @@ public class DialogController : MonoBehaviour
         }
         else
         {
-            dialogBox.SetActive(false);
+            dialogueBox.SetActive(false);
         }
     }
 }

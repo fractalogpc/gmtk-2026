@@ -229,7 +229,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &804217833175158707
 RectTransform:
   m_ObjectHideFlags: 0
@@ -404,13 +404,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b6a9e26d1b4bbc646b0cffa989c1463a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DialogController
-  textComponent: {fileID: 2589999737037972244}
   lines:
   - Testing 123456789
   - Testing 987654321
   - Testing abcdefghijklmnopqrstuvwxyz
   - Testing zyxwuvtsrqponmlkjihgfedcba
+  tempSprite: {fileID: 21300000, guid: 5dd497ea7a0c3c040bf0076a21415466, type: 3}
   playerInput: {fileID: 0}
   textSpeed: 0.1
   progressCooldown: 0.1
-  dialogBox: {fileID: 6924708676406552610}
+  dialogueBox: {fileID: 6924708676406552610}
+  textComponent: {fileID: 2589999737037972244}
+  dialogueImage: {fileID: 5464896518897538165}
