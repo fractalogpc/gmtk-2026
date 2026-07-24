@@ -19,5 +19,19 @@ public class Lever : MonoBehaviour, IInteractable
     public float CurrentAngle { get; private set; }
     public float NormalizedValue => Mathf.InverseLerp(minAngle, maxAngle, CurrentAngle);
 
-    
+    public InteractionSettings OnInteractStart(InteractionData data)
+    {
+        return new InteractionSettings(lockCameraAndMovement: true);
+    }
+
+    public InteractionSettings DuringInteract(InteractionData data)
+    {
+        return new InteractionSettings(lockCameraAndMovement: true);
+    }
+
+    public InteractionSettings OnInteractEnd(InteractionData data)
+    {
+        return new InteractionSettings(lockCameraAndMovement: false);
+    }
+
 }

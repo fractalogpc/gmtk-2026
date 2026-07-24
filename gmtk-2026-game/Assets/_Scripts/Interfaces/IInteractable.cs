@@ -11,7 +11,7 @@ public interface IInteractable
     /// Called every frame while the player is interacting with this object.
     /// </summary>
     /// <param name="data"></param>
-    InteractionSettings OnInteractDrag(InteractionData data);
+    InteractionSettings DuringInteract(InteractionData data);
     /// <summary>
     /// Called on the first frame the player stops interacting with this object.
     /// </summary>

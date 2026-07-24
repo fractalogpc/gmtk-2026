@@ -26,7 +26,7 @@ public class PlayerInteractor : MonoBehaviour
     private void Update()
     {
         if (currentInteractable == null) return;
-        ApplyInteractionSettings(currentInteractable.OnInteractDrag(BuildData(GetAimRay())));
+        ApplyInteractionSettings(currentInteractable.DuringInteract(BuildData(GetAimRay())));
     }
 
     private void TryStart()

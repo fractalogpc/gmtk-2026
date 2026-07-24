@@ -10,23 +10,26 @@ public class Interactable : MonoBehaviour, IInteractable
     public bool IsBeingInteracted { get; private set; }
     public InteractionData CurrentInteraction { get; private set; }
 
-    public void OnInteractStart(InteractionData data)
+    public InteractionSettings OnInteractStart(InteractionData data)
     {
         IsBeingInteracted = true;
         CurrentInteraction = data;
         onInteractStart.Invoke(data);
+        return new InteractionSettings(lockCameraAndMovement: false);
     }
 
-    public void OnInteractDrag(InteractionData data)
+    public InteractionSettings DuringInteract(InteractionData data)
     {
         CurrentInteraction = data;
         onInteractDrag.Invoke(data);
+        return new InteractionSettings(lockCameraAndMovement: false);
     }
 
-    public void OnInteractEnd(InteractionData data)
+    public InteractionSettings OnInteractEnd(InteractionData data)
     {
         IsBeingInteracted = false;
         CurrentInteraction = data;
         onInteractEnd.Invoke(data);
+        return new InteractionSettings(lockCameraAndMovement: false);
     }
 }
