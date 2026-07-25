@@ -16,12 +16,14 @@ public class BuildingGenerator : MonoBehaviour
         GenerateBuildings();
     }
 
-    public void GenerateBuildings()
+    public void GenerateBuildings(bool dontGenerate = false)
     {
         for (int i = center.childCount - 1; i >= 0; i--)
         {
             Destroy(center.GetChild(i).gameObject);
         }
+
+        if (dontGenerate) return;
 
         int buildingCount = Random.Range(minBuildingCount, maxBuildingCount + 1);
         for (int i = 0; i < buildingCount; i++)

@@ -28,6 +28,8 @@ public class GameManager : MonoBehaviour
     [SerializeField] private UnityEvent onPostImpact;
     [SerializeField] private UnityEvent onImpact;
     [SerializeField] private UnityEvent onNewTarget;
+    [SerializeField] private UnityEvent onShellAnimation;
+    [SerializeField] private Animation shellAnim;
 
     [Header("Settings")]
     [SerializeField] private float timeToImpact = 10f;
@@ -60,6 +62,14 @@ public class GameManager : MonoBehaviour
             countdown.StartTimer(timeToImpact);
             while (countdown.Timer > 0f)
             {
+                if (countdown.Timer < 1f)
+                {
+                    if (!shellAnim.isPlaying)
+                    {
+                        onShellAnimation?.Invoke();
+                        shellAnim.Play();
+                    }
+                }
                 yield return null;
             }
 
