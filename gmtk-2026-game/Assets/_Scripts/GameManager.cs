@@ -82,6 +82,7 @@ public class GameManager : MonoBehaviour
 
             // Impact
             onImpact?.Invoke();
+            EventManager.Instance.TriggerFireEvent(1);
             yield return new WaitForSeconds(impactViewTime);
             onPostImpact?.Invoke();
             // Reset the lever

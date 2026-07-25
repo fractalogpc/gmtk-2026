@@ -15,6 +15,8 @@ public class TargetingConsole : MonoBehaviour
     [SerializeField] private float gunMaxAzimuthVelocity = 30f;
     [SerializeField] private float gunMaxElevationVelocity = 15f;
     [SerializeField] private StudioEventEmitter gunMovementEmitter;
+    [SerializeField] private Transform gunBase;
+    [SerializeField] private Transform gunBarrel;
     public float GunAzimuth => gunAzimuth;
     public float GunElevation => gunElevation;
     private float gunAzimuth, gunElevation;
@@ -118,6 +120,8 @@ public class TargetingConsole : MonoBehaviour
         UpdateAccelFromLevers(deltaTime);
         UpdateGunFromVelocity(deltaTime);
         UpdateTraverseSound();
+        gunBase.rotation = Quaternion.Euler(0f, gunAzimuth, 0f);
+        gunBarrel.rotation = Quaternion.Euler(gunElevation, 0f, 0f);
         UpdateGunText();
     }
 
