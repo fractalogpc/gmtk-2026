@@ -16,7 +16,7 @@ public class EventManager : MonoBehaviour
     public GameObject bigFirePrefab;
     public GameObject explosionPrefab;
 
-    public E_FireComponent[] fireComponents;
+    private E_FireComponent[] fireComponents;
 
     bool isExtinguisherHeld = false;
     bool isExtinguisherInteractable = false;
@@ -38,12 +38,14 @@ public class EventManager : MonoBehaviour
 
     public void Start()
     {
+        fireComponents = FindObjectsByType<E_FireComponent>(FindObjectsSortMode.None);
+
         foreach (var fireComponent in fireComponents)
         {
             fireComponent.Initialize(smallFirePrefab, mediumFirePrefab, bigFirePrefab, explosionPrefab);
         }
 
-        // TriggerFireEvent(2); // Example trigger with intensity 2
+        TriggerFireEvent(4); // Example trigger with intensity 2
     }
 
     public void TriggerFireEvent(int intensity)

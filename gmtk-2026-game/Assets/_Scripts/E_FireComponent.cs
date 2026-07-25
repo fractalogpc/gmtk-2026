@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.Events;
 
+[RequireComponent(typeof(Collider))]
 public class E_FireComponent : MonoBehaviour
 {
 
@@ -21,6 +22,9 @@ public class E_FireComponent : MonoBehaviour
 
     public bool BeingExtinguished = false;
 
+    private const float InvulnerabilityDuration = 15f;
+    private float invulnerabilityTimer = 0f;
+
     public UnityEvent OnFireStarted;
     public UnityEvent OnFireIncreased;
     public UnityEvent OnFireExtinguished;
@@ -35,6 +39,9 @@ public class E_FireComponent : MonoBehaviour
 
     public void Trigger(int intensity)
     {
+        if (intensity > 3) intensity = 3;
+        if (intensity < 1) intensity = 1;
+
         OnFireStarted.Invoke();
         isTriggered = true;
         currentFireIntensity = intensity;
@@ -67,7 +74,13 @@ public class E_FireComponent : MonoBehaviour
 
     private void Update()
     {
-        float effectiveExternal = BeingExtinguished ? -80f : externalFlameInfluence;
+        if (invulnerabilityTimer > 0f) invulnerabilityTimer -= Time.deltaTime;
+
+        float effectiveExternal;
+        if (BeingExtinguished) effectiveExternal = -80f;
+        else if (invulnerabilityTimer > 0f) effectiveExternal = 0f;
+        else effectiveExternal = externalFlameInfluence;
+
         fireAmount += (internalFlameInfluence + effectiveExternal) * Time.deltaTime;
 
         if (fireAmount >= 100f)
@@ -167,6 +180,7 @@ public class E_FireComponent : MonoBehaviour
         currentFireIntensity = 0;
         fireAmount = 0f;
         internalFlameInfluence = 0f;
+        invulnerabilityTimer = InvulnerabilityDuration;
 
         if (currentFireInstance != null)
         {
