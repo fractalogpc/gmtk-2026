@@ -5117,6 +5117,27 @@ MonoBehaviour:
   randomElevationMax: 85
   impactViewTime: 3
   resultTime: 3
+  levels:
+  - requiredShell: 0
+    obscureCoordinates: 0
+    timeLimit: 0
+    tolerance: 1
+    range: 10
+  - requiredShell: 0
+    obscureCoordinates: 0
+    timeLimit: 0
+    tolerance: 1
+    range: 10
+  - requiredShell: 0
+    obscureCoordinates: 0
+    timeLimit: 0
+    tolerance: 1
+    range: 10
+  - requiredShell: 0
+    obscureCoordinates: 0
+    timeLimit: 0
+    tolerance: 1
+    range: 10
 --- !u!1 &686126119 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3332563795201689462, guid: 9bcfda04cb8b9c848aec614a86110382, type: 3}

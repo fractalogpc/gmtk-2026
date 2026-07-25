@@ -35,10 +35,12 @@ public class GameManager : MonoBehaviour
     [SerializeField] private float timeToImpact = 10f;
     [SerializeField] private float randomAzimuthMin = -180f;
     [SerializeField] private float randomAzimuthMax = 180;
-    [SerializeField] private float randomElevationMin = 5f;
-    [SerializeField] private float randomElevationMax = 85f;
+    [SerializeField] private float elevationVariation = 2f;
     [SerializeField] private float impactViewTime = 3f;
     [SerializeField] private float resultTime = 8f;
+    [SerializeField] private Level[] levels;
+
+    private int currentLevel = 0;
 
     private Coroutine gameCoroutine;
 
@@ -48,8 +50,14 @@ public class GameManager : MonoBehaviour
 
         while (true)
         {
+            if (currentLevel >= levels.Length)
+                yield break;
+            Level levelData = levels[currentLevel];
+            
             onNewTarget?.Invoke();
-            currentTarget = new TargetRequirements(randomAzimuthMin, randomAzimuthMax, randomElevationMin, randomElevationMax);
+            float elev = levelData.elevation();
+            float azim = levelData.azimuth();
+            currentTarget = new TargetRequirements(randomAzimuthMin, randomAzimuthMax, elev - elevationVariation, elev + elevationVariation, levelData.tolerance);
             targetingConsole.SetTargetValues(currentTarget.azimuth, currentTarget.elevation);
             while (!fireLever.IsFired)
             {
@@ -86,6 +94,7 @@ public class GameManager : MonoBehaviour
             successLight.Reset();
             fireLever.ResetFireState(3f);
             targetingConsole.SetLocked(false);
+            currentLevel++;
         }
     }
 
@@ -112,7 +121,7 @@ public class TargetRequirements
     public TargetRequirements(float azimuth, float elevation, float tolerance = 1f)
     {
         this.azimuth = azimuth;
-        this.elevation = elevation;
+        this.elevation = Mathf.Clamp(elevation, 0f, 90f);
         this.tolerance = tolerance;
     }
     
@@ -124,5 +133,37 @@ public class TargetRequirements
         this.azimuth = Random.Range(azimuthMin, azimuthMax);
         this.elevation = Random.Range(elevationMin, elevationMax);
         this.tolerance = tolerance;
+    }
+}
+
+public enum ShellType
+{
+    Normal,
+    AP,
+    HE
+}
+
+[System.Serializable]
+public class Level
+{
+    public const float MAX_RANGE = 11f;
+    public ShellType requiredShell;
+    public bool obscureCoordinates;
+    public float timeLimit;
+    public float tolerance;
+    public float range;
+
+    public Level()
+    {
+        requiredShell = ShellType.Normal;
+        obscureCoordinates = false;
+        timeLimit = 0f;
+        tolerance = 1f;
+        range = 10f;
+    }
+
+    public float elevation()
+    {
+        return 90f - Mathf.Asin(range / MAX_RANGE) * Mathf.Rad2Deg;
     }
 }
