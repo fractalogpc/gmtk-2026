@@ -17,6 +17,7 @@ public class TargetingConsole : MonoBehaviour
     [SerializeField] private StudioEventEmitter gunMovementEmitter;
     [SerializeField] private Transform gunBase;
     [SerializeField] private Transform gunBarrel;
+    [SerializeField] private float stopEmitterAfterSecondsAtZero = 0.2f;
     public float GunAzimuth => gunAzimuth;
     public float GunElevation => gunElevation;
     private float gunAzimuth, gunElevation;
@@ -97,19 +98,28 @@ public class TargetingConsole : MonoBehaviour
         gunVelocityElevation *= (1f - gunDrag * deltaTime);
     }
 
-    private void UpdateTraverseSound()
+    private float secondsAtZeroSpeed = 0f;
+    private void UpdateTraverseSound(float deltaTime)
     {
         float azimuthSpeed = Mathf.Abs(gunVelocityAzimuth) / gunMaxAzimuthVelocity;
         float elevationSpeed = Mathf.Abs(gunVelocityElevation) / gunMaxElevationVelocity;
         float speed = Mathf.Max(azimuthSpeed, elevationSpeed);
         gunMovementEmitter.SetParameter("TraverseSpeed", speed);
-        if (speed > 0f && (!gunMovementEmitter.IsPlaying() || FMODUtilities.IsEmitterStopping(gunMovementEmitter)))
+        if (speed > 0f)
         {
-            gunMovementEmitter.Play();
+            secondsAtZeroSpeed = 0f;
+            if (!gunMovementEmitter.IsPlaying())
+            {
+                gunMovementEmitter.Play();
+            }
         }
-        else if (speed <= 0f && gunMovementEmitter.IsPlaying())
+        else
         {
-            gunMovementEmitter.Stop();
+            secondsAtZeroSpeed += deltaTime;
+            if (secondsAtZeroSpeed >= stopEmitterAfterSecondsAtZero && gunMovementEmitter.IsPlaying())
+            {
+                gunMovementEmitter.Stop();
+            }
         }
     }
 
@@ -119,7 +129,7 @@ public class TargetingConsole : MonoBehaviour
         float deltaTime = Time.deltaTime;
         UpdateAccelFromLevers(deltaTime);
         UpdateGunFromVelocity(deltaTime);
-        UpdateTraverseSound();
+        UpdateTraverseSound(deltaTime);
         gunBase.localRotation = Quaternion.Euler(0f, -gunAzimuth, 0f);
         gunBarrel.localRotation = Quaternion.Euler(-gunElevation, 0f, 0f);
         UpdateGunText();
