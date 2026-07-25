@@ -95,6 +95,7 @@ public class PlayerController : MonoBehaviour
 
     private void HandleZoom()
     {
+        Debug.Log("HandleZoom called");
         if (playerCamera == null) return;
         float targetFov = isZoomed ? zoomedFov : defaultFov;
         LensSettings lens = playerCamera.Lens;
