@@ -84,6 +84,11 @@ MonoBehaviour:
   invertY: 0
   gravityStrengthMult: 1
   gravityVelocity: 0
+  playerCamera: {fileID: 2392938737942563602}
+  defaultFov: 60
+  zoomedFov: 30
+  zoomSpeed: 10
+  zoomedSensitivityMultiplier: 0.5
 --- !u!114 &6746815798634827295
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -97,7 +102,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerInteractor
   playerCamera: {fileID: 0}
-  interactDistance: 3
+  interactDistance: 1
   staticViewInteractDistance: 100
   interactLayers:
     serializedVersion: 2
@@ -276,6 +281,22 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: 56279fab-b177-427e-87ef-8690d683db24
     m_ActionName: 'Player/Cancel[/Keyboard/escape]'
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 5142837842679503649}
+        m_TargetAssemblyTypeName: PlayerController, Assembly-CSharp
+        m_MethodName: OnZoom
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: faf98f6e-6f35-41fd-8a04-66c0ec224863
+    m_ActionName: 'Player/Right Click[/Mouse/rightButton]'
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: Keyboard&Mouse
   m_DefaultActionMap: Player

@@ -1966,7 +1966,6 @@ GameObject:
   - component: {fileID: 3740474818074098627}
   - component: {fileID: 8254793431820100304}
   - component: {fileID: 67776655095774972}
-  - component: {fileID: 6548269119840036610}
   m_Layer: 0
   m_Name: Static Camera Trigger
   m_TagString: Interactable
@@ -1987,6 +1986,7 @@ Transform:
   m_LocalScale: {x: 1, y: 0.5902557, z: 0.4694}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 4851972680902226546}
   - {fileID: 2785272120144717770}
   - {fileID: 2642642869156561595}
   - {fileID: 9050612249597973580}
@@ -2092,54 +2092,6 @@ MonoBehaviour:
   onExit:
     m_PersistentCalls:
       m_Calls: []
---- !u!114 &6548269119840036610
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4432204053362150178}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8bed1afb6d454aa4692d6211d8536791, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::E_FireComponent
-  currentFireIntensity: 0
-  externalFlameInfluence: 0
-  BeingExtinguished: 0
-  OnFireStarted:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 67776655095774972}
-        m_TargetAssemblyTypeName: StaticCameraView, Assembly-CSharp
-        m_MethodName: DeactivateManagedObjects
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  OnFireIncreased:
-    m_PersistentCalls:
-      m_Calls: []
-  OnFireExtinguished:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 67776655095774972}
-        m_TargetAssemblyTypeName: StaticCameraView, Assembly-CSharp
-        m_MethodName: ReactivateManagedObjects
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
 --- !u!1 &4526138018549283940
 GameObject:
   m_ObjectHideFlags: 0
@@ -2281,6 +2233,108 @@ Transform:
   - {fileID: 8883541969139068019}
   m_Father: {fileID: 7081298769802159660}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &5113587029844537302
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4851972680902226546}
+  - component: {fileID: 3997167302462095453}
+  - component: {fileID: 4462908307970706072}
+  m_Layer: 0
+  m_Name: Fire Target
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4851972680902226546
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5113587029844537302}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3262556909165309926}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &3997167302462095453
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5113587029844537302}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &4462908307970706072
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5113587029844537302}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8bed1afb6d454aa4692d6211d8536791, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::E_FireComponent
+  currentFireIntensity: 0
+  externalFlameInfluence: 0
+  BeingExtinguished: 0
+  OnFireStarted:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 67776655095774972}
+        m_TargetAssemblyTypeName: StaticCameraView, Assembly-CSharp
+        m_MethodName: DeactivateManagedObjects
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  OnFireIncreased:
+    m_PersistentCalls:
+      m_Calls: []
+  OnFireExtinguished:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 67776655095774972}
+        m_TargetAssemblyTypeName: StaticCameraView, Assembly-CSharp
+        m_MethodName: ReactivateManagedObjects
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &5115232729337243923
 GameObject:
   m_ObjectHideFlags: 0
@@ -3318,6 +3372,7 @@ GameObject:
   - component: {fileID: 7592265044286790173}
   - component: {fileID: 4612470081183424791}
   - component: {fileID: 7498298146264968867}
+  - component: {fileID: 6709396454191304341}
   m_Layer: 0
   m_Name: Targeting Console
   m_TagString: Untagged
@@ -3368,10 +3423,14 @@ MonoBehaviour:
   gunText: {fileID: 2902953571993832493}
   leverAzimuth: {fileID: 1144911852922908021}
   leverElevation: {fileID: 6256974396259793794}
-  azimuthDPSMin: -10
-  azimuthDPSMax: 10
-  elevationDPSMin: -10
-  elevationDPSMax: 10
+  azimuthForceMin: -50
+  azimuthForceMax: 50
+  elevationForceMin: -50
+  elevationForceMax: 50
+  gunMass: 100
+  gunMaxAzimuthVelocity: 30
+  gunMaxElevationVelocity: 15
+  gunMovementEmitter: {fileID: 6709396454191304341}
 --- !u!114 &4612470081183424791
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3515,6 +3574,39 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &6709396454191304341
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8569129564166649987}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: FMODUnity::FMODUnity.StudioEventEmitter
+  CollisionTag: 
+  EventReference:
+    Guid:
+      Data1: 527394993
+      Data2: 1291529642
+      Data3: -1997583700
+      Data4: 1617806957
+    Path: event:/GunMovement
+  Event: 
+  EventPlayTrigger: 0
+  EventStopTrigger: 0
+  AllowFadeout: 1
+  TriggerOnce: 0
+  Preload: 0
+  NonRigidbodyVelocity: 0
+  Params:
+  - Name: TraverseSpeed
+    Value: 0
+  OverrideAttenuation: 0
+  OverrideMinDistance: 1
+  OverrideMaxDistance: 20
 --- !u!1 &8790135752825898003
 GameObject:
   m_ObjectHideFlags: 0
@@ -4696,7 +4788,7 @@ MonoBehaviour:
   segments: 8
   leverSpeed: 30
   directionMode: 1
-  returnOnRelease: 1
+  returnOnRelease: 0
   defaultAngle: 0
   onValueChanged:
     m_PersistentCalls:

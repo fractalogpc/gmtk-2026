@@ -1,5 +1,6 @@
 using TMPro;
 using UnityEngine;
+using FMODUnity;
 
 public class TargetingConsole : MonoBehaviour
 {
@@ -7,14 +8,19 @@ public class TargetingConsole : MonoBehaviour
     [SerializeField] private TextMeshProUGUI gunText;
     [SerializeField] private DragLever leverAzimuth;
     [SerializeField] private DragLever leverElevation;
-    [SerializeField] private float azimuthDPSMin, azimuthDPSMax;
-    [SerializeField] private float elevationDPSMin, elevationDPSMax;
+    [SerializeField] private float azimuthForceMin, azimuthForceMax;
+    [SerializeField] private float elevationForceMin, elevationForceMax;
+    [SerializeField] private float gunMass = 100f;
+    [SerializeField][Range(0, 1)] private float gunDrag = 0.1f;
+    [SerializeField] private float gunMaxAzimuthVelocity = 30f;
+    [SerializeField] private float gunMaxElevationVelocity = 15f;
+    [SerializeField] private StudioEventEmitter gunMovementEmitter;
     [SerializeField] private Transform gunBase;
     [SerializeField] private Transform gunBarrel;
     public float GunAzimuth => gunAzimuth;
     public float GunElevation => gunElevation;
-    private float gunAzimuth;
-    private float gunElevation;
+    private float gunAzimuth, gunElevation;
+    private float gunVelocityAzimuth, gunVelocityElevation;
 
     private bool locked = false;
 
@@ -53,22 +59,69 @@ public class TargetingConsole : MonoBehaviour
         gunText.text = $"GUN ORIENTATION\n_______________\n{gunAzimuth:F2} AZIM\n{gunElevation:F2} ELEV";
     }
 
-    private void UpdateGunFromLevers(float deltaTime)
+    private void UpdateAccelFromLevers(float deltaTime)
     {
-        gunAzimuth += deltaTime * MapNormalizedToRange(leverAzimuth.NormalizedValue, azimuthDPSMin, azimuthDPSMax) ; 
-        if (gunAzimuth > 180f) gunAzimuth = -180f;
-        if (gunAzimuth < -180f) gunAzimuth = 180f;
-        gunElevation += deltaTime * MapNormalizedToRange(leverElevation.NormalizedValue, elevationDPSMin, elevationDPSMax);
-        if (gunElevation > 90f) gunElevation = 90f;
-        if (gunElevation < 0f) gunElevation = 0f;
+        float azimuthForce = MapNormalizedToRange(leverAzimuth.NormalizedValue, azimuthForceMin, azimuthForceMax);
+        float elevationForce = MapNormalizedToRange(leverElevation.NormalizedValue, elevationForceMin, elevationForceMax);
+        gunVelocityAzimuth += (azimuthForce / gunMass) * deltaTime;
+        gunVelocityElevation += (elevationForce / gunMass) * deltaTime;
+        gunVelocityAzimuth = Mathf.Clamp(gunVelocityAzimuth, -gunMaxAzimuthVelocity, gunMaxAzimuthVelocity);
+        gunVelocityElevation = Mathf.Clamp(gunVelocityElevation, -gunMaxElevationVelocity, gunMaxElevationVelocity);
+        if (azimuthForce == 0f) gunVelocityAzimuth = 0f;
+        if (elevationForce == 0f) gunVelocityElevation = 0f;
+    }
+
+    private void UpdateGunFromVelocity(float deltaTime)
+    {
+        gunAzimuth += gunVelocityAzimuth * deltaTime;
+        if (gunAzimuth > 180f) {
+            gunAzimuth = -180f;
+            gunVelocityAzimuth = 0f;
+        }
+        if (gunAzimuth < -180f) {
+            gunAzimuth = 180f;
+            gunVelocityAzimuth = 0f;
+        }
+
+        gunElevation += gunVelocityElevation * deltaTime;
+        if (gunElevation > 90f) {
+            gunElevation = 90f;
+            gunVelocityElevation = 0f;
+        }
+        if (gunElevation < 0f) {
+            gunElevation = 0f;
+            gunVelocityElevation = 0f;
+        }
+
+        gunVelocityAzimuth *= (1f - gunDrag * deltaTime);
+        gunVelocityElevation *= (1f - gunDrag * deltaTime);
+    }
+
+    private void UpdateTraverseSound()
+    {
+        float azimuthSpeed = Mathf.Abs(gunVelocityAzimuth) / gunMaxAzimuthVelocity;
+        float elevationSpeed = Mathf.Abs(gunVelocityElevation) / gunMaxElevationVelocity;
+        float speed = Mathf.Max(azimuthSpeed, elevationSpeed);
+        gunMovementEmitter.SetParameter("TraverseSpeed", speed);
+        if (speed > 0f && (!gunMovementEmitter.IsPlaying() || FMODUtilities.IsEmitterStopping(gunMovementEmitter)))
+        {
+            gunMovementEmitter.Play();
+        }
+        else if (speed <= 0f && gunMovementEmitter.IsPlaying())
+        {
+            gunMovementEmitter.Stop();
+        }
     }
 
     private void Update()
     {
         if (locked) return;
-        UpdateGunFromLevers(Time.deltaTime);
-        gunBase.localRotation = Quaternion.Euler(0f, -gunAzimuth, 0f);
-        gunBarrel.localRotation = Quaternion.Euler(-gunElevation, 0f, 0f);
+        float deltaTime = Time.deltaTime;
+        UpdateAccelFromLevers(deltaTime);
+        UpdateGunFromVelocity(deltaTime);
+        UpdateTraverseSound();
+        gunBase.rotation = Quaternion.Euler(0f, -gunAzimuth, 0f);
+        gunBarrel.rotation = Quaternion.Euler(-gunElevation, 0f, 0f);
         UpdateGunText();
     }
 

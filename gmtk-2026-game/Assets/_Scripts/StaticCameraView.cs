@@ -52,6 +52,8 @@ public class StaticCameraView : MonoBehaviour, IStaticCamera
                 interactable.SetInteractionEnabled(target);
             }
         }
+
+        // SetOwnCollidersEnabled(value);
     }
 
     public void DeactivateManagedObjects()
@@ -62,6 +64,8 @@ public class StaticCameraView : MonoBehaviour, IStaticCamera
             if (managedObjects[i] is IInteractable interactable)
                 interactable.SetInteractionEnabled(false);
         }
+
+        SetOwnCollidersEnabled(false);
     }
 
     public void ReactivateManagedObjects()
@@ -70,6 +74,7 @@ public class StaticCameraView : MonoBehaviour, IStaticCamera
         {
             deactivated[i] = false;
         }
+        SetOwnCollidersEnabled(true);
     }
 
 #if UNITY_EDITOR
