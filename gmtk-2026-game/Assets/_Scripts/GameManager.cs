@@ -68,6 +68,7 @@ public class GameManager : MonoBehaviour
             bool isSuccess = Mathf.Abs(targetingConsole.GunAzimuth - currentTarget.azimuth) <= currentTarget.tolerance &&
                             Mathf.Abs(targetingConsole.GunElevation - currentTarget.elevation) <= currentTarget.tolerance;
             successLight.SetSuccess(isSuccess);
+            targetingConsole.DisplayMessage(isSuccess ? "SUCCESS" : "FAILURE");
             yield return new WaitForSeconds(resultTime);
             successLight.Reset();
             fireLever.ResetFireState(3f);

@@ -16,6 +16,8 @@ public class TargetingConsole : MonoBehaviour
     private float gunAzimuth;
     private float gunElevation;
 
+    private bool locked = false;
+
     public void SetLocked(bool isLocked)
     {
         ((IInteractable)leverAzimuth).SetInteractionEnabled(!isLocked);
@@ -28,10 +30,17 @@ public class TargetingConsole : MonoBehaviour
         {
             UpdateGunText();
         }
+        locked = isLocked;
     }
+
+    public void DisplayMessage(string message)
+    {
+        gunText.text = message;
+    }
+
     public void SetTargetValues(float azimuth, float elevation)
     {
-        targetText.text = $"FIRING ORDERS\n________________\n{azimuth:F2} AZIM\n{elevation:F2} ELEV";
+        targetText.text = $"FIRING ORDERS\n_______________\n{azimuth:F2} AZIM\n{elevation:F2} ELEV";
     }
 
     private float MapNormalizedToRange(float normalizedValue, float min, float max)
@@ -56,6 +65,7 @@ public class TargetingConsole : MonoBehaviour
 
     private void Update()
     {
+        if (locked) return;
         UpdateGunFromLevers(Time.deltaTime);
         azimuthChangeText.text = $"{MapNormalizedToRange(leverAzimuth.NormalizedValue, azimuthDPSMin, azimuthDPSMax):F2}";
         elevationChangeText.text = $"{MapNormalizedToRange(leverElevation.NormalizedValue, elevationDPSMin, elevationDPSMax):F2}";
