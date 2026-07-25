@@ -8,6 +8,7 @@ public class LoadingStation : MonoBehaviour
     [SerializeField] private Button loadButton;
 
     [SerializeField] private TextMeshProUGUI powderText;
+    [SerializeField] private TextMeshProUGUI shellText;
 
     [Tooltip("Powder units per second when hold first starts.")]
     [SerializeField] private float startFillSpeed = 5f;
@@ -27,8 +28,8 @@ public class LoadingStation : MonoBehaviour
     [SerializeField] private UnityEvent onShellLoaded;
     [SerializeField] private UnityEvent<float> onPowderChanged;
 
-    private GameManager.ShellType currentSelectedShell = GameManager.ShellType.Normal;
-    private GameManager.ShellType loadedShell = GameManager.ShellType.Normal;
+    private GameManager.ShellType currentSelectedShell = GameManager.ShellType.None;
+    private GameManager.ShellType loadedShell = GameManager.ShellType.None;
     private float currentPowderLoaded = 0f;
     private bool locked = false;
 
@@ -41,11 +42,13 @@ public class LoadingStation : MonoBehaviour
     public void SelectShell(int shell)
     {
         currentSelectedShell = (GameManager.ShellType)shell;
+
+        UpdateShellText();
     }
 
     public void Start()
     {
-        UpdateText();
+        UpdateProgressText();
     }
 
     private void Update()
@@ -84,15 +87,36 @@ public class LoadingStation : MonoBehaviour
         if (!Mathf.Approximately(previous, currentPowderLoaded))
         {
             onPowderChanged.Invoke(currentPowderLoaded);
-            UpdateText();
+            UpdateProgressText();
         }
 
         wasPressed = pressed;
     }
 
-    private void UpdateText()
+    private void UpdateProgressText()
     {
         powderText.text = $"POWDER LOADING\n\n[{GenerateBar(currentPowderLoaded)}]\n\n{(currentPowderLoaded == 0 ? "HOLD TO LOAD" : "DO NOT OVERFILL")}";
+    }
+
+    private GameManager.ShellType requiredShell = GameManager.ShellType.None;
+    private void UpdateShellText()
+    {
+        shellText.text = $"REQUIRED SHELL \n\n{ParseShellType(requiredShell)}\n\nSELECTED SHELL \n\n{ParseShellType(currentSelectedShell)}";
+    }
+
+    private string ParseShellType(GameManager.ShellType shell)
+    {
+        switch (shell)
+        {
+            case GameManager.ShellType.AP:
+                return "Armor Piercing";
+            case GameManager.ShellType.INC:
+                return "Incendiary";
+            case GameManager.ShellType.HE:
+                return "High Explosive";
+            default:
+                return "NONE";
+        }
     }
 
     private string GenerateBar(float value)
