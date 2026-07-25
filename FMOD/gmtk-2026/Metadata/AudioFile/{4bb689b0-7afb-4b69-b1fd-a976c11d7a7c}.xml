@@ -2,7 +2,7 @@
 <objects serializationModel="Studio.02.03.00">
 	<object class="AudioFile" id="{4bb689b0-7afb-4b69-b1fd-a976c11d7a7c}">
 		<property name="assetPath">
-			<value>Foley Footstep Hard Sole Dress Shoe Single Step On Cement 02.wav</value>
+			<value>Footsteps/Foley Footstep Hard Sole Dress Shoe Single Step On Cement 02.wav</value>
 		</property>
 		<property name="frequencyInKHz">
 			<value>48</value>

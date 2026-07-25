@@ -2,7 +2,7 @@
 <objects serializationModel="Studio.02.03.00">
 	<object class="AudioFile" id="{6610ed59-f194-4d7d-b2d6-d4af6ebfce8a}">
 		<property name="assetPath">
-			<value>arpmedia-horror-ambience-569511.mp3</value>
+			<value>Music/arpmedia-horror-ambience-569511.mp3</value>
 		</property>
 		<property name="isStreaming">
 			<value>true</value>
