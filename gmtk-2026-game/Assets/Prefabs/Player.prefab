@@ -86,7 +86,7 @@ MonoBehaviour:
   gravityVelocity: 0
   playerCamera: {fileID: 2392938737942563602}
   defaultFov: 60
-  zoomedFov: 30
+  zoomedFov: 35
   zoomSpeed: 10
   zoomedSensitivityMultiplier: 0.5
 --- !u!114 &6746815798634827295
