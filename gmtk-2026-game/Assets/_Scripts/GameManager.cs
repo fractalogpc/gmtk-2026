@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class GameManager : MonoBehaviour
 {
@@ -24,6 +25,9 @@ public class GameManager : MonoBehaviour
     [SerializeField] private FireLever fireLever;
     [SerializeField] private SuccessLight successLight;
     [SerializeField] private TargetRequirements currentTarget;
+    [SerializeField] private UnityEvent onPostImpact;
+    [SerializeField] private UnityEvent onImpact;
+    [SerializeField] private UnityEvent onNewTarget;
 
     [Header("Settings")]
     [SerializeField] private float timeToImpact = 10f;
@@ -31,7 +35,8 @@ public class GameManager : MonoBehaviour
     [SerializeField] private float randomAzimuthMax = 180;
     [SerializeField] private float randomElevationMin = 5f;
     [SerializeField] private float randomElevationMax = 85f;
-    [SerializeField] private float resultTime = 3f;
+    [SerializeField] private float impactViewTime = 3f;
+    [SerializeField] private float resultTime = 8f;
 
     private Coroutine gameCoroutine;
 
@@ -39,6 +44,7 @@ public class GameManager : MonoBehaviour
     {
         while (true)
         {
+            onNewTarget?.Invoke();
             currentTarget = new TargetRequirements(randomAzimuthMin, randomAzimuthMax, randomElevationMin, randomElevationMax);
             targetingConsole.SetTargetValues(currentTarget.azimuth, currentTarget.elevation);
             while (!fireLever.IsFired)
@@ -55,6 +61,9 @@ public class GameManager : MonoBehaviour
             }
 
             // Impact
+            onImpact?.Invoke();
+            yield return new WaitForSeconds(impactViewTime);
+            onPostImpact?.Invoke();
             // Reset the lever
             bool isSuccess = Mathf.Abs(targetingConsole.GunAzimuth - currentTarget.azimuth) <= currentTarget.tolerance &&
                             Mathf.Abs(targetingConsole.GunElevation - currentTarget.elevation) <= currentTarget.tolerance;
