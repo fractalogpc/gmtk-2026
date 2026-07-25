@@ -3318,6 +3318,7 @@ GameObject:
   - component: {fileID: 7592265044286790173}
   - component: {fileID: 4612470081183424791}
   - component: {fileID: 7498298146264968867}
+  - component: {fileID: 6709396454191304341}
   m_Layer: 0
   m_Name: Targeting Console
   m_TagString: Untagged
@@ -3368,10 +3369,14 @@ MonoBehaviour:
   gunText: {fileID: 2902953571993832493}
   leverAzimuth: {fileID: 1144911852922908021}
   leverElevation: {fileID: 6256974396259793794}
-  azimuthDPSMin: -10
-  azimuthDPSMax: 10
-  elevationDPSMin: -10
-  elevationDPSMax: 10
+  azimuthForceMin: -50
+  azimuthForceMax: 50
+  elevationForceMin: -50
+  elevationForceMax: 50
+  gunMass: 100
+  gunMaxAzimuthVelocity: 30
+  gunMaxElevationVelocity: 15
+  gunMovementEmitter: {fileID: 6709396454191304341}
 --- !u!114 &4612470081183424791
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3515,6 +3520,39 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &6709396454191304341
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8569129564166649987}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: FMODUnity::FMODUnity.StudioEventEmitter
+  CollisionTag: 
+  EventReference:
+    Guid:
+      Data1: 527394993
+      Data2: 1291529642
+      Data3: -1997583700
+      Data4: 1617806957
+    Path: event:/GunMovement
+  Event: 
+  EventPlayTrigger: 0
+  EventStopTrigger: 0
+  AllowFadeout: 1
+  TriggerOnce: 0
+  Preload: 0
+  NonRigidbodyVelocity: 0
+  Params:
+  - Name: TraverseSpeed
+    Value: 0
+  OverrideAttenuation: 0
+  OverrideMinDistance: 1
+  OverrideMaxDistance: 20
 --- !u!1 &8790135752825898003
 GameObject:
   m_ObjectHideFlags: 0
