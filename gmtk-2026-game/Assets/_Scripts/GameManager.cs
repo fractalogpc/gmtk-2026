@@ -64,6 +64,8 @@ public class GameManager : MonoBehaviour
                 yield return null;
             }
             // Lever has been fired
+            bool isSuccess = Mathf.Abs(targetingConsole.GunAzimuth - currentTarget.azimuth) <= currentTarget.tolerance &&
+                            Mathf.Abs(targetingConsole.GunElevation - currentTarget.elevation) <= currentTarget.tolerance;
 
             targetingConsole.SetLocked(true);
             yield return new WaitForSeconds(3f); // Wait for firing animations
@@ -72,7 +74,7 @@ public class GameManager : MonoBehaviour
             {
                 if (countdown.Timer < 1f)
                 {
-                    if (!shellAnim.isPlaying)
+                    if (!shellAnim.isPlaying && isSuccess)
                     {
                         onShellAnimation?.Invoke();
                         shellAnim.Play();
@@ -82,8 +84,6 @@ public class GameManager : MonoBehaviour
             }
 
             // Impact
-            bool isSuccess = Mathf.Abs(targetingConsole.GunAzimuth - currentTarget.azimuth) <= currentTarget.tolerance &&
-                            Mathf.Abs(targetingConsole.GunElevation - currentTarget.elevation) <= currentTarget.tolerance;
             onImpact?.Invoke();
             if (isSuccess)
             {
@@ -115,6 +115,14 @@ public class GameManager : MonoBehaviour
             StopCoroutine(gameCoroutine);
         }
     }
+
+    public enum ShellType
+    {
+        Normal,
+        AP,
+        HE,
+        None
+    }
 }
 
 public class TargetRequirements
@@ -141,18 +149,12 @@ public class TargetRequirements
     }
 }
 
-public enum ShellType
-{
-    Normal,
-    AP,
-    HE
-}
 
 [System.Serializable]
 public class Level
 {
     public const float MAX_RANGE = 11f;
-    public ShellType requiredShell;
+    public GameManager.ShellType requiredShell;
     public bool obscureCoordinates;
     public float timeLimit;
     public float tolerance;
@@ -160,7 +162,7 @@ public class Level
 
     public Level()
     {
-        requiredShell = ShellType.Normal;
+        requiredShell = GameManager.ShellType.Normal;
         obscureCoordinates = false;
         timeLimit = 0f;
         tolerance = 1f;
