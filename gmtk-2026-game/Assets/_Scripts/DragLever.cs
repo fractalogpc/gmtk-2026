@@ -10,6 +10,10 @@ public class DragLever : MonoBehaviour, IInteractable
     [SerializeField] private float maxAngle = 45f;
     [SerializeField] private float startAngle = 0f;
 
+    [Header("Input")]
+    [Tooltip("Degrees per pixel of mouse motion along the lever's screen-space tangent.")]
+    [SerializeField] private float sensitivity = 0.5f;
+
     [Header("Events")]
     [SerializeField] private UnityEvent<float> onValueChanged;
     [SerializeField] private UnityEvent<float> onAngleChanged;
@@ -18,8 +22,9 @@ public class DragLever : MonoBehaviour, IInteractable
 
     private Quaternion initialLocalRotation;
     private float currentAngle;
-    private float dragStartLeverAngle;
-    private float dragStartRayAngle;
+    private Camera dragCamera;
+    private CursorLockMode savedCursorLockMode;
+    private bool savedCursorVisible;
     private bool wasAtMax;
     private bool wasAtMin;
 
@@ -36,41 +41,53 @@ public class DragLever : MonoBehaviour, IInteractable
 
     public InteractionSettings OnInteractStart(InteractionData data)
     {
-        dragStartLeverAngle = currentAngle;
-        dragStartRayAngle = GetRayAngle(data.ray);
+        dragCamera = Camera.main;
+        savedCursorLockMode = Cursor.lockState;
+        savedCursorVisible = Cursor.visible;
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
         return new InteractionSettings(lockCameraAndMovement: true);
     }
 
     public InteractionSettings DuringInteract(InteractionData data)
     {
-        float rayAngle = GetRayAngle(data.ray);
-        float delta = Mathf.DeltaAngle(dragStartRayAngle, rayAngle);
-        SetAngle(dragStartLeverAngle + delta);
+        if (dragCamera == null) return new InteractionSettings(lockCameraAndMovement: true);
+
+        Vector3 axis = GetWorldAxis();
+        Vector3 handleDir = GetHandleDirection(axis);
+        Vector3 tangentWorld = Vector3.Cross(axis, handleDir);
+
+        Vector3 pivotScreen = dragCamera.WorldToScreenPoint(leverPivot.position);
+        Vector3 tangentEndScreen = dragCamera.WorldToScreenPoint(leverPivot.position + tangentWorld);
+        Vector2 tangentScreen = (Vector2)(tangentEndScreen - pivotScreen);
+        if (tangentScreen.sqrMagnitude < 1e-4f) return new InteractionSettings(lockCameraAndMovement: true);
+
+        Vector2 tangentDir = tangentScreen.normalized;
+        float alignedMotion = Vector2.Dot(data.mouseDelta, tangentDir);
+        SetAngle(currentAngle + alignedMotion * sensitivity);
+
         return new InteractionSettings(lockCameraAndMovement: true);
     }
 
     public InteractionSettings OnInteractEnd(InteractionData data)
     {
+        Cursor.lockState = savedCursorLockMode;
+        Cursor.visible = savedCursorVisible;
         return new InteractionSettings(lockCameraAndMovement: false);
     }
 
-    private float GetRayAngle(Ray ray)
+    private Vector3 GetHandleDirection(Vector3 axis)
     {
-        Vector3 axis = GetWorldAxis();
-
-        // Intersect the cursor ray with a plane through the pivot facing the camera.
-        // This always yields a stable world point regardless of how the camera is oriented
-        // relative to the rotation axis.
-        Plane cursorPlane = new(-ray.direction, leverPivot.position);
-        if (!cursorPlane.Raycast(ray, out float enter)) return dragStartRayAngle;
-
-        // Drop the axis-aligned component so the point lives on the rotation plane.
-        Vector3 offset = ray.GetPoint(enter) - leverPivot.position;
-        Vector3 inRotationPlane = Vector3.ProjectOnPlane(offset, axis);
-        if (inRotationPlane.sqrMagnitude < 1e-6f) return dragStartRayAngle;
-
-        Vector3 reference = GetWorldReference(axis);
-        return Vector3.SignedAngle(reference, inRotationPlane, axis);
+        // A unit direction perpendicular to the axis that rotates with the lever,
+        // used to compute the tangent (direction the tip is moving right now).
+        Vector3 candidate = leverPivot.up;
+        Vector3 projected = Vector3.ProjectOnPlane(candidate, axis);
+        if (projected.sqrMagnitude < 1e-4f)
+        {
+            candidate = leverPivot.forward;
+            projected = Vector3.ProjectOnPlane(candidate, axis);
+        }
+        return projected.normalized;
     }
 
     private Vector3 GetWorldAxis()
@@ -79,13 +96,6 @@ public class DragLever : MonoBehaviour, IInteractable
             ? leverPivot.parent.rotation * initialLocalRotation
             : initialLocalRotation;
         return (baseRot * rotationAxis).normalized;
-    }
-
-    private static Vector3 GetWorldReference(Vector3 axis)
-    {
-        Vector3 candidate = Vector3.forward;
-        if (Mathf.Abs(Vector3.Dot(axis, candidate)) > 0.99f) candidate = Vector3.up;
-        return Vector3.ProjectOnPlane(candidate, axis).normalized;
     }
 
     private void SetAngle(float angle)
