@@ -42,6 +42,8 @@ public class GameManager : MonoBehaviour
 
     private IEnumerator GameCoroutine()
     {
+        fireLever.ResetFireState(0f);
+
         while (true)
         {
             onNewTarget?.Invoke();
@@ -54,6 +56,7 @@ public class GameManager : MonoBehaviour
             // Lever has been fired
 
             targetingConsole.SetLocked(true);
+            yield return new WaitForSeconds(3f); // Wait for firing animations
             countdown.StartTimer(timeToImpact);
             while (countdown.Timer > 0f)
             {
