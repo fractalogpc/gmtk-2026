@@ -4,6 +4,13 @@ using System.Collections.Generic;
 public class EventManager : MonoBehaviour
 {
 
+    public static EventManager Instance { get; private set; }
+
+    [Header("Fire Event")]
+    public GameObject HeldExtinguisherObj;
+    public GameObject InteractableExtinguisherObj;
+    public Interactable InteractableExtinguisherScript;
+
     public GameObject smallFirePrefab;
     public GameObject mediumFirePrefab;
     public GameObject bigFirePrefab;
@@ -11,8 +18,23 @@ public class EventManager : MonoBehaviour
 
     public E_FireComponent[] fireComponents;
 
+    bool isExtinguisherHeld = false;
+    bool isExtinguisherInteractable = false;
+
     float updateInterval = 0.25f; // Update every second
     float timer = 0f;
+
+    private void Awake()
+    {
+        if (Instance != null && Instance != this)
+        {
+            Destroy(this.gameObject);
+        }
+        else
+        {
+            Instance = this;
+        }
+    }
 
     public void Start()
     {
@@ -21,12 +43,17 @@ public class EventManager : MonoBehaviour
             fireComponent.Initialize(smallFirePrefab, mediumFirePrefab, bigFirePrefab, explosionPrefab);
         }
 
-
-        TriggerFireEvent(2); // Example trigger with intensity 2
+        // TriggerFireEvent(2); // Example trigger with intensity 2
     }
 
     public void TriggerFireEvent(int intensity)
     {
+        if (!isExtinguisherHeld && !isExtinguisherInteractable)
+        {
+            isExtinguisherInteractable = true;
+            InteractableExtinguisherScript.enabled = true;
+        }
+
         int numberOfComponentsToTrigger = Mathf.Clamp(intensity, 0, fireComponents.Length);
 
         var indices = new List<int>();
@@ -47,6 +74,35 @@ public class EventManager : MonoBehaviour
         }
     }
 
+    public void PickUpExtinguisher()
+    {
+        isExtinguisherHeld = true;
+        HeldExtinguisherObj.SetActive(true);
+        InteractableExtinguisherObj.SetActive(false);
+        InteractableExtinguisherScript.enabled = false;
+    }
+
+    private void DropExtinguisher()
+    {
+        isExtinguisherHeld = false;
+        isExtinguisherInteractable = false;
+        HeldExtinguisherObj.SetActive(false);
+        InteractableExtinguisherObj.SetActive(true);
+        InteractableExtinguisherScript.enabled = false;
+    }
+
+    private bool AllFiresExtinguished()
+    {
+        foreach (var fireComponent in fireComponents)
+        {
+            if (fireComponent.currentFireIntensity > 0)
+            {
+                return false;
+            }
+        }
+        return true;
+    }
+
     private void Update()
     {
         timer += Time.deltaTime;
@@ -54,6 +110,11 @@ public class EventManager : MonoBehaviour
         {
             timer = 0f;
             HandleActiveFireComponents();
+
+            if (AllFiresExtinguished())
+            {
+                DropExtinguisher();
+            }
         }
     }
 

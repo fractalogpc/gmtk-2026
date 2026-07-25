@@ -65,6 +65,8 @@ public class GameManager : MonoBehaviour
 
             // Impact
             onImpact?.Invoke();
+            EventManager.Instance.TriggerFireEvent(Random.Range(1, 4));
+
             yield return new WaitForSeconds(impactViewTime);
             onPostImpact?.Invoke();
             // Reset the lever
@@ -76,6 +78,8 @@ public class GameManager : MonoBehaviour
             successLight.Reset();
             fireLever.ResetFireState(3f);
             targetingConsole.SetLocked(false);
+
+            // Test fire event
         }
     }
 
