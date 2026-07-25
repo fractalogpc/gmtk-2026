@@ -45,18 +45,23 @@ public class GameManager : MonoBehaviour
             {
                 yield return null;
             }
+            // Lever has been fired
+
             targetingConsole.SetLocked(true);
             countdown.StartTimer(timeToImpact);
             while (countdown.Timer > 0f)
             {
                 yield return null;
             }
+
+            // Impact
+            // Reset the lever
             bool isSuccess = Mathf.Abs(targetingConsole.GunAzimuth - currentTarget.azimuth) <= currentTarget.tolerance &&
                             Mathf.Abs(targetingConsole.GunElevation - currentTarget.elevation) <= currentTarget.tolerance;
             successLight.SetSuccess(isSuccess);
             yield return new WaitForSeconds(resultTime);
             successLight.Reset();
-            fireLever.ResetFireState();
+            fireLever.ResetFireState(3f);
             targetingConsole.SetLocked(false);
         }
     }
