@@ -80,6 +80,14 @@ public class GameManager : MonoBehaviour
     {
         gameCoroutine = StartCoroutine(GameCoroutine());
     }
+
+    private void OnDestroy()
+    {
+        if (gameCoroutine != null)
+        {
+            StopCoroutine(gameCoroutine);
+        }
+    }
 }
 
 public class TargetRequirements
