@@ -41,8 +41,8 @@ public class FireExtinguisher : MonoBehaviour
 
         hitThisFrame.Clear();
 
-        Vector3 boxCenter = transform.position + transform.forward * 1f;
-        Vector3 boxHalfExtents = new Vector3(0.5f, 0.5f, 1f);
+        Vector3 boxCenter = transform.position + transform.forward * 2f;
+        Vector3 boxHalfExtents = new Vector3(1f, 1f, 2f);
         Collider[] hitColliders = Physics.OverlapBox(boxCenter, boxHalfExtents, transform.rotation);
         foreach (var hitCollider in hitColliders)
         {
@@ -72,9 +72,9 @@ public class FireExtinguisher : MonoBehaviour
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.blue;
-        Vector3 boxHalfExtents = new Vector3(0.5f, 0.5f, 1f);
+        Vector3 boxHalfExtents = new Vector3(1f, 1f, 2f);
         Matrix4x4 prev = Gizmos.matrix;
-        Gizmos.matrix = Matrix4x4.TRS(transform.position + transform.forward * 1f, transform.rotation, Vector3.one);
+        Gizmos.matrix = Matrix4x4.TRS(transform.position + transform.forward * 2f, transform.rotation, Vector3.one);
         Gizmos.DrawWireCube(Vector3.zero, boxHalfExtents * 2);
         Gizmos.matrix = prev;
     }

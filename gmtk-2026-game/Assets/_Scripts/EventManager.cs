@@ -45,7 +45,7 @@ public class EventManager : MonoBehaviour
             fireComponent.Initialize(smallFirePrefab, mediumFirePrefab, bigFirePrefab, explosionPrefab);
         }
 
-        TriggerFireEvent(1); // Example trigger with intensity 2
+        // TriggerFireEvent(4); // Example trigger with intensity 2
     }
 
     public void TriggerFireEvent(int intensity)
@@ -130,6 +130,7 @@ public class EventManager : MonoBehaviour
             for (int j = 0; j < fireComponents.Length; j++)
             {
                 if (i == j) continue;
+                if (fireComponents[j].BeingExtinguished) continue;
                 int otherFireIntensity = fireComponents[j].currentFireIntensity;
                 if (otherFireIntensity == 0) continue;
 
@@ -138,13 +139,13 @@ public class EventManager : MonoBehaviour
                 switch (otherFireIntensity)
                 {
                     case 1:
-                        if (distance < 5f) intensity += 2.5f;
+                        if (distance < 2f) intensity += 2f;
                         break;
                     case 2:
-                        if (distance < 8f) intensity += 4f;
+                        if (distance < 4f) intensity += 3f;
                         break;
                     case 3:
-                        if (distance < 10f) intensity += 7f;
+                        if (distance < 6f) intensity += 6f;
                         break;
                 }
             }

@@ -1,3 +1,4 @@
+using Unity.Cinemachine;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -16,10 +17,19 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float gravityStrengthMult = 1f;
     [SerializeField] private float gravityVelocity = 0;
 
+    [Header("Zoom")]
+    [SerializeField] private CinemachineCamera playerCamera;
+    [SerializeField] private float defaultFov = 60f;
+    [SerializeField] private float zoomedFov = 30f;
+    [SerializeField] private float zoomSpeed = 10f;
+    [Tooltip("Scales look sensitivity while zoomed (multiplied with lookSensitivity).")]
+    [SerializeField] private float zoomedSensitivityMultiplier = 0.5f;
+
     private CharacterController controller;
     private Vector2 moveInput;
     private Vector2 lookInput;
     private float pitch;
+    private bool isZoomed;
 
     private void Awake()
     {
@@ -42,6 +52,7 @@ public class PlayerController : MonoBehaviour
     {
         HandleLook();
         HandleMove();
+        HandleZoom();
         if (!controller.isGrounded)
         {
             gravityVelocity += Physics.gravity.y * Time.deltaTime * gravityStrengthMult;
@@ -63,9 +74,16 @@ public class PlayerController : MonoBehaviour
         lookInput = context.ReadValue<Vector2>();
     }
 
+    public void OnZoom(InputAction.CallbackContext context)
+    {
+        if (context.started) isZoomed = true;
+        else if (context.canceled) isZoomed = false;
+    }
+
     private void HandleLook()
     {
-        Vector2 look = lookInput * lookSensitivity;
+        float sensitivity = lookSensitivity * (isZoomed ? zoomedSensitivityMultiplier : 1f);
+        Vector2 look = lookInput * sensitivity;
         transform.Rotate(0f, look.x, 0f);
 
         float pitchDelta = invertY ? look.y : -look.y;
@@ -73,6 +91,15 @@ public class PlayerController : MonoBehaviour
 
         if (cameraPivot != null)
             cameraPivot.localEulerAngles = new Vector3(pitch, 0f, 0f);
+    }
+
+    private void HandleZoom()
+    {
+        if (playerCamera == null) return;
+        float targetFov = isZoomed ? zoomedFov : defaultFov;
+        LensSettings lens = playerCamera.Lens;
+        lens.FieldOfView = Mathf.Lerp(lens.FieldOfView, targetFov, Time.deltaTime * zoomSpeed);
+        playerCamera.Lens = lens;
     }
 
     private void HandleMove()
