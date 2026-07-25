@@ -45,7 +45,7 @@ public class EventManager : MonoBehaviour
             fireComponent.Initialize(smallFirePrefab, mediumFirePrefab, bigFirePrefab, explosionPrefab);
         }
 
-        TriggerFireEvent(4); // Example trigger with intensity 2
+        TriggerFireEvent(1); // Example trigger with intensity 2
     }
 
     public void TriggerFireEvent(int intensity)

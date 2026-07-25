@@ -6,9 +6,7 @@ public class TargetingConsole : MonoBehaviour
     [SerializeField] private TextMeshProUGUI targetText;
     [SerializeField] private TextMeshProUGUI gunText;
     [SerializeField] private DragLever leverAzimuth;
-    [SerializeField] private TextMeshProUGUI azimuthChangeText;
     [SerializeField] private DragLever leverElevation;
-    [SerializeField] private TextMeshProUGUI elevationChangeText;
     [SerializeField] private float azimuthDPSMin, azimuthDPSMax;
     [SerializeField] private float elevationDPSMin, elevationDPSMax;
     public float GunAzimuth => gunAzimuth;
@@ -67,8 +65,6 @@ public class TargetingConsole : MonoBehaviour
     {
         if (locked) return;
         UpdateGunFromLevers(Time.deltaTime);
-        azimuthChangeText.text = $"{MapNormalizedToRange(leverAzimuth.NormalizedValue, azimuthDPSMin, azimuthDPSMax):F2}";
-        elevationChangeText.text = $"{MapNormalizedToRange(leverElevation.NormalizedValue, elevationDPSMin, elevationDPSMax):F2}";
         UpdateGunText();
     }
 
