@@ -5329,7 +5329,8 @@ MonoBehaviour:
   segments: 8
   leverSpeed: 30
   directionMode: 1
-  returnOnRelease: 0
+  returnOnRelease: 1
+  dontReturnOnReleaseIfAtMax: 1
   defaultAngle: 0
   onValueChanged:
     m_PersistentCalls:
