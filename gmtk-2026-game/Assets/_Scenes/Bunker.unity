@@ -20421,9 +20421,33 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 543450652380634721}
     - target: {fileID: 7592265044286790173, guid: 9bcfda04cb8b9c848aec614a86110382, type: 3}
+      propertyPath: gunMass
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 7592265044286790173, guid: 9bcfda04cb8b9c848aec614a86110382, type: 3}
       propertyPath: gunBarrel
       value: 
       objectReference: {fileID: 101692463547631170}
+    - target: {fileID: 7592265044286790173, guid: 9bcfda04cb8b9c848aec614a86110382, type: 3}
+      propertyPath: azimuthForceMax
+      value: 1000
+      objectReference: {fileID: 0}
+    - target: {fileID: 7592265044286790173, guid: 9bcfda04cb8b9c848aec614a86110382, type: 3}
+      propertyPath: azimuthForceMin
+      value: -1000
+      objectReference: {fileID: 0}
+    - target: {fileID: 7592265044286790173, guid: 9bcfda04cb8b9c848aec614a86110382, type: 3}
+      propertyPath: elevationForceMax
+      value: 300
+      objectReference: {fileID: 0}
+    - target: {fileID: 7592265044286790173, guid: 9bcfda04cb8b9c848aec614a86110382, type: 3}
+      propertyPath: elevationForceMin
+      value: -300
+      objectReference: {fileID: 0}
+    - target: {fileID: 7592265044286790173, guid: 9bcfda04cb8b9c848aec614a86110382, type: 3}
+      propertyPath: gunMaxAzimuthVelocity
+      value: 75
+      objectReference: {fileID: 0}
     - target: {fileID: 8569129564166649987, guid: 9bcfda04cb8b9c848aec614a86110382, type: 3}
       propertyPath: m_Name
       value: Targeting Console
@@ -20872,6 +20896,30 @@ PrefabInstance:
     - target: {fileID: 2197322315370450243, guid: 48fc8cd505fac0c4297298950f9f3aad, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3780604701616376869, guid: 48fc8cd505fac0c4297298950f9f3aad, type: 3}
+      propertyPath: startAngle
+      value: -60
+      objectReference: {fileID: 0}
+    - target: {fileID: 4742810168878812421, guid: 48fc8cd505fac0c4297298950f9f3aad, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.1546
+      objectReference: {fileID: 0}
+    - target: {fileID: 4742810168878812421, guid: 48fc8cd505fac0c4297298950f9f3aad, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.8119
+      objectReference: {fileID: 0}
+    - target: {fileID: 5483623357031093728, guid: 48fc8cd505fac0c4297298950f9f3aad, type: 3}
+      propertyPath: startAngle
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7115983757653363577, guid: 48fc8cd505fac0c4297298950f9f3aad, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.1529
+      objectReference: {fileID: 0}
+    - target: {fileID: 7115983757653363577, guid: 48fc8cd505fac0c4297298950f9f3aad, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.8121
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

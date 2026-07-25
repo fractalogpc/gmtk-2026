@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Events;
 
 public class DecoderController : MonoBehaviour
 {
@@ -18,20 +19,69 @@ public class DecoderController : MonoBehaviour
     [Tooltip("Min/Max offset (local units) the horizontal bar can shift along Y from its start position.")]
     [SerializeField] private Vector2 horizontalBarOffsetClamp = new Vector2(-0.5f, 0.5f);
 
+    [Header("Signal / Wave")]
+    [SerializeField] private WaveVisual waveVisual;
+    [SerializeField] private UnityEvent onSignalMatched;
+    [SerializeField] private UnityEvent onSignalLost;
+    [SerializeField] private UnityEvent onTargetRandomized;
+
     private Vector3 verticalBarInitialWorldPos;
     private Vector3 horizontalBarInitialWorldPos;
 
-    private float verticalBarOffset;
-    private float horizontalBarOffset;
-    private float previousLeftDialAngle;
-    private float previousRightDialAngle;
+    public bool IsSignalMatched => waveVisual != null && waveVisual.IsMatched;
+    public float CurrentAmplitude => waveVisual != null ? waveVisual.CurrentAmplitude : 0f;
+    public float CurrentDistortion => waveVisual != null ? waveVisual.CurrentDistortion : 0f;
+    public float CurrentPhase => waveVisual != null ? waveVisual.CurrentPhase : 0f;
 
     private void Awake()
     {
         if (verticalBar != null) verticalBarInitialWorldPos = verticalBar.transform.position;
         if (horizontalBar != null) horizontalBarInitialWorldPos = horizontalBar.transform.position;
-        if (leftDial != null) previousLeftDialAngle = leftDial.Angle;
-        if (rightDial != null) previousRightDialAngle = rightDial.Angle;
+
+        // Constrain each dial's rotation range to exactly the bar clamp so the dial
+        // physically stops at the same limits and stays in sync with the bar.
+        if (leftDial != null && verticalBarSensitivity != 0f)
+        {
+            // vertical bar offset = -leftDial.Angle * sens, clamped to [clamp.x, clamp.y]
+            //   → leftDial.Angle in [-clamp.y / sens, -clamp.x / sens]
+            leftDial.SetBounds(-verticalBarOffsetClamp.y / verticalBarSensitivity,
+                               -verticalBarOffsetClamp.x / verticalBarSensitivity);
+        }
+        if (rightDial != null && horizontalBarSensitivity != 0f)
+        {
+            rightDial.SetBounds(horizontalBarOffsetClamp.x / horizontalBarSensitivity,
+                                horizontalBarOffsetClamp.y / horizontalBarSensitivity);
+        }
+    }
+
+    private void OnEnable()
+    {
+        if (waveVisual == null) return;
+        waveVisual.Matched += HandleMatched;
+        waveVisual.Unmatched += HandleUnmatched;
+        waveVisual.TargetRandomized += HandleTargetRandomized;
+    }
+
+    private void OnDisable()
+    {
+        if (waveVisual == null) return;
+        waveVisual.Matched -= HandleMatched;
+        waveVisual.Unmatched -= HandleUnmatched;
+        waveVisual.TargetRandomized -= HandleTargetRandomized;
+    }
+
+    private void HandleMatched() => onSignalMatched.Invoke();
+    private void HandleUnmatched() => onSignalLost.Invoke();
+    private void HandleTargetRandomized() => onTargetRandomized.Invoke();
+
+    public void RandomizeTarget()
+    {
+        if (waveVisual != null) waveVisual.RandomizeTarget();
+    }
+
+    public void SetTarget(float amplitude, float distortion, float phase)
+    {
+        if (waveVisual != null) waveVisual.SetTarget(amplitude, distortion, phase);
     }
 
     private void Update()
@@ -43,18 +93,14 @@ public class DecoderController : MonoBehaviour
     {
         if (verticalBar != null && leftDial != null)
         {
-            float delta = leftDial.Angle - previousLeftDialAngle;
-            previousLeftDialAngle = leftDial.Angle;
-            verticalBarOffset = Mathf.Clamp(verticalBarOffset - delta * verticalBarSensitivity, verticalBarOffsetClamp.x, verticalBarOffsetClamp.y);
-            verticalBar.transform.position = verticalBarInitialWorldPos + verticalBar.transform.TransformVector(Vector3.right) * verticalBarOffset;
+            float offset = -leftDial.Angle * verticalBarSensitivity;
+            verticalBar.transform.position = verticalBarInitialWorldPos + verticalBar.transform.TransformVector(Vector3.right) * offset;
         }
 
         if (horizontalBar != null && rightDial != null)
         {
-            float delta = rightDial.Angle - previousRightDialAngle;
-            previousRightDialAngle = rightDial.Angle;
-            horizontalBarOffset = Mathf.Clamp(horizontalBarOffset + delta * horizontalBarSensitivity, horizontalBarOffsetClamp.x, horizontalBarOffsetClamp.y);
-            horizontalBar.transform.position = horizontalBarInitialWorldPos + horizontalBar.transform.TransformVector(Vector3.up) * horizontalBarOffset;
+            float offset = rightDial.Angle * horizontalBarSensitivity;
+            horizontalBar.transform.position = horizontalBarInitialWorldPos + horizontalBar.transform.TransformVector(Vector3.up) * offset;
         }
 
         if (horizontalBar != null && verticalBar != null)
