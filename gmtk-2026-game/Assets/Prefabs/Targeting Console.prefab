@@ -3903,13 +3903,13 @@ MonoBehaviour:
   gunText: {fileID: 2902953571993832493}
   leverAzimuth: {fileID: 1144911852922908021}
   leverElevation: {fileID: 6256974396259793794}
-  azimuthForceMin: -100
-  azimuthForceMax: 100
-  elevationForceMin: -100
-  elevationForceMax: 100
+  azimuthForceMin: -1000
+  azimuthForceMax: 1000
+  elevationForceMin: -300
+  elevationForceMax: 300
   gunMass: 100
   gunDrag: 0.494
-  gunMaxAzimuthVelocity: 30
+  gunMaxAzimuthVelocity: 75
   gunMaxElevationVelocity: 15
   gunMovementEmitter: {fileID: 6709396454191304341}
   gunBase: {fileID: 0}
