@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.03.00">
+	<object class="AudioFile" id="{4412e50d-ff93-4971-a37c-dd5b83e5ccce}">
+		<property name="assetPath">
+			<value>freesound_community-light-switch-fluorescent-flickering-electric-bulb-banff-190107-79289.mp3</value>
+		</property>
+		<property name="isStreaming">
+			<value>true</value>
+		</property>
+		<property name="frequencyInKHz">
+			<value>24</value>
+		</property>
+		<property name="channelCount">
+			<value>2</value>
+		</property>
+		<property name="length">
+			<value>20.184000000000001</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{ebee0467-0437-4d67-b854-44db09358938}</destination>
+		</relationship>
+	</object>
+</objects>

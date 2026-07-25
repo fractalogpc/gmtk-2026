@@ -4387,6 +4387,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4714888773691855100}
   - component: {fileID: 1880637182733103745}
+  - component: {fileID: 2500014974221942427}
   m_Layer: 0
   m_Name: Controller
   m_TagString: Untagged
@@ -4403,7 +4404,7 @@ Transform:
   m_GameObject: {fileID: 9070563560731443646}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0.526, y: -0.132, z: -0.733}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -4484,6 +4485,38 @@ MonoBehaviour:
   blinkInterval: 1
   offMaterial: {fileID: -4013827361098655440, guid: 9c84bb2285e108741bb749ee5ffcef39, type: 3}
   onMaterial: {fileID: 2100000, guid: bf7f478c8caa89c4182b028d2003a07c, type: 2}
+  tickEmitter: {fileID: 2500014974221942427}
+--- !u!114 &2500014974221942427
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9070563560731443646}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: FMODUnity::FMODUnity.StudioEventEmitter
+  CollisionTag: 
+  EventReference:
+    Guid:
+      Data1: -1862502896
+      Data2: 1306513115
+      Data3: 1203362232
+      Data4: 1963644519
+    Path: event:/CountdownClick
+  Event: 
+  EventPlayTrigger: 0
+  EventStopTrigger: 0
+  AllowFadeout: 1
+  TriggerOnce: 0
+  Preload: 0
+  NonRigidbodyVelocity: 0
+  Params: []
+  OverrideAttenuation: 0
+  OverrideMinDistance: 1
+  OverrideMaxDistance: 20
 --- !u!1 &9114286345863262074
 GameObject:
   m_ObjectHideFlags: 0
