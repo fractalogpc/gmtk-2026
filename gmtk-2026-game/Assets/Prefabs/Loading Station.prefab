@@ -1157,10 +1157,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: '::'
   loadButton: {fileID: 3540912939640456194}
   powderText: {fileID: 1521574333521145732}
-  shellText: {fileID: 0}
+  shellText: {fileID: 9103472646873496519}
   startFillSpeed: 4
   fillAcceleration: 30
   decaySpeed: 15
+  overloadDecaySpeed: 30
   targetMin: 63
   targetMax: 77
   overloadThreshold: 91

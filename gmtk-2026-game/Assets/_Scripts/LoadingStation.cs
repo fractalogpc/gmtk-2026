@@ -16,6 +16,8 @@ public class LoadingStation : MonoBehaviour
     [SerializeField] private float fillAcceleration = 25f;
     [Tooltip("Units per second the powder drains when released outside the target zone.")]
     [SerializeField] private float decaySpeed = 15f;
+    [Tooltip("Units per second the powder drains during the OVERLOADED lockout. Should be faster than decaySpeed.")]
+    [SerializeField] private float overloadDecaySpeed = 30f;
     [Tooltip("Lower bound of the acceptable powder amount.")]
     [SerializeField] private float targetMin = 7*10;
     [Tooltip("Upper bound of the acceptable powder amount.")]
@@ -35,6 +37,7 @@ public class LoadingStation : MonoBehaviour
 
     private float currentFillSpeed;
     private bool wasPressed;
+    private bool overloaded;
 
     public float CurrentPowder => currentPowderLoaded;
     public bool IsLocked => locked;
@@ -49,6 +52,7 @@ public class LoadingStation : MonoBehaviour
     public void Start()
     {
         UpdateProgressText();
+        UpdateShellText();
     }
 
     private void Update()
@@ -58,7 +62,16 @@ public class LoadingStation : MonoBehaviour
         bool pressed = loadButton.IsPressed();
         float previous = currentPowderLoaded;
 
-        if (pressed)
+        if (overloaded)
+        {
+            currentPowderLoaded = Mathf.Max(0f, currentPowderLoaded - overloadDecaySpeed * Time.deltaTime);
+            if (currentPowderLoaded <= 0f)
+            {
+                overloaded = false;
+                currentFillSpeed = 0f;
+            }
+        }
+        else if (pressed)
         {
             if (!wasPressed) currentFillSpeed = startFillSpeed;
             currentFillSpeed += fillAcceleration * Time.deltaTime;
@@ -71,12 +84,19 @@ public class LoadingStation : MonoBehaviour
                 return;
             }
         }
+        else if (wasPressed && currentPowderLoaded > targetMax)
+        {
+            Overload();
+            wasPressed = pressed;
+            return;
+        }
         else if (wasPressed &&
                  currentPowderLoaded >= targetMin &&
                  currentPowderLoaded <= targetMax)
         {
             LoadShell();
             wasPressed = pressed;
+            UpdateProgressText();
             return;
         }
         else if (currentPowderLoaded > 0f)
@@ -95,6 +115,16 @@ public class LoadingStation : MonoBehaviour
 
     private void UpdateProgressText()
     {
+        if (locked)
+        {
+            powderText.text = $"POWDER LOADED\n\n[{GenerateBar(currentPowderLoaded)}]\n\nREADY";
+            return;
+        }
+        if (overloaded)
+        {
+            powderText.text = $"OVERLOADED\n\n[{GenerateBar(currentPowderLoaded)}]\n\nWAIT FOR RESET";
+            return;
+        }
         powderText.text = $"POWDER LOADING\n\n[{GenerateBar(currentPowderLoaded)}]\n\n{(currentPowderLoaded == 0 ? "HOLD TO LOAD" : "DO NOT OVERFILL")}";
     }
 
@@ -123,23 +153,30 @@ public class LoadingStation : MonoBehaviour
     {
         int totalSections = 13;
         int filledSections = Mathf.Clamp(Mathf.RoundToInt(value / overloadThreshold * totalSections), 0, totalSections);
+
+        if (overloaded)
+        {
+            string filled = new string('#', filledSections);
+            string empty = new string('-', totalSections - filledSections);
+            return $"<color=red>{filled}</color>{empty}";
+        }
+
         string bar = new string('#', filledSections) + new string('-', totalSections - filledSections);
 
         string first = bar.Substring(0, 9);
         string second = bar.Substring(9, 2);
         string third = bar.Substring(11, 2);
 
-        bar = $"<color=white>{first}</color><color=green>{second}</color><color=red>{third}</color>";
-        
-        return bar;
+        return $"<color=white>{first}</color><color=green>{second}</color><color=red>{third}</color>";
     }
 
     private void Overload()
     {
-        currentPowderLoaded = 0f;
+        overloaded = true;
         currentFillSpeed = 0f;
         onOverload.Invoke();
         onPowderChanged.Invoke(currentPowderLoaded);
+        UpdateProgressText();
     }
 
     private void LoadShell()
@@ -148,6 +185,7 @@ public class LoadingStation : MonoBehaviour
         locked = true;
         onShellLoaded.Invoke();
         onPowderChanged.Invoke(currentPowderLoaded);
+        UpdateProgressText();
     }
 
     private void Fire()
@@ -157,5 +195,6 @@ public class LoadingStation : MonoBehaviour
         currentPowderLoaded = 0f;
         currentFillSpeed = 0f;
         onPowderChanged.Invoke(currentPowderLoaded);
+        UpdateProgressText();
     }
 }
