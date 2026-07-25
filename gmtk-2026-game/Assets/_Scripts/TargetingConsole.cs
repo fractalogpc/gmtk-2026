@@ -5,9 +5,9 @@ public class TargetingConsole : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI targetText;
     [SerializeField] private TextMeshProUGUI gunText;
-    [SerializeField] private Lever leverAzimuth;
+    [SerializeField] private DragLever leverAzimuth;
     [SerializeField] private TextMeshProUGUI azimuthChangeText;
-    [SerializeField] private Lever leverElevation;
+    [SerializeField] private DragLever leverElevation;
     [SerializeField] private TextMeshProUGUI elevationChangeText;
     [SerializeField] private float azimuthDPSMin, azimuthDPSMax;
     [SerializeField] private float elevationDPSMin, elevationDPSMax;
@@ -18,8 +18,8 @@ public class TargetingConsole : MonoBehaviour
 
     public void SetLocked(bool isLocked)
     {
-        leverAzimuth.SetInteractable(!isLocked);
-        leverElevation.SetInteractable(!isLocked);
+        ((IInteractable)leverAzimuth).SetInteractionEnabled(!isLocked);
+        ((IInteractable)leverElevation).SetInteractionEnabled(!isLocked);
         if (isLocked)
         {
             gunText.text = "CONTROLS LOCKED\nFIRE COMMAND SENT";
