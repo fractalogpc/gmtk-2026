@@ -7446,9 +7446,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 82951da4d2779674687df5970b33c710, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EventManager
-  HeldExtinguisherObj: {fileID: 0}
-  InteractableExtinguisherObj: {fileID: 0}
-  InteractableExtinguisherScript: {fileID: 0}
+  HeldExtinguisherObj: {fileID: 1446074313}
+  InteractableExtinguisherObj: {fileID: 1736036669}
+  InteractableExtinguisherScript: {fileID: 1736036671}
   smallFirePrefab: {fileID: 1972207730512856, guid: 0ab9e840fa96bfc42bb4ef27882f55f5, type: 3}
   mediumFirePrefab: {fileID: 1478314613700728, guid: 84d16be05680aed44b3dd34b30a04f4f, type: 3}
   bigFirePrefab: {fileID: 1901245927194888, guid: 3c7b6342713d28c49b2e3bc5764dc421, type: 3}
@@ -9906,7 +9906,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1406207074}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -10134,6 +10134,11 @@ Mesh:
       - serializedVersion: 1
         m_IndexStart: 0
         m_IndexCount: 0
+--- !u!1 &1446074313 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7892444845663634392, guid: 41ac7d59838590341ab96e405592c7b3, type: 3}
+  m_PrefabInstance: {fileID: 2265253249554138868}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1456637586
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -11830,6 +11835,22 @@ Mesh:
       - serializedVersion: 1
         m_IndexStart: 0
         m_IndexCount: 0
+--- !u!1 &1736036669 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4299978346269900696, guid: c98ee29c1e3051043be221fad79cd08a, type: 3}
+  m_PrefabInstance: {fileID: 882161820}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1736036671 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7572547032446042338, guid: c98ee29c1e3051043be221fad79cd08a, type: 3}
+  m_PrefabInstance: {fileID: 882161820}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1736036669}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4862c1125ce9d984cb9dc31e72bbd771, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Interactable
 --- !u!1 &1740464993 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 6824816107138119823, guid: 9bcfda04cb8b9c848aec614a86110382, type: 3}
