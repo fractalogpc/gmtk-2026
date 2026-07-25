@@ -13,20 +13,23 @@ public class LoadingStation : MonoBehaviour
     public void SelectShell(int shell)
     {
         currentSelectedShell = (GameManager.ShellType)shell;
+        currentPowderLoaded = 0f;
     }
 
-    private void LoadShell()
+    public void LoadShell()
     {
+        if (locked) return;
         loadedShell = currentSelectedShell;
         locked = true;
     }
 
-    private void LoadPowder(float amount)
+    public void LoadPowder(float amount)
     {
+        if (locked) return;
         currentPowderLoaded += amount;
     }
 
-    private void Fire()
+    public void Fire()
     {
         loadedShell = GameManager.ShellType.None;
         locked = false;

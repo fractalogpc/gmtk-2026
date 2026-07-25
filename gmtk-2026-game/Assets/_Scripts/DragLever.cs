@@ -56,6 +56,7 @@ public class DragLever : MonoBehaviour, IInteractable
     private bool wasAtMax;
     private bool wasAtMin;
     private bool isInteracting;
+    private bool canInteract = true;
 
     public float Angle => currentAngle;
     public float NormalizedValue => Mathf.InverseLerp(minAngle, maxAngle, currentAngle);
@@ -89,7 +90,7 @@ public class DragLever : MonoBehaviour, IInteractable
 
     public InteractionSettings OnInteractStart(InteractionData data)
     {
-        if (!enabled) return new InteractionSettings(lockCameraAndMovement: false);
+        if (!canInteract) return new InteractionSettings(lockCameraAndMovement: false);
         isInteracting = true;
         dragCamera = Camera.main;
         savedCursorLockMode = Cursor.lockState;
@@ -103,6 +104,7 @@ public class DragLever : MonoBehaviour, IInteractable
 
     public InteractionSettings DuringInteract(InteractionData data)
     {
+        if (!canInteract) return new InteractionSettings(lockCameraAndMovement: false);
         if (!isInteracting) return new InteractionSettings(lockCameraAndMovement: false);
         if (dragCamera == null) return new InteractionSettings(lockCameraAndMovement: true);
 
@@ -125,6 +127,7 @@ public class DragLever : MonoBehaviour, IInteractable
 
     public InteractionSettings OnInteractEnd(InteractionData data)
     {
+        if (!canInteract) return new InteractionSettings(lockCameraAndMovement: false);
         if (!isInteracting) return new InteractionSettings(lockCameraAndMovement: false);
         isInteracting = false;
         Cursor.lockState = savedCursorLockMode;
@@ -136,7 +139,7 @@ public class DragLever : MonoBehaviour, IInteractable
     public void SetInteractionEnabled(bool value)
     {
         if (!value) SafeDisable();
-        else enabled = true;
+        else canInteract = true;
     }
 
     public void SafeDisable()
@@ -148,7 +151,7 @@ public class DragLever : MonoBehaviour, IInteractable
             overrideLerpSpeed = null;
             isInteracting = false;
         }
-        enabled = false;
+        canInteract = false;
     }
 
     private Vector3 GetHandleDirection(Vector3 axis)
