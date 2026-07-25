@@ -2552,6 +2552,22 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1.0000001, y: 0.36000004, z: 0.6000002}
   m_Center: {x: 0.00027647612, y: 0.000000014910656, z: 5.184491e-22}
+--- !u!4 &373803760 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 3262556909165309926, guid: 9bcfda04cb8b9c848aec614a86110382, type: 3}
+  m_PrefabInstance: {fileID: 4247042953601168270}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &373803762 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 67776655095774972, guid: 9bcfda04cb8b9c848aec614a86110382, type: 3}
+  m_PrefabInstance: {fileID: 4247042953601168270}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d1e487dbf94da6249927ccb299a4c3d4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::StaticCameraView
 --- !u!1 &384263400
 GameObject:
   m_ObjectHideFlags: 0
@@ -9336,6 +9352,108 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 1056929605934237367, guid: 81e3fa83bb876924d89e0161793f5091, type: 3}
   m_PrefabInstance: {fileID: 1254302732}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1256552738
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1256552739}
+  - component: {fileID: 1256552741}
+  - component: {fileID: 1256552740}
+  m_Layer: 0
+  m_Name: Fire Target
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1256552739
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1256552738}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 373803760}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1256552740
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1256552738}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8bed1afb6d454aa4692d6211d8536791, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::E_FireComponent
+  currentFireIntensity: 0
+  externalFlameInfluence: 0
+  BeingExtinguished: 0
+  OnFireStarted:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 373803762}
+        m_TargetAssemblyTypeName: StaticCameraView, Assembly-CSharp
+        m_MethodName: DeactivateManagedObjects
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  OnFireIncreased:
+    m_PersistentCalls:
+      m_Calls: []
+  OnFireExtinguished:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 373803762}
+        m_TargetAssemblyTypeName: StaticCameraView, Assembly-CSharp
+        m_MethodName: ReactivateManagedObjects
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!65 &1256552741
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1256552738}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &1261125512
 GameObject:
   m_ObjectHideFlags: 0
@@ -18566,9 +18684,13 @@ PrefabInstance:
       propertyPath: m_Name
       value: Targeting Console
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 6548269119840036610, guid: 9bcfda04cb8b9c848aec614a86110382, type: 3}
     m_RemovedGameObjects: []
-    m_AddedGameObjects: []
+    m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: 3262556909165309926, guid: 9bcfda04cb8b9c848aec614a86110382, type: 3}
+      insertIndex: 0
+      addedObject: {fileID: 1256552739}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9bcfda04cb8b9c848aec614a86110382, type: 3}
 --- !u!114 &4247042953601168271 stripped
