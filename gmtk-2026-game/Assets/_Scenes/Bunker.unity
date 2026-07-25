@@ -11837,17 +11837,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1354520875}
   m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
---- !u!114 &1357652521 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 6256974396259793794, guid: 9bcfda04cb8b9c848aec614a86110382, type: 3}
-  m_PrefabInstance: {fileID: 4247042953601168270}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 18c9aa04f2ee4124cb93c4600a689502, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::DragLever
 --- !u!1 &1369333966
 GameObject:
   m_ObjectHideFlags: 0
@@ -14592,11 +14581,6 @@ MonoBehaviour:
 --- !u!1 &1740464993 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 6824816107138119823, guid: 9bcfda04cb8b9c848aec614a86110382, type: 3}
-  m_PrefabInstance: {fileID: 4247042953601168270}
-  m_PrefabAsset: {fileID: 0}
---- !u!23 &1740464996 stripped
-MeshRenderer:
-  m_CorrespondingSourceObject: {fileID: 5023310629939403098, guid: 9bcfda04cb8b9c848aec614a86110382, type: 3}
   m_PrefabInstance: {fileID: 4247042953601168270}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &1772089811
@@ -19867,14 +19851,6 @@ PrefabInstance:
       propertyPath: gunBarrel
       value: 
       objectReference: {fileID: 101692463547631170}
-    - target: {fileID: 7592265044286790173, guid: 9bcfda04cb8b9c848aec614a86110382, type: 3}
-      propertyPath: leverAzimuth
-      value: 
-      objectReference: {fileID: 1307214111}
-    - target: {fileID: 7592265044286790173, guid: 9bcfda04cb8b9c848aec614a86110382, type: 3}
-      propertyPath: leverElevation
-      value: 
-      objectReference: {fileID: 1357652521}
     - target: {fileID: 8254793431820100304, guid: 9bcfda04cb8b9c848aec614a86110382, type: 3}
       propertyPath: m_IsTrigger
       value: 1
@@ -19908,34 +19884,7 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 4937538223127287431, guid: 9bcfda04cb8b9c848aec614a86110382, type: 3}
       insertIndex: 10
       addedObject: {fileID: 1375198741}
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 4432204053362150178, guid: 9bcfda04cb8b9c848aec614a86110382, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 4247042953601168285}
-    - targetCorrespondingSourceObject: {fileID: 3332563795201689462, guid: 9bcfda04cb8b9c848aec614a86110382, type: 3}
-      insertIndex: 3
-      addedObject: {fileID: 686126125}
-    - targetCorrespondingSourceObject: {fileID: 3332563795201689462, guid: 9bcfda04cb8b9c848aec614a86110382, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 4247042953601168284}
-    - targetCorrespondingSourceObject: {fileID: 8291462222530492469, guid: 9bcfda04cb8b9c848aec614a86110382, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 4247042953601168283}
-    - targetCorrespondingSourceObject: {fileID: 8291462222530492469, guid: 9bcfda04cb8b9c848aec614a86110382, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 4247042953601168282}
-    - targetCorrespondingSourceObject: {fileID: 173035984310220435, guid: 9bcfda04cb8b9c848aec614a86110382, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 534616643}
-    - targetCorrespondingSourceObject: {fileID: 173035984310220435, guid: 9bcfda04cb8b9c848aec614a86110382, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 534616642}
-    - targetCorrespondingSourceObject: {fileID: 1468490872125693245, guid: 9bcfda04cb8b9c848aec614a86110382, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1217860077}
-    - targetCorrespondingSourceObject: {fileID: 1468490872125693245, guid: 9bcfda04cb8b9c848aec614a86110382, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1217860076}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9bcfda04cb8b9c848aec614a86110382, type: 3}
 --- !u!114 &4247042953601168271 stripped
 MonoBehaviour:
