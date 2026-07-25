@@ -1,12 +1,14 @@
 using Unity.Cinemachine;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using FMODUnity;
 
 [RequireComponent(typeof(CharacterController))]
 public class PlayerController : MonoBehaviour
 {
     [Header("Movement")]
     [SerializeField] private float moveSpeed = 5f;
+    [SerializeField] private StudioEventEmitter footstepEmitter;
 
     [Header("Look")]
     [SerializeField] private Transform cameraPivot;
@@ -62,6 +64,8 @@ public class PlayerController : MonoBehaviour
         {
             gravityVelocity = 0;
         }
+
+        timeSinceLastFootstep += Time.deltaTime;
     }
 
     public void OnMove(InputAction.CallbackContext context)
@@ -106,5 +110,22 @@ public class PlayerController : MonoBehaviour
     {
         Vector3 move = transform.right * moveInput.x + transform.forward * moveInput.y;
         controller.Move(move * (moveSpeed * Time.deltaTime));
+
+        if (new Vector2(controller.velocity.x, controller.velocity.z).magnitude > 0.1f)
+        {
+            HandleFootstep();
+        }
+    }
+
+    const float FOOTSTEP_FREQUENCY = 0.5f;
+    float timeSinceLastFootstep = 0f;
+
+    private void HandleFootstep()
+    {
+        if (timeSinceLastFootstep > FOOTSTEP_FREQUENCY)
+        {
+            timeSinceLastFootstep = 0f;
+            footstepEmitter.Play();
+        }
     }
 }
