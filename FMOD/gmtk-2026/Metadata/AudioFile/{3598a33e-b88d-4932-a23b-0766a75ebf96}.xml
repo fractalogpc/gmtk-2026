@@ -2,7 +2,7 @@
 <objects serializationModel="Studio.02.03.00">
 	<object class="AudioFile" id="{3598a33e-b88d-4932-a23b-0766a75ebf96}">
 		<property name="assetPath">
-			<value>Industry Chain Pull 01.wav</value>
+			<value>Fire Lever/Industry Chain Pull 01.wav</value>
 		</property>
 		<property name="frequencyInKHz">
 			<value>48</value>

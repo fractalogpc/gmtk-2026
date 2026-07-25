@@ -2,7 +2,7 @@
 <objects serializationModel="Studio.02.03.00">
 	<object class="AudioFile" id="{dc1210aa-dd2c-45aa-aab2-2a18a1bd3ad5}">
 		<property name="assetPath">
-			<value>Industry Gate Metal Gate Squeak 01.wav</value>
+			<value>Fire Lever/Industry Gate Metal Gate Squeak 01.wav</value>
 		</property>
 		<property name="frequencyInKHz">
 			<value>48</value>
