@@ -115,6 +115,14 @@ public class GameManager : MonoBehaviour
             StopCoroutine(gameCoroutine);
         }
     }
+
+    public enum ShellType
+    {
+        Normal,
+        AP,
+        HE,
+        None
+    }
 }
 
 public class TargetRequirements
@@ -141,18 +149,12 @@ public class TargetRequirements
     }
 }
 
-public enum ShellType
-{
-    Normal,
-    AP,
-    HE
-}
 
 [System.Serializable]
 public class Level
 {
     public const float MAX_RANGE = 11f;
-    public ShellType requiredShell;
+    public GameManager.ShellType requiredShell;
     public bool obscureCoordinates;
     public float timeLimit;
     public float tolerance;
@@ -160,7 +162,7 @@ public class Level
 
     public Level()
     {
-        requiredShell = ShellType.Normal;
+        requiredShell = GameManager.ShellType.Normal;
         obscureCoordinates = false;
         timeLimit = 0f;
         tolerance = 1f;
