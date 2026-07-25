@@ -53,7 +53,7 @@ public class StaticCameraView : MonoBehaviour, IStaticCamera
             }
         }
 
-        SetOwnCollidersEnabled(value);
+        // SetOwnCollidersEnabled(value);
     }
 
     public void DeactivateManagedObjects()
