@@ -67,10 +67,8 @@ public class TargetingConsole : MonoBehaviour
     {
         if (locked) return;
         UpdateGunFromLevers(Time.deltaTime);
-        azimuthChangeText.text = $"{MapNormalizedToRange(leverAzimuth.NormalizedValue, azimuthDPSMin, azimuthDPSMax):F2}";
-        elevationChangeText.text = $"{MapNormalizedToRange(leverElevation.NormalizedValue, elevationDPSMin, elevationDPSMax):F2}";
-        gunBase.rotation = Quaternion.Euler(0f, gunAzimuth, 0f);
-        gunBarrel.rotation = Quaternion.Euler(gunElevation, 0f, 0f);
+        gunBase.localRotation = Quaternion.Euler(0f, -gunAzimuth, 0f);
+        gunBarrel.localRotation = Quaternion.Euler(-gunElevation, 0f, 0f);
         UpdateGunText();
     }
 
