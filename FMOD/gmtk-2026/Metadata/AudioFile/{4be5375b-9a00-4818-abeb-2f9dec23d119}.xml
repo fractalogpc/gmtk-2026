@@ -2,7 +2,7 @@
 <objects serializationModel="Studio.02.03.00">
 	<object class="AudioFile" id="{4be5375b-9a00-4818-abeb-2f9dec23d119}">
 		<property name="assetPath">
-			<value>Drone Production Element Imaging Keyboard Synth Tone Steady Feedback 01.wav</value>
+			<value>Drones/Drone Production Element Imaging Keyboard Synth Tone Steady Feedback 01.wav</value>
 		</property>
 		<property name="isStreaming">
 			<value>true</value>

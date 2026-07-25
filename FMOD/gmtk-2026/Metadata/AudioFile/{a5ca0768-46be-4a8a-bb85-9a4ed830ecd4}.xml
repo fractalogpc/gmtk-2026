@@ -2,7 +2,7 @@
 <objects serializationModel="Studio.02.03.00">
 	<object class="AudioFile" id="{a5ca0768-46be-4a8a-bb85-9a4ed830ecd4}">
 		<property name="assetPath">
-			<value>Industry Tool Ratchet Knob 01.wav</value>
+			<value>Lever/Industry Tool Ratchet Knob 01.wav</value>
 		</property>
 		<property name="frequencyInKHz">
 			<value>48</value>
