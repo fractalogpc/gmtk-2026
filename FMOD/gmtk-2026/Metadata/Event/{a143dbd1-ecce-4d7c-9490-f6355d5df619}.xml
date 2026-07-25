@@ -135,6 +135,9 @@
 		<property name="length">
 			<value>1.0000000000000004</value>
 		</property>
+		<property name="looping">
+			<value>true</value>
+		</property>
 		<relationship name="modulators">
 			<destination>{67d29c65-9ed5-4068-8104-07a982dbfa51}</destination>
 		</relationship>
@@ -145,6 +148,9 @@
 	<object class="SingleSound" id="{8e175374-7115-4d63-8bd5-3594ad33ecc2}">
 		<property name="start">
 			<value>2</value>
+		</property>
+		<property name="looping">
+			<value>true</value>
 		</property>
 		<relationship name="modulators">
 			<destination>{d5cf974e-a289-463a-8544-6cc4d3ba601e}</destination>
@@ -159,6 +165,9 @@
 		</property>
 		<property name="volume">
 			<value>3.5</value>
+		</property>
+		<property name="looping">
+			<value>true</value>
 		</property>
 		<relationship name="modulators">
 			<destination>{cf031c1d-2fe1-49e4-a650-0863a5476122}</destination>

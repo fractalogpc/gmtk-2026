@@ -364,10 +364,10 @@
 	<object class="MixerBusPanner" id="{bc95aa17-5146-4a38-b906-b1b2ec56bac2}" />
 	<object class="MultibandEqEffect" id="{aaf3a194-4338-43d5-be02-695efef895a3}">
 		<property name="frequencyA">
-			<value>255.746063</value>
+			<value>550.48114</value>
 		</property>
 		<property name="qualityA">
-			<value>0.7961725</value>
+			<value>0.686068952</value>
 		</property>
 	</object>
 	<object class="SFXReverbEffect" id="{11fa5287-18d8-4827-8a1c-34ac200f5a47}">
