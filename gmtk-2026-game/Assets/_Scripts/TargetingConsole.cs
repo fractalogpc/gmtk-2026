@@ -120,8 +120,8 @@ public class TargetingConsole : MonoBehaviour
         UpdateAccelFromLevers(deltaTime);
         UpdateGunFromVelocity(deltaTime);
         UpdateTraverseSound();
-        gunBase.rotation = Quaternion.Euler(0f, -gunAzimuth, 0f);
-        gunBarrel.rotation = Quaternion.Euler(-gunElevation, 0f, 0f);
+        gunBase.localRotation = Quaternion.Euler(0f, -gunAzimuth, 0f);
+        gunBarrel.localRotation = Quaternion.Euler(-gunElevation, 0f, 0f);
         UpdateGunText();
     }
 

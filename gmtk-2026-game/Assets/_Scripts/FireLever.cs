@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Collections;
 using Unity.Cinemachine;
+using UnityEngine.Events;
 
 public class FireLever : MonoBehaviour
 {
@@ -12,6 +13,7 @@ public class FireLever : MonoBehaviour
     [SerializeField][Range(0, 1)] private float fireThreshold = 0.8f; 
     [SerializeField] private CinemachineImpulseSource gunMoveImpulse;
     [SerializeField] private CinemachineImpulseSource fireImpulse;
+    [SerializeField] private UnityEvent onFire;
     public bool IsFired => hasFired;
     private bool hasFired = false;
 
@@ -53,6 +55,7 @@ public class FireLever : MonoBehaviour
         gunMoveImpulse.GenerateImpulse();
         yield return StartCoroutine(LightsCoroutine());
         fireImpulse.GenerateImpulse();
+        onFire?.Invoke();
     }
 
     private IEnumerator LightsCoroutine()

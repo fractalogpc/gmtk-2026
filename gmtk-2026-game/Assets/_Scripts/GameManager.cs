@@ -27,6 +27,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private TargetRequirements currentTarget;
     [SerializeField] private UnityEvent onPostImpact;
     [SerializeField] private UnityEvent onImpact;
+    [SerializeField] private UnityEvent onTargetHit;
     [SerializeField] private UnityEvent onNewTarget;
     [SerializeField] private UnityEvent onShellAnimation;
     [SerializeField] private Animation shellAnim;
@@ -81,13 +82,17 @@ public class GameManager : MonoBehaviour
             }
 
             // Impact
+            bool isSuccess = Mathf.Abs(targetingConsole.GunAzimuth - currentTarget.azimuth) <= currentTarget.tolerance &&
+                            Mathf.Abs(targetingConsole.GunElevation - currentTarget.elevation) <= currentTarget.tolerance;
             onImpact?.Invoke();
+            if (isSuccess)
+            {
+                onTargetHit?.Invoke();
+            }
             EventManager.Instance.TriggerFireEvent(1);
             yield return new WaitForSeconds(impactViewTime);
             onPostImpact?.Invoke();
             // Reset the lever
-            bool isSuccess = Mathf.Abs(targetingConsole.GunAzimuth - currentTarget.azimuth) <= currentTarget.tolerance &&
-                            Mathf.Abs(targetingConsole.GunElevation - currentTarget.elevation) <= currentTarget.tolerance;
             successLight.SetSuccess(isSuccess);
             targetingConsole.DisplayMessage(isSuccess ? "SUCCESS" : "FAILURE");
             yield return new WaitForSeconds(resultTime);
