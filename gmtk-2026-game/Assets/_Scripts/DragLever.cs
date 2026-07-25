@@ -36,6 +36,7 @@ public class DragLever : MonoBehaviour, IInteractable
     [SerializeField] private LeverDirectionMode directionMode = LeverDirectionMode.Bidirectional;
     [Tooltip("If true, the lever returns to Default Angle when released.")]
     [SerializeField] private bool returnOnRelease = false;
+    [SerializeField] private bool dontReturnOnReleaseIfAtMax = false;
     [Tooltip("Angle the lever returns to on release (only used when Return On Release is enabled). Bypasses direction restriction.")]
     [SerializeField] private float defaultAngle = 0f;
 
@@ -128,7 +129,7 @@ public class DragLever : MonoBehaviour, IInteractable
         isInteracting = false;
         Cursor.lockState = savedCursorLockMode;
         Cursor.visible = savedCursorVisible;
-        if (returnOnRelease) ApplyAngle(defaultAngle, ignoreDirection: true);
+        if (returnOnRelease && !(dontReturnOnReleaseIfAtMax && currentAngle == maxAngle)) ApplyAngle(defaultAngle, ignoreDirection: true);
         return new InteractionSettings(lockCameraAndMovement: false);
     }
 
