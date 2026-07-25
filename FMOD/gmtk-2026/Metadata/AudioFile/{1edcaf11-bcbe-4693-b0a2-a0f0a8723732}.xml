@@ -2,7 +2,7 @@
 <objects serializationModel="Studio.02.03.00">
 	<object class="AudioFile" id="{1edcaf11-bcbe-4693-b0a2-a0f0a8723732}">
 		<property name="assetPath">
-			<value>Drone Production Element Imaging Bed Evil Tension 01.wav</value>
+			<value>Drones/Drone Production Element Imaging Bed Evil Tension 01.wav</value>
 		</property>
 		<property name="isStreaming">
 			<value>true</value>

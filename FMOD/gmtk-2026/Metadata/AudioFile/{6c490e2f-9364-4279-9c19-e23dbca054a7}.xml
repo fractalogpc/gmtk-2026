@@ -2,7 +2,7 @@
 <objects serializationModel="Studio.02.03.00">
 	<object class="AudioFile" id="{6c490e2f-9364-4279-9c19-e23dbca054a7}">
 		<property name="assetPath">
-			<value>Drone Production Element Imaging Bed Heartbeat 01.wav</value>
+			<value>Drones/Drone Production Element Imaging Bed Heartbeat 01.wav</value>
 		</property>
 		<property name="isStreaming">
 			<value>true</value>

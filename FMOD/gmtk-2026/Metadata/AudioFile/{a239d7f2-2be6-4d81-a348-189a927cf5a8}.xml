@@ -2,7 +2,7 @@
 <objects serializationModel="Studio.02.03.00">
 	<object class="AudioFile" id="{a239d7f2-2be6-4d81-a348-189a927cf5a8}">
 		<property name="assetPath">
-			<value>Drone Production Element Imaging Electronic Hum Ballast Science Fiction 01.wav</value>
+			<value>Drones/Drone Production Element Imaging Electronic Hum Ballast Science Fiction 01.wav</value>
 		</property>
 		<property name="isStreaming">
 			<value>true</value>
