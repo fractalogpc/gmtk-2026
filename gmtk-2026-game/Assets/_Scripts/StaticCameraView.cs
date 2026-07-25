@@ -14,10 +14,12 @@ public class StaticCameraView : MonoBehaviour, IStaticCamera
     public CinemachineCamera StaticCamera => staticCamera;
 
     private Collider[] ownColliders;
+    private bool[] deactivated;
 
     private void Awake()
     {
         ownColliders = GetComponents<Collider>();
+        deactivated = new bool[managedObjects != null ? managedObjects.Length : 0];
         SetManagedEnabled(false);
     }
 
@@ -42,8 +44,32 @@ public class StaticCameraView : MonoBehaviour, IStaticCamera
 
     private void SetManagedEnabled(bool value)
     {
-        foreach (MonoBehaviour mb in managedObjects)
-            if (mb is IInteractable interactable) interactable.SetInteractionEnabled(value);
+        for (int i = 0; i < managedObjects.Length; i++)
+        {
+            if (managedObjects[i] is IInteractable interactable)
+            {
+                bool target = value && !deactivated[i];
+                interactable.SetInteractionEnabled(target);
+            }
+        }
+    }
+
+    public void DeactivateManagedObjects()
+    {
+        for (int i = 0; i < managedObjects.Length; i++)
+        {
+            deactivated[i] = true;
+            if (managedObjects[i] is IInteractable interactable)
+                interactable.SetInteractionEnabled(false);
+        }
+    }
+
+    public void ReactivateManagedObjects()
+    {
+        for (int i = 0; i < managedObjects.Length; i++)
+        {
+            deactivated[i] = false;
+        }
     }
 
 #if UNITY_EDITOR
