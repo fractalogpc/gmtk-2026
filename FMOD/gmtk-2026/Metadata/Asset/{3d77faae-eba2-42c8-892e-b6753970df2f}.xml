@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.03.00">
+	<object class="EncodableAsset" id="{3d77faae-eba2-42c8-892e-b6753970df2f}">
+		<property name="assetPath">
+			<value>Fire Lever/</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{ebee0467-0437-4d67-b854-44db09358938}</destination>
+		</relationship>
+	</object>
+</objects>

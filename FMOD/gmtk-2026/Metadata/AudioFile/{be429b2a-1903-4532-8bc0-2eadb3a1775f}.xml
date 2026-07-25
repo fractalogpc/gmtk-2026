@@ -2,7 +2,7 @@
 <objects serializationModel="Studio.02.03.00">
 	<object class="AudioFile" id="{be429b2a-1903-4532-8bc0-2eadb3a1775f}">
 		<property name="assetPath">
-			<value>Impact Bag Duffle Bag Drop Metal Surface 05.wav</value>
+			<value>Fire Lever/Impact Bag Duffle Bag Drop Metal Surface 05.wav</value>
 		</property>
 		<property name="frequencyInKHz">
 			<value>48</value>

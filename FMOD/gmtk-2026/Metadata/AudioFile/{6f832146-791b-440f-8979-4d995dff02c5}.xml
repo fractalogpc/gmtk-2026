@@ -2,7 +2,7 @@
 <objects serializationModel="Studio.02.03.00">
 	<object class="AudioFile" id="{6f832146-791b-440f-8979-4d995dff02c5}">
 		<property name="assetPath">
-			<value>Industry Hydraulic Pump Run 01.wav</value>
+			<value>GunTraverse/Industry Hydraulic Pump Run 01.wav</value>
 		</property>
 		<property name="isStreaming">
 			<value>true</value>
