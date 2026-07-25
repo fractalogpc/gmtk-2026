@@ -56,7 +56,6 @@ public class GameManager : MonoBehaviour
             
             onNewTarget?.Invoke();
             float elev = levelData.elevation();
-            float azim = levelData.azimuth();
             currentTarget = new TargetRequirements(randomAzimuthMin, randomAzimuthMax, elev - elevationVariation, elev + elevationVariation, levelData.tolerance);
             targetingConsole.SetTargetValues(currentTarget.azimuth, currentTarget.elevation);
             while (!fireLever.IsFired)
