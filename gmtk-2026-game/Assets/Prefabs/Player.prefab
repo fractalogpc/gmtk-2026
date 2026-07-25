@@ -102,7 +102,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerInteractor
   playerCamera: {fileID: 0}
-  interactDistance: 1
+  interactDistance: 1.3
   staticViewInteractDistance: 100
   interactLayers:
     serializedVersion: 2
