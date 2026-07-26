@@ -128,6 +128,9 @@
 		</relationship>
 	</object>
 	<object class="EventMixerMaster" id="{11c058b4-f85d-4cb1-ae0a-cf554a26c1f7}">
+		<property name="volume">
+			<value>4</value>
+		</property>
 		<relationship name="effectChain">
 			<destination>{e7a16a51-c6ec-4b90-ae29-be08a15844bb}</destination>
 		</relationship>
@@ -183,9 +186,6 @@
 		<property name="length">
 			<value>124.32025</value>
 		</property>
-		<property name="volume">
-			<value>-10</value>
-		</property>
 		<property name="polyphony">
 			<value>8</value>
 		</property>
@@ -234,7 +234,7 @@
 	</object>
 	<object class="SingleSound" id="{7c6105de-b33b-4c8b-ada7-38cabf1a8145}">
 		<property name="volume">
-			<value>-8.5</value>
+			<value>-18.5</value>
 		</property>
 		<property name="looping">
 			<value>true</value>
@@ -270,7 +270,7 @@
 	</object>
 	<object class="SingleSound" id="{16800b7d-b4b6-4c89-acdb-ae55574042f5}">
 		<property name="volume">
-			<value>-4</value>
+			<value>-80</value>
 		</property>
 		<property name="looping">
 			<value>true</value>
@@ -408,9 +408,6 @@
 	</object>
 	<object class="MixerBusFader" id="{4424ea33-7d4a-454a-af38-95772bd49d7a}" />
 	<object class="SingleSound" id="{8db0fffd-7d32-486b-bda0-edb969a73c84}">
-		<property name="volume">
-			<value>10</value>
-		</property>
 		<relationship name="audioFile">
 			<destination>{360b61ab-2221-4b96-a885-2d1bb04f941c}</destination>
 		</relationship>
@@ -421,7 +418,6 @@
 		</relationship>
 		<relationship name="automationPoints">
 			<destination>{86ef3d76-cbb3-48fd-947d-95acf46995e5}</destination>
-			<destination>{f1dffd3c-c886-4c09-8657-505616338640}</destination>
 			<destination>{292d25e5-621d-45ec-adb0-d9c5642f868b}</destination>
 		</relationship>
 	</object>
@@ -519,13 +515,13 @@
 	</object>
 	<object class="AutomationPoint" id="{8ff664cf-78b2-4972-b3a5-179cb7779d1f}">
 		<property name="position">
-			<value>0.71999999999999997</value>
+			<value>0.35999999999999999</value>
 		</property>
 		<property name="value">
 			<value>0</value>
 		</property>
 		<property name="curveShape">
-			<value>0.813169122</value>
+			<value>1</value>
 		</property>
 	</object>
 	<object class="AutomationPoint" id="{86ef3d76-cbb3-48fd-947d-95acf46995e5}">
@@ -535,16 +531,8 @@
 		<property name="value">
 			<value>0</value>
 		</property>
-	</object>
-	<object class="AutomationPoint" id="{f1dffd3c-c886-4c09-8657-505616338640}">
-		<property name="position">
-			<value>0.70000000000000007</value>
-		</property>
-		<property name="value">
-			<value>-7</value>
-		</property>
 		<property name="curveShape">
-			<value>0.120137505</value>
+			<value>1</value>
 		</property>
 	</object>
 	<object class="AutomationPoint" id="{292d25e5-621d-45ec-adb0-d9c5642f868b}">
@@ -560,7 +548,7 @@
 			<value>0</value>
 		</property>
 		<property name="value">
-			<value>-80</value>
+			<value>-79.1090393</value>
 		</property>
 		<property name="curveShape">
 			<value>0.365878552</value>
@@ -571,15 +559,15 @@
 			<value>1</value>
 		</property>
 		<property name="value">
-			<value>0</value>
+			<value>0.133642197</value>
 		</property>
 	</object>
 	<object class="AutomationPoint" id="{39e5bff6-85dd-40e3-bfc8-50208e43010e}">
 		<property name="position">
-			<value>0.75</value>
+			<value>0.44</value>
 		</property>
 		<property name="value">
-			<value>-10</value>
+			<value>-15.8663578</value>
 		</property>
 		<property name="curveShape">
 			<value>-0.515013814</value>
@@ -601,7 +589,7 @@
 			<value>-80</value>
 		</property>
 		<property name="curveShape">
-			<value>0.140959039</value>
+			<value>-0.807686329</value>
 		</property>
 	</object>
 	<object class="AutomationPoint" id="{82a36b43-da85-45ac-9c17-47f3496376cf}">
@@ -633,7 +621,7 @@
 			<value>ApplyDA</value>
 		</property>
 		<property name="value">
-			<value>2</value>
+			<value>0</value>
 		</property>
 		<property name="minimumValue">
 			<value>0</value>
@@ -769,7 +757,7 @@
 			<value>DAMaxDist</value>
 		</property>
 		<property name="value">
-			<value>10</value>
+			<value>20</value>
 		</property>
 		<property name="curve">
 			<value>{(0.000000,0.000000)(1.000000,10000.000000)}</value>
@@ -1025,7 +1013,7 @@
 			<value>90</value>
 		</property>
 		<property name="curveShape">
-			<value>0.340667009</value>
+			<value>-0.7133497</value>
 		</property>
 	</object>
 	<object class="AutomationPoint" id="{24c969d4-71f6-408e-ba53-a27e4980659b}">

@@ -188,6 +188,8 @@ public class DecoderController : MonoBehaviour
         hasActivated = true;
         ApplyIndicatorLightsState();
         ApplyAdditionalObjectsState();
+        Debug.Log("Start playing decoder sound emitter");
+        decoderSoundEmitter.Play();
     }
 
     private static void SetAll(GameObject[] items, bool value)
@@ -203,6 +205,8 @@ public class DecoderController : MonoBehaviour
     {
         if (waveVisual != null) waveVisual.ResetState();
         SetInteractable(false);
+        Debug.Log("Decoder sound emitter stopped");
+        decoderSoundEmitter.Stop();
     }
 
     public void SetInteractable(bool interactable)
@@ -219,10 +223,12 @@ public class DecoderController : MonoBehaviour
         ApplyIndicatorLightsState();
         if (powered) {
             decoderSoundEmitter.Play();
+            Debug.Log("Start playing decoder sound emitter");
         }
         else
         {
             decoderSoundEmitter.Stop();
+            Debug.Log("Decoder sound emitter stopped");
         }
     }
 
@@ -266,7 +272,7 @@ public class DecoderController : MonoBehaviour
             horizontalBar.transform.localPosition = hLocal;
         }
 
-        decoderSoundEmitter.SetParameter("Accuracy", NormalizedAccuracy);
+        decoderSoundEmitter.SetParameter("Matching", NormalizedAccuracy);
     }
 
 #if UNITY_EDITOR
