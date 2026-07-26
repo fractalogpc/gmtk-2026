@@ -124,7 +124,7 @@ public class LoadingStation : MonoBehaviour
             powderText.text = $"OVERLOADED\n\n[{GenerateBar(currentPowderLoaded)}]\n\nWAIT FOR RESET";
             return;
         }
-        powderText.text = $"POWDER LOADING\n\n[{GenerateBar(currentPowderLoaded)}]\n\n{(currentPowderLoaded == 0 ? "HOLD TO LOAD" : "DO NOT OVERFILL")}";
+        powderText.text = $"POWDER LOADING\n\n[{GenerateBar(currentPowderLoaded)}]\n\n{(currentPowderLoaded == 0 ? "HOLD TO LOAD" : "DO NOT OVERFILL\n\nPULL TO LOCK")}";
     }
 
     private GameManager.ShellType requiredShell = GameManager.ShellType.None;
