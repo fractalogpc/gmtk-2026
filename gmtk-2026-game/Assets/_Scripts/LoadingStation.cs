@@ -94,7 +94,6 @@ public class LoadingStation : MonoBehaviour
                  currentPowderLoaded >= targetMin &&
                  currentPowderLoaded <= targetMax)
         {
-            LoadShell();
             wasPressed = pressed;
             UpdateProgressText();
             return;
@@ -179,7 +178,7 @@ public class LoadingStation : MonoBehaviour
         UpdateProgressText();
     }
 
-    private void LoadShell()
+    public void LoadShell()
     {
         loadedShell = currentSelectedShell;
         locked = true;
