@@ -5182,13 +5182,52 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 5934836209984394177, guid: f39503f9091bfc64ca79e3333878c934, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1317119448504099519}
   m_SourcePrefab: {fileID: 100100000, guid: f39503f9091bfc64ca79e3333878c934, type: 3}
 --- !u!4 &5924566089410617031 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6419624783478950267, guid: f39503f9091bfc64ca79e3333878c934, type: 3}
   m_PrefabInstance: {fileID: 805968195300857788}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &6445664659404309629 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5934836209984394177, guid: f39503f9091bfc64ca79e3333878c934, type: 3}
+  m_PrefabInstance: {fileID: 805968195300857788}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1317119448504099519
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6445664659404309629}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: FMODUnity::FMODUnity.StudioEventEmitter
+  CollisionTag: 
+  EventReference:
+    Guid:
+      Data1: 1312784770
+      Data2: 1169612695
+      Data3: 1891625400
+      Data4: -849120837
+    Path: event:/LightbulbSwitch
+  Event: 
+  EventPlayTrigger: 11
+  EventStopTrigger: 12
+  AllowFadeout: 1
+  TriggerOnce: 0
+  Preload: 0
+  NonRigidbodyVelocity: 0
+  Params: []
+  OverrideAttenuation: 0
+  OverrideMinDistance: 1
+  OverrideMaxDistance: 20
 --- !u!1001 &930653037736373070
 PrefabInstance:
   m_ObjectHideFlags: 0
