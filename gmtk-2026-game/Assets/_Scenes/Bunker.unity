@@ -19331,7 +19331,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 1000
-  field of view: 60
+  field of view: 60.000004
   orthographic: 0
   orthographic size: 5
   m_Depth: -1
@@ -19358,7 +19358,7 @@ Transform:
   m_GameObject: {fileID: 2102256285}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 3, z: -7}
+  m_LocalPosition: {x: 0, y: 1.5, z: 1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -21331,6 +21331,10 @@ PrefabInstance:
       propertyPath: dialogueSound
       value: 
       objectReference: {fileID: 5670267144387979569}
+    - target: {fileID: 3981256159172761418, guid: 67f1833459133ed44b7b4bf39c68e8cf, type: 3}
+      propertyPath: tweenDestination.y
+      value: 300
+      objectReference: {fileID: 0}
     - target: {fileID: 4844042336903271074, guid: 67f1833459133ed44b7b4bf39c68e8cf, type: 3}
       propertyPath: m_Color.a
       value: 1
