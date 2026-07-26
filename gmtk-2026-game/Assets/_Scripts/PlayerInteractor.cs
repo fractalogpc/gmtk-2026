@@ -17,6 +17,7 @@ public class PlayerInteractor : MonoBehaviour
     private IInteractable currentInteractable;
     private IStaticCamera activeStaticView;
     private PlayerInput playerInput;
+    public bool suppressPauseUntilCancelReleased;
 
     public bool IsInStaticView => activeStaticView != null;
     public bool IsInteracting => currentInteractable != null;
@@ -35,7 +36,18 @@ public class PlayerInteractor : MonoBehaviour
 
     public void OnCancel(InputAction.CallbackContext context)
     {
+        if (context.canceled)
+        {
+            suppressPauseUntilCancelReleased = false;
+            return;
+        }
+
         if (!context.started) return;
+
+        if (suppressPauseUntilCancelReleased)
+        {
+            return;
+        }
 
         // Priority: end an active interaction first, then close a static view, then pause.
         // Only one action per press so the player never accidentally exits AND opens the pause menu.
@@ -47,12 +59,13 @@ public class PlayerInteractor : MonoBehaviour
         if (activeStaticView != null)
         {
             ExitStaticView();
+            suppressPauseUntilCancelReleased = true;
             return;
         }
-        if (pauseController != null)
-        {
-            pauseController.TogglePause();
-        }
+        // if (pauseController != null)
+        // {
+        //     pauseController.TogglePause();
+        // }
     }
 
     private void Update()

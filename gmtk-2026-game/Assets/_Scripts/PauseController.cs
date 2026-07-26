@@ -2,7 +2,9 @@ using UnityEngine;
 using UnityEngine.UI;
 using FMODUnity;
 using UnityEngine.SceneManagement;
+using UnityEngine.InputSystem;
 
+[DefaultExecutionOrder(-100)]
 public class PauseController : MonoBehaviour
 {
     private const string LookSensitivityPrefKey = "settings.lookSensitivity";
@@ -79,9 +81,16 @@ public class PauseController : MonoBehaviour
     /// Called by the escape / cancel input path once other cancel targets (interaction,
     /// static view) have been ruled out. Toggles the pause menu open/closed.
     /// </summary>
-    public void TogglePause()
+    public void TogglePause(InputAction.CallbackContext context)
     {
+        if (!context.started) return;
+
         if (playerInteractor != null && playerInteractor.IsInStaticView)
+        {
+            return;
+        }
+
+        if (playerInteractor.suppressPauseUntilCancelReleased)
         {
             return;
         }
