@@ -49,8 +49,8 @@ public class FireExtinguisher : MonoBehaviour
 
         hitThisFrame.Clear();
 
-        Vector3 boxCenter = transform.position + transform.forward * 2f;
-        Vector3 boxHalfExtents = new Vector3(1f, 1f, 2f);
+        Vector3 boxCenter = transform.position + transform.forward * 4f;
+        Vector3 boxHalfExtents = new Vector3(2f, 2f, 4f);
         Collider[] hitColliders = Physics.OverlapBox(boxCenter, boxHalfExtents, transform.rotation);
         foreach (var hitCollider in hitColliders)
         {
