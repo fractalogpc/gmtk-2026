@@ -19,6 +19,22 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    private void OnEnable()
+    {
+        if (decoderController != null) decoderController.SignalMatched += HandleSignalDecoded;
+    }
+
+    private void OnDisable()
+    {
+        if (decoderController != null) decoderController.SignalMatched -= HandleSignalDecoded;
+    }
+
+    private void HandleSignalDecoded()
+    {
+        LogState("Decoder matched → revealing coordinates");
+        targetingConsole.RevealCoordinates();
+    }
+
     [Header("References")]
     [SerializeField] private TargetingConsole targetingConsole;
     [SerializeField] private DecoderController decoderController;
@@ -218,6 +234,8 @@ public class GameManager : MonoBehaviour
             // yield return new WaitForSeconds(Mathf.Max(levelData.soundDelay(currentTarget.elevation) - impactViewTime - resultTime, 0f));
 
             currentLevel++;
+
+            onNewTarget?.Invoke();
 
             // onNewTarget?.Invoke();
             // float elev = levelData.elevation();
