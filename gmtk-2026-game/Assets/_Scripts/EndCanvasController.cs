@@ -1,9 +1,9 @@
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class EndCanvasController : MonoBehaviour
 {
-    [SerializeField] private Button quitButton;
     [SerializeField] private CanvasGroup endCanvasGroup;
 
     public void End()
@@ -21,6 +21,9 @@ public class EndCanvasController : MonoBehaviour
         float elapsedTime = 0f;
         endCanvasGroup.blocksRaycasts = true; // Enable interaction with the canvas
         endCanvasGroup.interactable = true; // Enable interaction with the canvas
+
+        Cursor.lockState = CursorLockMode.None; // Unlock the cursor
+        Cursor.visible = true; // Make the cursor visible
         while (elapsedTime < fadeDuration)
         {
             elapsedTime += Time.deltaTime;
@@ -31,6 +34,6 @@ public class EndCanvasController : MonoBehaviour
 
     public void QuitGame()
     {
-        
+        SceneManager.LoadScene("MainMenu"); // Load the main menu scene
     }
 }
