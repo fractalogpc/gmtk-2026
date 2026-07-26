@@ -309,6 +309,7 @@ public class LoadingStation : MonoBehaviour
         wasPressed = false;
         requiredShell = GameManager.ShellType.None;
         onPowderChanged.Invoke(currentPowderLoaded);
+        loadCommitLever.ResetLever();
         UpdateProgressText();
         UpdateShellText();
         SetInteractable(false);
