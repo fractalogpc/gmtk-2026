@@ -15,6 +15,7 @@ public class StaticCameraView : MonoBehaviour, IStaticCamera
 
     private Collider[] ownColliders;
     private bool[] deactivated;
+    private bool isCurrentlyViewed;
 
     private void Awake()
     {
@@ -25,6 +26,7 @@ public class StaticCameraView : MonoBehaviour, IStaticCamera
 
     public void OnEnterView()
     {
+        isCurrentlyViewed = true;
         SetOwnCollidersEnabled(false);
         SetManagedEnabled(true);
         onEnter.Invoke();
@@ -32,6 +34,7 @@ public class StaticCameraView : MonoBehaviour, IStaticCamera
 
     public void OnExitView()
     {
+        isCurrentlyViewed = false;
         SetManagedEnabled(false);
         SetOwnCollidersEnabled(true);
         onExit.Invoke();
@@ -73,8 +76,13 @@ public class StaticCameraView : MonoBehaviour, IStaticCamera
         for (int i = 0; i < managedObjects.Length; i++)
         {
             deactivated[i] = false;
+            // Only re-enable the interactable itself if the player is currently inside this view.
+            // Otherwise the item was already disabled before Deactivate ran, and OnEnterView will
+            // turn it back on later when appropriate.
+            if (isCurrentlyViewed && managedObjects[i] is IInteractable interactable)
+                interactable.SetInteractionEnabled(true);
         }
-        SetOwnCollidersEnabled(true);
+        SetOwnCollidersEnabled(!isCurrentlyViewed);
     }
 
 #if UNITY_EDITOR

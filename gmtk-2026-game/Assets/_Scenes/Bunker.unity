@@ -6161,12 +6161,12 @@ MonoBehaviour:
   failMessageDuration: 2
   levels:
   - requiredShell: 3
-    obscureCoordinates: 0
+    obscureCoordinates: 1
     timeLimit: 0
-    tolerance: 1
-    range: 500
-    fireIntensity: 0
-    doBlackout: 1
+    tolerance: 10
+    range: 3000
+    fireIntensity: 3
+    doBlackout: 0
     startDialog: {fileID: 11400000, guid: a15a2a905b1423142b8d40314d063cbb, type: 2}
     showStartDialog: 1
     fireDialog: {fileID: 11400000, guid: 6812adff2be362049914ba2a6957335a, type: 2}
@@ -8464,6 +8464,11 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!1 &954361405 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4890590842536414472, guid: 0728bdcb0358d774db2d861611635fa2, type: 3}
+  m_PrefabInstance: {fileID: 917756105}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &960179017
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -13292,7 +13297,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::StaticCameraView
   staticCamera: {fileID: 1452211274}
-  managedObjects: []
+  managedObjects:
+  - {fileID: 1184366796}
+  - {fileID: 489220780}
+  - {fileID: 2100681396}
   onEnter:
     m_PersistentCalls:
       m_Calls: []
@@ -21884,7 +21892,7 @@ PrefabInstance:
     - target: {fileID: 951713222979092153, guid: 534f17b2e06bf1e43a7e59facd61853a, type: 3}
       propertyPath: 'indicatorLights.Array.data[0]'
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 954361405}
     - target: {fileID: 951713222979092153, guid: 534f17b2e06bf1e43a7e59facd61853a, type: 3}
       propertyPath: additionalActivatedObjects.Array.size
       value: 2
