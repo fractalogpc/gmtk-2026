@@ -6,6 +6,8 @@ public class LoadingStation : MonoBehaviour
 {
 
     [SerializeField] private Button loadButton;
+    [Tooltip("The commit lever the player pulls to call LoadShell. Hard-locked unless powder is currently in the green zone.")]
+    [SerializeField] private DragLever loadCommitLever;
     [SerializeField] private StaticCameraView staticView;
     [Tooltip("Interactables (levers, buttons, dials) that this machine owns but which live OUTSIDE the StaticCameraView's managed list. Toggled alongside the view.")]
     [SerializeField] private MonoBehaviour[] additionalInteractables;
@@ -29,11 +31,11 @@ public class LoadingStation : MonoBehaviour
     [SerializeField] private float decaySpeed = 15f;
     [Tooltip("Units per second the powder drains during the OVERLOADED lockout. Should be faster than decaySpeed.")]
     [SerializeField] private float overloadDecaySpeed = 30f;
-    [Tooltip("Lower bound of the acceptable powder amount.")]
-    [SerializeField] private float targetMin = 7*10;
-    [Tooltip("Upper bound of the acceptable powder amount.")]
-    [SerializeField] private float targetMax = 7*12;
-    [Tooltip("Powder amount at which the load overloads and resets. Must be > targetMax.")]
+    [Tooltip("Lower bound of the acceptable (green) powder amount. Defaults tuned for a 3-wide green / 4-wide red bar over 13 total sections.")]
+    [SerializeField] private float targetMin = 6f / 13f * 91f;
+    [Tooltip("Upper bound of the acceptable (green) powder amount.")]
+    [SerializeField] private float targetMax = 9f / 13f * 91f;
+    [Tooltip("Powder amount at which the load overloads (all red). Must be > targetMax.")]
     [SerializeField] private float overloadThreshold = 91f;
 
     [Header("Events")]
@@ -171,8 +173,23 @@ public class LoadingStation : MonoBehaviour
         }
     }
 
+    private void UpdateCommitLeverLock()
+    {
+        if (loadCommitLever == null)
+        {
+            Debug.LogWarning("[LoadingStation] loadCommitLever is not assigned in the inspector — commit lever gating cannot run.", this);
+            return;
+        }
+        bool inGreen = !overloaded
+                       && !locked
+                       && currentPowderLoaded >= targetMin
+                       && currentPowderLoaded <= targetMax;
+        loadCommitLever.SetHardDisabled(!inGreen);
+    }
+
     private void Update()
     {
+        UpdateCommitLeverLock();
         if (!IsInteractable || locked || loadButton == null) return;
 
         bool pressed = loadButton.IsPressed();
@@ -200,12 +217,6 @@ public class LoadingStation : MonoBehaviour
                 return;
             }
         }
-        else if (wasPressed && currentPowderLoaded > targetMax)
-        {
-            Overload();
-            wasPressed = pressed;
-            return;
-        }
         else if (wasPressed &&
                  currentPowderLoaded >= targetMin &&
                  currentPowderLoaded <= targetMax)
@@ -216,6 +227,8 @@ public class LoadingStation : MonoBehaviour
         }
         else if (currentPowderLoaded > 0f)
         {
+            // Released outside the green zone (below or above) — just decay back down.
+            // Overload only triggers if the player pushes past overloadThreshold while holding.
             currentPowderLoaded = Mathf.Max(0f, currentPowderLoaded - decaySpeed * Time.deltaTime);
         }
 
@@ -332,9 +345,14 @@ public class LoadingStation : MonoBehaviour
 
         string bar = new string('#', filledSections) + new string('-', totalSections - filledSections);
 
-        string first = bar.Substring(0, 9);
-        string second = bar.Substring(9, 2);
-        string third = bar.Substring(11, 2);
+        // Compute segment boundaries from the actual target thresholds so the visual
+        // always matches the mechanic — green sits inside [targetMin, targetMax], red above.
+        int greenStart = Mathf.Clamp(Mathf.RoundToInt(targetMin / overloadThreshold * totalSections), 0, totalSections);
+        int redStart = Mathf.Clamp(Mathf.RoundToInt(targetMax / overloadThreshold * totalSections), greenStart, totalSections);
+
+        string first = bar.Substring(0, greenStart);
+        string second = bar.Substring(greenStart, redStart - greenStart);
+        string third = bar.Substring(redStart, totalSections - redStart);
 
         return $"<color=white>{first}</color><color=green>{second}</color><color=red>{third}</color>";
     }
