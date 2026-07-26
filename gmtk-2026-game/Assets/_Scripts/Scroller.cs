@@ -10,11 +10,16 @@ public class Scroller : MonoBehaviour
 
     [SerializeField] private Transform targetTransform;
 
-    private float timer = 10f;
+    private float timer;
 
     public void Scroll()
     {
         timer = 0f;
+    }
+
+    private void Start()
+    {
+        timer = scrollTime;
     }
 
     private void Update()

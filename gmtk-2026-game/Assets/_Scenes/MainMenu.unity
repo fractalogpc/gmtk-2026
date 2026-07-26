@@ -9667,7 +9667,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: '::'
   startYPos: -190
   endYPos: 160
-  scrollTime: 10
+  scrollTime: 20
   targetTransform: {fileID: 962519315}
 --- !u!1001 &972004756
 PrefabInstance:
