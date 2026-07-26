@@ -123,7 +123,7 @@
 	<object class="MixerBusPanner" id="{66432061-2851-41b8-955b-4d06de1093d8}" />
 	<object class="SingleSound" id="{63467ad8-cd42-482c-8ac2-61526c960bcf}">
 		<property name="start">
-			<value>2.4000000000000004</value>
+			<value>0.39999999999999969</value>
 		</property>
 		<property name="length">
 			<value>3.7439374999999995</value>
@@ -161,14 +161,11 @@
 		</relationship>
 	</object>
 	<object class="SingleSound" id="{ae3a289a-0443-48be-973d-17322dd53ac2}">
-		<property name="start">
-			<value>0.5</value>
-		</property>
 		<property name="length">
-			<value>9.9999999999999982</value>
+			<value>8.5000000000000036</value>
 		</property>
 		<property name="timelockedOffset">
-			<value>0.5</value>
+			<value>2.0000000000000004</value>
 		</property>
 		<property name="volume">
 			<value>-15</value>
@@ -202,7 +199,7 @@
 	</object>
 	<object class="SingleSound" id="{83b39df5-a57a-41fa-ae44-3851fd3eb19b}">
 		<property name="start">
-			<value>2.8000000000000007</value>
+			<value>0.79999999999999916</value>
 		</property>
 		<property name="length">
 			<value>8</value>
@@ -239,7 +236,7 @@
 	</object>
 	<object class="SingleSound" id="{8e9180e5-5de0-491f-a0fd-d8b03e84fd33}">
 		<property name="start">
-			<value>3.5000000000000009</value>
+			<value>1.4999999999999991</value>
 		</property>
 		<property name="length">
 			<value>7</value>
@@ -368,7 +365,7 @@
 	</object>
 	<object class="AutomationPoint" id="{e7911956-c558-4d52-a161-58458ab05e62}">
 		<property name="position">
-			<value>5.5000000000000071</value>
+			<value>3.5000000000000138</value>
 		</property>
 		<property name="value">
 			<value>1</value>
@@ -379,7 +376,7 @@
 	</object>
 	<object class="AutomationPoint" id="{47095439-b6bf-48f7-90b2-6755192fdf7f}">
 		<property name="position">
-			<value>10.499999999999991</value>
+			<value>8.4999999999999982</value>
 		</property>
 		<property name="value">
 			<value>0</value>
@@ -388,7 +385,7 @@
 	<object class="MixerBusFader" id="{d2884968-6b10-48ae-9eaf-f50e13920e41}" />
 	<object class="AutomationPoint" id="{79139922-640b-4489-8c43-f5561f695d78}">
 		<property name="position">
-			<value>2.8000000000000007</value>
+			<value>0.79999999999999916</value>
 		</property>
 		<property name="value">
 			<value>0</value>
@@ -399,7 +396,7 @@
 	</object>
 	<object class="AutomationPoint" id="{3c5e2272-8f8a-40e1-b4a7-6617fd6070e3}">
 		<property name="position">
-			<value>3.4000000000000008</value>
+			<value>1.399999999999999</value>
 		</property>
 		<property name="value">
 			<value>1</value>
@@ -408,7 +405,7 @@
 	<object class="MixerBusFader" id="{f4ba1cd3-e4b7-420e-bda5-de1c6a84682e}" />
 	<object class="AutomationPoint" id="{37e223c9-4287-47c3-adca-0eb7a206be66}">
 		<property name="position">
-			<value>8.4999999999999929</value>
+			<value>6.5</value>
 		</property>
 		<property name="value">
 			<value>1</value>
@@ -419,7 +416,7 @@
 	</object>
 	<object class="AutomationPoint" id="{ef846f5b-c561-4aff-8a43-1d082a28041a}">
 		<property name="position">
-			<value>10.499999999999993</value>
+			<value>8.5</value>
 		</property>
 		<property name="value">
 			<value>0</value>
@@ -442,7 +439,7 @@
 	<object class="MixerBusFader" id="{c2453399-b636-4a0d-931a-6acfec7c7374}" />
 	<object class="AutomationPoint" id="{94e97e9d-7a98-4413-8013-65833052e05e}">
 		<property name="position">
-			<value>0.5</value>
+			<value>0</value>
 		</property>
 		<property name="value">
 			<value>-24</value>
@@ -458,18 +455,18 @@
 	</object>
 	<object class="AutomationPoint" id="{5af5165d-d3de-4a76-94dc-87cc78e1d2d9}">
 		<property name="position">
-			<value>2.4000000000000004</value>
+			<value>0.5</value>
 		</property>
 		<property name="value">
-			<value>14</value>
+			<value>16</value>
 		</property>
 	</object>
 	<object class="AutomationPoint" id="{7bc7e81a-76d4-47b3-a733-370cb58de64e}">
 		<property name="position">
-			<value>2.8000000000000007</value>
+			<value>0.90000000000000002</value>
 		</property>
 		<property name="value">
-			<value>6.80198479</value>
+			<value>10</value>
 		</property>
 	</object>
 </objects>
