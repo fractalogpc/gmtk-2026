@@ -32,10 +32,32 @@ public class PlayerController : MonoBehaviour
     private Vector2 lookInput;
     private float pitch;
     private bool isZoomed;
+    private bool canLook = true;
 
     private void Awake()
     {
         controller = GetComponent<CharacterController>();
+    }
+
+    public bool InvertY
+    {
+        get => invertY;
+        set => invertY = value;
+    }
+
+    public float LookSensitivity
+    {
+        get => lookSensitivity;
+        set => lookSensitivity = value;
+    }
+
+    public void SetLookEnabled(bool enabled)
+    {
+        canLook = enabled;
+        if (!enabled)
+        {
+            lookInput = Vector2.zero;
+        }
     }
 
     private void OnEnable()
@@ -86,6 +108,8 @@ public class PlayerController : MonoBehaviour
 
     private void HandleLook()
     {
+        if (!canLook) return;
+
         float sensitivity = lookSensitivity * (isZoomed ? zoomedSensitivityMultiplier : 1f);
         Vector2 look = lookInput * sensitivity;
         transform.Rotate(0f, look.x, 0f);

@@ -11,10 +11,15 @@ public class PlayerInteractor : MonoBehaviour
     [Tooltip("Only colliders with this tag will be considered interactable. Leave empty to accept any IInteractable.")]
     [SerializeField] private string interactableTag = "Interactable";
     [SerializeField] private CrosshairManager crosshairManager;
+    [Tooltip("Optional. If set, Escape/Cancel opens the pause menu when no interaction or static view needs to be exited first.")]
+    [SerializeField] private PauseController pauseController;
 
     private IInteractable currentInteractable;
     private IStaticCamera activeStaticView;
     private PlayerInput playerInput;
+
+    public bool IsInStaticView => activeStaticView != null;
+    public bool IsInteracting => currentInteractable != null;
 
     private void Awake()
     {
@@ -31,17 +36,36 @@ public class PlayerInteractor : MonoBehaviour
     public void OnCancel(InputAction.CallbackContext context)
     {
         if (!context.started) return;
-        if (currentInteractable != null) EndInteraction();
-        if (activeStaticView != null) ExitStaticView();
+
+        // Priority: end an active interaction first, then close a static view, then pause.
+        // Only one action per press so the player never accidentally exits AND opens the pause menu.
+        if (currentInteractable != null)
+        {
+            EndInteraction();
+            return;
+        }
+        if (activeStaticView != null)
+        {
+            ExitStaticView();
+            return;
+        }
+        if (pauseController != null)
+        {
+            pauseController.TogglePause();
+        }
     }
 
     private void Update()
     {
         if (currentInteractable == null)
         {
-            if (InteractableInView(out bool interactableEnabled))
+            if (InteractableInView(out bool interactableEnabled, out bool staticCamera))
             {
-                if (interactableEnabled)
+                if (staticCamera)
+                {
+                    crosshairManager.ShowStaticCameraCrosshair();
+                }
+                else if (interactableEnabled)
                 {
                     crosshairManager.ShowInteractableCrosshair();
                 }
@@ -59,9 +83,10 @@ public class PlayerInteractor : MonoBehaviour
         ApplyInteractionSettings(currentInteractable.DuringInteract(BuildData(GetInteractRay(), GetMouseDelta())));
     }
 
-    private bool InteractableInView(out bool canInteract)
+    private bool InteractableInView(out bool canInteract, out bool staticCamera)
     {
         canInteract = false;
+        staticCamera = false;
         Ray ray = GetInteractRay();
         float distance = activeStaticView != null ? staticViewInteractDistance : interactDistance;
         if (!Physics.Raycast(ray, out RaycastHit hit, distance, interactLayers)) 
@@ -75,12 +100,12 @@ public class PlayerInteractor : MonoBehaviour
         IStaticCamera staticView = hit.collider.GetComponentInParent<IStaticCamera>();
         if (staticView != null)
         {
+            staticCamera = true;
             canInteract = true;
             return true;
         }
         if (interactable is DragLever lever && !lever.CanInteract)
         {
-            canInteract = false;
             return true;
         }
         if (interactable is MonoBehaviour mb && !mb.enabled) {

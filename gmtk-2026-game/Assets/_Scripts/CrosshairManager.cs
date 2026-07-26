@@ -3,6 +3,7 @@ using UnityEngine;
 public class CrosshairManager : MonoBehaviour
 {
     [SerializeField] private GameObject regularCrosshair;
+    [SerializeField] private GameObject staticCameraCrosshair;
     [SerializeField] private GameObject interactableCrosshair;
     [SerializeField] private GameObject errorCrosshair;
 
@@ -10,6 +11,7 @@ public class CrosshairManager : MonoBehaviour
     public enum CrosshairType
     {
         Regular,
+        StaticCamera,
         Interactable,
         Error
     }
@@ -21,7 +23,18 @@ public class CrosshairManager : MonoBehaviour
         regularCrosshair.SetActive(true);
         interactableCrosshair.SetActive(false);
         errorCrosshair.SetActive(false);
+        staticCameraCrosshair.SetActive(false);
         CurrentCrosshairType = CrosshairType.Regular;
+    }
+
+    public void ShowStaticCameraCrosshair()
+    {
+        if (Hidden) return;
+        regularCrosshair.SetActive(false);
+        interactableCrosshair.SetActive(false);
+        errorCrosshair.SetActive(false);
+        staticCameraCrosshair.SetActive(true);
+        CurrentCrosshairType = CrosshairType.StaticCamera;
     }
 
     public void ShowInteractableCrosshair()
@@ -30,6 +43,7 @@ public class CrosshairManager : MonoBehaviour
         regularCrosshair.SetActive(false);
         interactableCrosshair.SetActive(true);
         errorCrosshair.SetActive(false);
+        staticCameraCrosshair.SetActive(false);
         CurrentCrosshairType = CrosshairType.Interactable;
     }
 
@@ -39,6 +53,7 @@ public class CrosshairManager : MonoBehaviour
         regularCrosshair.SetActive(false);
         interactableCrosshair.SetActive(false);
         errorCrosshair.SetActive(true);
+        staticCameraCrosshair.SetActive(false);
         CurrentCrosshairType = CrosshairType.Error;
     }
 
@@ -48,5 +63,6 @@ public class CrosshairManager : MonoBehaviour
         regularCrosshair.SetActive(!hidden && CurrentCrosshairType == CrosshairType.Regular);
         interactableCrosshair.SetActive(!hidden && CurrentCrosshairType == CrosshairType.Interactable);
         errorCrosshair.SetActive(!hidden && CurrentCrosshairType == CrosshairType.Error);
+        staticCameraCrosshair.SetActive(!hidden && CurrentCrosshairType == CrosshairType.StaticCamera);
     }
 }
