@@ -17,6 +17,7 @@ public class CrosshairManager : MonoBehaviour
 
     public void ShowRegularCrosshair()
     {
+        if (Hidden) return;
         regularCrosshair.SetActive(true);
         interactableCrosshair.SetActive(false);
         errorCrosshair.SetActive(false);
@@ -25,6 +26,7 @@ public class CrosshairManager : MonoBehaviour
 
     public void ShowInteractableCrosshair()
     {
+        if (Hidden) return;
         regularCrosshair.SetActive(false);
         interactableCrosshair.SetActive(true);
         errorCrosshair.SetActive(false);
@@ -33,6 +35,7 @@ public class CrosshairManager : MonoBehaviour
 
     public void ShowErrorCrosshair()
     {
+        if (Hidden) return;
         regularCrosshair.SetActive(false);
         interactableCrosshair.SetActive(false);
         errorCrosshair.SetActive(true);

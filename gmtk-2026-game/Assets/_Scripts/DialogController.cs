@@ -4,6 +4,7 @@ using System.Collections;
 using UnityEngine.InputSystem;
 using GLTFast.Schema;
 using DG.Tweening;
+using FMODUnity;
 
 public class DialogController : MonoBehaviour
 {
@@ -25,6 +26,7 @@ public class DialogController : MonoBehaviour
     [SerializeField] DialogObject testDialog;
     // Speed of the Tween for Dialogue box >
     [SerializeField] float dialogueAppearAnimSpeed;
+    [SerializeField] StudioEventEmitter dialogueSound;
 
     // String var for Dialog text >
     string[] lines;
@@ -80,8 +82,13 @@ public class DialogController : MonoBehaviour
     // This is called by StartDialogue(); to display text with a basic typewriter anim
     IEnumerator TypewriterAnim()
     {
+        dialogueSound.Play();
         foreach (char c in lines[index].ToCharArray())
         {
+            if (c == ' ') 
+            {
+                dialogueSound.Play();
+            }
             textComponent.text += c;
             yield return new WaitForSeconds(textSpeed);
         }
