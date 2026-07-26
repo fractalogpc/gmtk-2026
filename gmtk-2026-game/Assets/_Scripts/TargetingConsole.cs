@@ -341,7 +341,7 @@ public class TargetingConsole : MonoBehaviour
         UpdateGunText();
 
         // Tutorial
-        if (TutorialManager.Instance != null && !hasDoneTutorial)
+        if (TutorialManager.Instance != null && !hasDoneTutorial && HasReceivedCoordinates)
         {
             float maxError = Mathf.Max(Mathf.Abs(gunAzimuth - pendingAzimuth), Mathf.Abs(gunElevation - pendingElevation));
             if (maxError <= 5.0f)
