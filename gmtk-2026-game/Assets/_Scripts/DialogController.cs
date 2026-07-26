@@ -129,7 +129,6 @@ public class DialogController : MonoBehaviour
 
     private void DismissAndAdvance()
     {
-        dialogueBox.transform.DOMove(new Vector3(tweenDestination.x, -1000, 0), 0.5f);
         dialogueVisible = false;
         preventDismiss = false;
 
@@ -137,6 +136,10 @@ public class DialogController : MonoBehaviour
         {
             var next = dialogueQueue.Dequeue();
             ShowDialogue(next.dialog, next.preventDismiss);
+        }
+        else
+        {
+            dialogueBox.transform.DOMove(new Vector3(tweenDestination.x, -1000, 0), 0.5f);
         }
     }
 
