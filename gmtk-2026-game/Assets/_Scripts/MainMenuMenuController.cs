@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 using FMODUnity;
+using FMOD.Studio;
 
 public class MainMenuMenuController : MonoBehaviour
 {
@@ -24,18 +25,26 @@ public class MainMenuMenuController : MonoBehaviour
     [SerializeField] private string musicVcaPath = "vca:/Music";
     [SerializeField] private string sfxVcaPath = "vca:/SFX";
     [SerializeField] private string ambientVcaPath = "vca:/Ambient";
+    [SerializeField] private Bus masterBus;
+    [SerializeField] private Bus musicBus;
+    [SerializeField] private Bus sfxBus;
+    [SerializeField] private Bus ambientBus;
+    [SerializeField] private string masterBusPath = "bus:/";
+    [SerializeField] private string musicBusPath = "bus:/Music";
+    [SerializeField] private string sfxBusPath = "bus:/SFX";
+    [SerializeField] private string ambientBusPath = "bus:/Ambient";
 
-    private FMOD.Studio.VCA masterVca;
-    private FMOD.Studio.VCA musicVca;
-    private FMOD.Studio.VCA sfxVca;
-    private FMOD.Studio.VCA ambientVca;
+    //private FMOD.Studio.VCA masterVca;
+    //private FMOD.Studio.VCA musicVca;
+    //private FMOD.Studio.VCA sfxVca;
+    //private FMOD.Studio.VCA ambientVca;
 
     private void Awake()
     {
-        masterVca = ResolveVca(masterVcaPath);
-        musicVca = ResolveVca(musicVcaPath);
-        sfxVca = ResolveVca(sfxVcaPath);
-        ambientVca = ResolveVca(ambientVcaPath);
+        masterBus = RuntimeManager.GetBus(masterBusPath);
+        musicBus = RuntimeManager.GetBus(musicBusPath);
+        sfxBus = RuntimeManager.GetBus(sfxBusPath);
+        ambientBus = RuntimeManager.GetBus(ambientBusPath);
 
         BindSettingsUi();
         ApplySavedSettings();
@@ -54,25 +63,29 @@ public class MainMenuMenuController : MonoBehaviour
 
     public void SetMasterSound(float value)
     {
-        SetVcaVolume(ref masterVca, masterVcaPath, value);
+        //SetVcaVolume(ref masterVca, masterVcaPath, value);
+        masterBus.setVolume(value);
         PlayerPrefs.SetFloat(MasterSoundPrefKey, value);
     }
 
     public void SetMusicSound(float value)
     {
-        SetVcaVolume(ref musicVca, musicVcaPath, value);
+        //SetVcaVolume(ref musicVca, musicVcaPath, value);
+        musicBus.setVolume(value);
         PlayerPrefs.SetFloat(MusicSoundPrefKey, value);
     }
 
     public void SetSFXSound(float value)
     {
-        SetVcaVolume(ref sfxVca, sfxVcaPath, value);
+        //SetVcaVolume(ref sfxVca, sfxVcaPath, value);
+        sfxBus.setVolume(value);
         PlayerPrefs.SetFloat(SFXSoundPrefKey, value);
     }
 
     public void SetAmbientSound(float value)
     {
-        SetVcaVolume(ref ambientVca, ambientVcaPath, value);
+        //SetVcaVolume(ref ambientVca, ambientVcaPath, value);
+        ambientBus.setVolume(value);
         PlayerPrefs.SetFloat(AmbientSoundPrefKey, value);
     }
 
