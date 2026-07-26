@@ -13191,7 +13191,7 @@ MonoBehaviour:
     shown: 0
     completed: 0
   - id: blackout
-    dialog: {fileID: 11400000, guid: f38c70cb607386c4c8b55a3682720e41, type: 2}
+    dialog: {fileID: 11400000, guid: 8e471e8201a480346ba48aca96bf9ea1, type: 2}
     outlines:
     - {fileID: 1378592317}
     - {fileID: 700681521080843636}
@@ -13205,7 +13205,7 @@ MonoBehaviour:
     shown: 0
     completed: 0
   - id: failure
-    dialog: {fileID: 11400000, guid: f38c70cb607386c4c8b55a3682720e41, type: 2}
+    dialog: {fileID: 11400000, guid: ccd9a3c50831bc841b90a2e86fc682f6, type: 2}
     outlines: []
     holdDialogUntilCompleted: 0
     onTriggered:
