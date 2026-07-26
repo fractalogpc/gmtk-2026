@@ -215,6 +215,13 @@ public class DragLever : MonoBehaviour, IInteractable
         if (atMin && !wasAtMin) onReachedMin.Invoke();
         wasAtMax = atMax;
         wasAtMin = atMin;
+
+        // Snap the pivot immediately if lerping isn't wanted or Update won't run to catch it.
+        float effectiveSpeed = overrideLerpSpeed ?? leverSpeed;
+        if (effectiveSpeed <= 0f || !enabled || !gameObject.activeInHierarchy)
+        {
+            leverPivot.localRotation = TargetRotation();
+        }
     }
 
     private float SnapAngle(float angle)
