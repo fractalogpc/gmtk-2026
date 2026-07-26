@@ -10,6 +10,7 @@ public class PlayerInteractor : MonoBehaviour
     [SerializeField] private LayerMask interactLayers = ~0;
     [Tooltip("Only colliders with this tag will be considered interactable. Leave empty to accept any IInteractable.")]
     [SerializeField] private string interactableTag = "Interactable";
+    [SerializeField] private CrosshairManager crosshairManager;
 
     private IInteractable currentInteractable;
     private IStaticCamera activeStaticView;
@@ -36,8 +37,57 @@ public class PlayerInteractor : MonoBehaviour
 
     private void Update()
     {
-        if (currentInteractable == null) return;
+        if (currentInteractable == null)
+        {
+            if (InteractableInView(out bool interactableEnabled))
+            {
+                if (interactableEnabled)
+                {
+                    crosshairManager.ShowInteractableCrosshair();
+                }
+                else
+                {
+                    crosshairManager.ShowErrorCrosshair();
+                }
+            }
+            else
+            {
+                crosshairManager.ShowRegularCrosshair();
+            }
+            return;
+        }
         ApplyInteractionSettings(currentInteractable.DuringInteract(BuildData(GetInteractRay(), GetMouseDelta())));
+    }
+
+    private bool InteractableInView(out bool canInteract)
+    {
+        canInteract = false;
+        Ray ray = GetInteractRay();
+        float distance = activeStaticView != null ? staticViewInteractDistance : interactDistance;
+        if (!Physics.Raycast(ray, out RaycastHit hit, distance, interactLayers)) 
+        {
+            return false;
+        }
+        if (!string.IsNullOrEmpty(interactableTag) && !hit.collider.CompareTag(interactableTag)) {
+            return false;
+        }
+        IInteractable interactable = hit.collider.GetComponentInParent<IInteractable>();
+        IStaticCamera staticView = hit.collider.GetComponentInParent<IStaticCamera>();
+        if (staticView != null)
+        {
+            canInteract = true;
+            return true;
+        }
+        if (interactable is DragLever lever && !lever.CanInteract)
+        {
+            canInteract = false;
+            return true;
+        }
+        if (interactable is MonoBehaviour mb && !mb.enabled) {
+            return true;
+        }
+        canInteract = true;
+        return true;
     }
 
     private Vector2 GetMouseDelta()
@@ -80,6 +130,8 @@ public class PlayerInteractor : MonoBehaviour
         view.StaticCamera.gameObject.SetActive(true);
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
+        crosshairManager.SetCrosshairHidden(true);
+        Debug.Log("Set crosshair hidden");
         SetPlayerControlEnabled(false);
         view.OnEnterView();
     }
@@ -91,6 +143,7 @@ public class PlayerInteractor : MonoBehaviour
         activeStaticView = null;
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
+        crosshairManager.SetCrosshairHidden(false);
         SetPlayerControlEnabled(true);
     }
 
