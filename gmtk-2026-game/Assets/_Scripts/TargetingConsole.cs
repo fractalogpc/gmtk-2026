@@ -35,6 +35,7 @@ public class TargetingConsole : MonoBehaviour
 
     private float pendingAzimuth;
     private float pendingElevation;
+    private float pendingTolerance;
     private bool coordinatesEncrypted;
 
     private bool locked = false;
@@ -64,10 +65,11 @@ public class TargetingConsole : MonoBehaviour
         gunText.text = message;
     }
 
-    public void SetTargetValues(float azimuth, float elevation, bool encrypted = false)
+    public void SetTargetValues(float azimuth, float elevation, float tolerance, bool encrypted = false)
     {
         pendingAzimuth = azimuth;
         pendingElevation = elevation;
+        pendingTolerance = tolerance;
         coordinatesEncrypted = encrypted;
         HasReceivedCoordinates = false;
         UpdateTargetText();
@@ -162,7 +164,7 @@ public class TargetingConsole : MonoBehaviour
         }
         else
         {
-            targetText.text = $"FIRING ORDERS\n———————————————\n{pendingAzimuth:F2} AZIM\n{pendingElevation:F2} ELEV";
+            targetText.text = $"FIRING ORDERS\n———————————————\n{pendingAzimuth:F2} AZIM\n{pendingElevation:F2} ELEV\nMAX DEV ±{pendingTolerance:F2}";
         }
     }
 

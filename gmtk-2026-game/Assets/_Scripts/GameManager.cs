@@ -61,6 +61,8 @@ public class GameManager : MonoBehaviour
     [SerializeField] private float elevationVariation = 2f;
     [SerializeField] private float impactViewTime = 3f;
     [SerializeField] private float resultTime = 8f;
+    [Tooltip("How long the TIME OUT message stays on the screen before the retry begins.")]
+    [SerializeField] private float failMessageDuration = 2f;
     [SerializeField] private Level[] levels;
 
     private int currentLevel = 0;
@@ -105,6 +107,7 @@ public class GameManager : MonoBehaviour
             targetingConsole.SetTargetValues(
                 currentTarget.azimuth,
                 currentTarget.elevation,
+                currentTarget.tolerance,
                 levelData.obscureCoordinates);
 
             LogState("WAITING for player to receive coordinates");
@@ -145,6 +148,8 @@ public class GameManager : MonoBehaviour
                 decoderController.RandomizeTarget();
             }
 
+            bool failed = false;
+
             if (requiresLoading)
             {
                 LogState("WAITING for loading station IsReady (or timeout)");
@@ -156,6 +161,7 @@ public class GameManager : MonoBehaviour
                 if (hasTimer && countdown.Timer <= 0f && !loadingStation.IsReady)
                 {
                     LogState("FAILURE: loading timed out");
+                    failed = true;
                 }
                 else
                 {
@@ -163,23 +169,47 @@ public class GameManager : MonoBehaviour
                 }
             }
 
-            // Loaded, unlock fire lever
-            LogState("Unlocking fire lever");
-            fireLever.UnlockFireLever();
-
-            LogState("WAITING for fire lever pulled (or timeout)");
-            while (!fireLever.IsFired && (!hasTimer || countdown.Timer > 0f))
+            if (!failed)
             {
-                yield return null;
+                // Loaded, unlock fire lever
+                LogState("Unlocking fire lever");
+                fireLever.UnlockFireLever();
+
+                LogState("WAITING for fire lever pulled (or timeout)");
+                while (!fireLever.IsFired && (!hasTimer || countdown.Timer > 0f))
+                {
+                    yield return null;
+                }
+
+                if (hasTimer && countdown.Timer <= 0f && !fireLever.IsFired)
+                {
+                    LogState("FAILURE: fire timed out");
+                    failed = true;
+                }
+                else
+                {
+                    LogState("Fire lever pulled");
+                }
             }
 
-            if (hasTimer && countdown.Timer <= 0f && !fireLever.IsFired)
+            if (failed)
             {
-                LogState("FAILURE: fire timed out");
-            }
-            else
-            {
-                LogState("Fire lever pulled");
+                countdown.StopTimer();
+                onImpact?.Invoke();
+                successLight.SetSuccess(false);
+                targetingConsole.DisplayMessage("TIME OUT\nRETRY");
+
+                yield return new WaitForSeconds(failMessageDuration);
+
+                LogState("RESET after failure — retrying same level");
+                targetingConsole.Reset();
+                loadingStation.Reset();
+                decoderController.Reset();
+                fireLever.ResetFireState();
+                successLight.Reset();
+
+                // Don't advance currentLevel — the player retries this level (fresh random target).
+                continue;
             }
 
             // At the point the shot has been fired
