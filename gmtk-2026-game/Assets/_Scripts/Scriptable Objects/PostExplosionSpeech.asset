@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2a7f8b01275fa09419b530c467407023, type: 3}
+  m_Name: PostExplosionSpeech
+  m_EditorClassIdentifier: Assembly-CSharp::DialogObject
+  sprite: {fileID: 21300000, guid: 16307adf14f5f81409b8dac9eb0b259e, type: 3}
+  dialogue:
+  - I know, I know, the seeds (yum, seeds) of friendship were just beginning to sprout
+    between us and I've gone and thrown it all away.
+  - It's not personal, you know, just following protocol. Policy requires strict
+    training criteria for new recruits, and fortunately you've passed with flying
+    colors (like brown, white, and green!
+  - At least, if you can find a way out of there. I'm sure you'll manage.
+  - I'll be waiting for you with a congratulatory plate of bread crumbs, just for
+    you! Or for me, if you don't get here in the next... five minutes.
+  - Such a shame to see all that equipment go to waste. I hope you had fun working
+    with a real piece of history.
+  - 'Well, I won''t keep you. You''ll figure something out. Just wing it. '

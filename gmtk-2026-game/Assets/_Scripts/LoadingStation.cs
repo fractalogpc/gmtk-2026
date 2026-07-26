@@ -57,6 +57,8 @@ public class LoadingStation : MonoBehaviour
 
     public float CurrentPowder => currentPowderLoaded;
     public bool IsLocked => locked;
+    public GameManager.ShellType LoadedShell => loadedShell;
+    public GameManager.ShellType RequiredShell => requiredShell;
 
     public bool IsReady => locked
         && !overloaded
