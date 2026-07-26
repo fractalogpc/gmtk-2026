@@ -59,6 +59,26 @@ public class WaveVisual : MonoBehaviour
     [SerializeField] private int randomizeMaxAttempts = 50;
     [SerializeField] private UnityEngine.Events.UnityEvent onTargetRandomized;
 
+    public float NormalizedAccuracy
+    {
+        get
+        {
+            float ampDiff = Mathf.Abs(CurrentAmplitude - targetAmplitude);
+            float distDiff = Mathf.Abs(CurrentDistortion - targetDistortion);
+            float phaseDiff = Mathf.Abs(Mathf.DeltaAngle(CurrentPhase * 360f, targetPhase * 360f)) / 360f;
+
+            float ampTol = amplitudeTolerance > 0f ? amplitudeTolerance : matchTolerance;
+            float distTol = distortionTolerance > 0f ? distortionTolerance : matchTolerance;
+            float phaseTol = phaseTolerance > 0f ? phaseTolerance : matchTolerance;
+
+            float ampScore = Mathf.Clamp01(1f - (ampDiff / ampTol));
+            float distScore = Mathf.Clamp01(1f - (distDiff / distTol));
+            float phaseScore = Mathf.Clamp01(1f - (phaseDiff / phaseTol));
+
+            return (ampScore + distScore + phaseScore) / 3f;
+        }
+    }
+
     private LineRenderer line;
     private bool isMatched;
 
