@@ -153,16 +153,16 @@ public class TargetingConsole : MonoBehaviour
         if (targetText == null) return;
         if (!HasReceivedCoordinates)
         {
-            targetText.text = "FIRING ORDERS\n_______________\nAWAITING TRANSMISSION\nPRESS RECEIVE";
+            targetText.text = "FIRING ORDERS\n———————————————\nAWAITING TRANSMISSION\nPRESS RECEIVE";
             return;
         }
         if (coordinatesEncrypted)
         {
-            targetText.text = "FIRING ORDERS\n_______________\n<< ENCRYPTED >>\nDECODE SIGNAL";
+            targetText.text = "FIRING ORDERS\n———————————————\n<< ENCRYPTED >>\nDECODE SIGNAL";
         }
         else
         {
-            targetText.text = $"FIRING ORDERS\n_______________\n{pendingAzimuth:F2} AZIM\n{pendingElevation:F2} ELEV";
+            targetText.text = $"FIRING ORDERS\n———————————————\n{pendingAzimuth:F2} AZIM\n{pendingElevation:F2} ELEV";
         }
     }
 
@@ -206,7 +206,7 @@ public class TargetingConsole : MonoBehaviour
 
     private void UpdateGunText()
     {
-        gunText.text = $"GUN ORIENTATION\n_______________\n{gunAzimuth:F2} AZIM\n{gunElevation:F2} ELEV";
+        gunText.text = $"GUN ORIENTATION\n———————————————\n{gunAzimuth:F2} AZIM\n{gunElevation:F2} ELEV";
     }
 
     private void UpdateAccelFromLevers(float deltaTime)
