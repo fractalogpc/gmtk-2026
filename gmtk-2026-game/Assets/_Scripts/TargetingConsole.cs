@@ -54,7 +54,8 @@ public class TargetingConsole : MonoBehaviour
         ((IInteractable)leverElevation).SetInteractionEnabled(!isLocked);
         if (isLocked)
         {
-            gunText.text = "CONTROLS LOCKED\nFIRE COMMAND SENT";
+            gunText.text = "CONTROLS LOCKED";
+            gunMovementEmitter.Stop();
         }
         else
         {
@@ -237,7 +238,7 @@ public class TargetingConsole : MonoBehaviour
     public void Reset()
     {
         HasReceivedCoordinates = false;
-        locked = false;
+        SetLocked(false);
         coordinatesEncrypted = false;
         pendingAzimuth = 0f;
         pendingElevation = 0f;
@@ -363,6 +364,7 @@ public class TargetingConsole : MonoBehaviour
                 TutorialManager.Instance.CompleteLesson("targeting");
                 TutorialManager.Instance.TriggerLesson("fire");
                 hasDoneTutorial = true;
+                SetLocked(true);
             }
         }
     }
