@@ -60,6 +60,7 @@ public class DragLever : MonoBehaviour, IInteractable
     private bool isInteracting;
     private bool canInteract = true;
 
+    public bool CanInteract => canInteract;
     public float Angle => currentAngle;
     public float NormalizedValue => Mathf.InverseLerp(minAngle, maxAngle, currentAngle);
 
