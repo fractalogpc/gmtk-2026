@@ -167,13 +167,16 @@ public class DragDial : MonoBehaviour, IInteractable
 
     private Vector3 GetHandleDirection(Vector3 axis)
     {
-        // Use the pivot's REST rotation so the drag direction stays fixed for the whole
-        // interaction. Tracking the current rotation caused the tangent to flip past 90°,
-        // which broke IncreaseOnly / DecreaseOnly restrictions — the player could spin
-        // "one way" and the physical mouse direction would still flip the raw angle.
-        Quaternion baseRot = dialPivot.parent != null
-            ? dialPivot.parent.rotation * initialLocalRotation
+        // Bidirectional dials use the CURRENT rotation so the tangent tracks the handle for
+        // a smooth "spin" feel. Direction-restricted dials use the REST rotation so the
+        // tangent's sign stays fixed and IncreaseOnly / DecreaseOnly restrictions behave
+        // consistently regardless of how far the dial has rotated.
+        Quaternion reference = directionMode == DialDirectionMode.Bidirectional
+            ? dialPivot.localRotation
             : initialLocalRotation;
+        Quaternion baseRot = dialPivot.parent != null
+            ? dialPivot.parent.rotation * reference
+            : reference;
         Vector3 worldIndicator = baseRot * indicatorAxis;
         Vector3 projected = Vector3.ProjectOnPlane(worldIndicator, axis);
         return projected.sqrMagnitude < 1e-6f ? Vector3.zero : projected.normalized;
