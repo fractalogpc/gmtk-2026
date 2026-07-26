@@ -17,6 +17,7 @@ public class NixieClock : MonoBehaviour
     [SerializeField] private Material offMaterial;
     [SerializeField] private Material onMaterial;
     [SerializeField] private StudioEventEmitter tickEmitter;
+    [SerializeField] private StudioEventEmitter endEmitter;
 
     public float Timer => timer;
     private float timer = 0f;
@@ -30,7 +31,7 @@ public class NixieClock : MonoBehaviour
     public void StopTimer()
     {
         timer = 0f;
-        tickEmitter?.Stop();
+        endEmitter?.Play();
     }
 
     private void Start()
@@ -40,10 +41,15 @@ public class NixieClock : MonoBehaviour
 
     private void Update()
     {
+        float oldTimer = timer;
         timer -= Time.deltaTime;
 
         if (timer > 0f)
         {
+            if (Mathf.CeilToInt(oldTimer / 1f) != Mathf.CeilToInt(timer / 1f))
+            {
+                tickEmitter?.Play();
+            }
             // Counting down
             bool colonOn = timer % blinkInterval < blinkInterval / 2;
             for (int i = 0; i < tubes.Length; i++)
@@ -67,9 +73,9 @@ public class NixieClock : MonoBehaviour
         }
         else
         {
-            if (tickEmitter.IsPlaying())
+            if (oldTimer > 0f)
             {
-                tickEmitter.Stop();
+                endEmitter?.Play();
             }
             // Expired; set all to 0 and don't blink
             for (int i = 0; i < tubes.Length; i++)

@@ -24982,6 +24982,37 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 52a138c63da8aac4aa94d4bc733b6bae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::NixieClock
+--- !u!114 &2865407346528988534
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1571485742}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: FMODUnity::FMODUnity.StudioEventEmitter
+  CollisionTag: 
+  EventReference:
+    Guid:
+      Data1: -623972136
+      Data2: 1084167084
+      Data3: 1859195568
+      Data4: 1663786951
+    Path: event:/CountdownEnd
+  Event: 
+  EventPlayTrigger: 0
+  EventStopTrigger: 0
+  AllowFadeout: 1
+  TriggerOnce: 0
+  Preload: 0
+  NonRigidbodyVelocity: 0
+  Params: []
+  OverrideAttenuation: 0
+  OverrideMinDistance: 1
+  OverrideMaxDistance: 20
 --- !u!33 &2933322746918459754
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -25359,6 +25390,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1975721805}
     m_Modifications:
+    - target: {fileID: 1880637182733103745, guid: 9bcfda04cb8b9c848aec614a86110382, type: 3}
+      propertyPath: endEmitter
+      value: 
+      objectReference: {fileID: 2865407346528988534}
     - target: {fileID: 2642642869156561595, guid: 9bcfda04cb8b9c848aec614a86110382, type: 3}
       propertyPath: m_LocalPosition.y
       value: -0.0703
@@ -25443,6 +25478,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 2602694511411495537, guid: 9bcfda04cb8b9c848aec614a86110382, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1193726229}
+    - targetCorrespondingSourceObject: {fileID: 9070563560731443646, guid: 9bcfda04cb8b9c848aec614a86110382, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2865407346528988534}
     - targetCorrespondingSourceObject: {fileID: 3332563795201689462, guid: 9bcfda04cb8b9c848aec614a86110382, type: 3}
       insertIndex: -1
       addedObject: {fileID: 539363270}
