@@ -110,7 +110,7 @@ public class GeneratorController : MonoBehaviour
     {
         if (hasActivated) return;
         hasActivated = true;
-        SetAll(indicatorLights, true);
+        ApplyIndicatorLightsState();
         ApplyAdditionalObjectsState();
     }
 
@@ -118,12 +118,18 @@ public class GeneratorController : MonoBehaviour
     {
         powered = value;
         ApplyAdditionalObjectsState();
+        ApplyIndicatorLightsState();
     }
 
     private void ApplyAdditionalObjectsState()
     {
         bool shouldBeOn = hasActivated && powered && activeFireCount == 0;
         SetAll(additionalActivatedObjects, shouldBeOn);
+    }
+
+    private void ApplyIndicatorLightsState()
+    {
+        SetAll(indicatorLights, hasActivated && powered);
     }
 
     private static void SetAll(GameObject[] items, bool value)

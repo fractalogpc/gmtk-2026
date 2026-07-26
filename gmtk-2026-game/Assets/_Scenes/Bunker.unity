@@ -2209,7 +2209,6 @@ Transform:
   - {fileID: 727121032}
   - {fileID: 1505701517}
   - {fileID: 1452211273}
-  - {fileID: 653890297}
   m_Father: {fileID: 1975721805}
   m_LocalEulerAnglesHint: {x: 0, y: -10.564, z: 0}
 --- !u!114 &286175753
@@ -2233,7 +2232,7 @@ MonoBehaviour:
   verticalBarOffsetClamp: {x: -0.034, y: 0.014}
   horizontalBarOffsetClamp: {x: -0.0085, y: 0.004}
   waveVisual: {fileID: 2027039932}
-  staticView: {fileID: 653890298}
+  staticView: {fileID: 0}
   indicatorLights:
   - {fileID: 1104336919}
   additionalActivatedObjects:
@@ -5680,83 +5679,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 6648457355548620207, guid: 88006a2948c532d4189728469a148646, type: 3}
   m_PrefabInstance: {fileID: 626204236}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &653890296
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 653890297}
-  - component: {fileID: 653890298}
-  - component: {fileID: 653890299}
-  m_Layer: 0
-  m_Name: Static Camera Position
-  m_TagString: Interactable
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &653890297
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 653890296}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: 0.050247822, z: -0, w: 0.9987368}
-  m_LocalPosition: {x: -0.037, y: 0, z: 0.528}
-  m_LocalScale: {x: 1, y: 1.8066, z: 1.8543}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 286175752}
-  m_LocalEulerAnglesHint: {x: 0, y: 5.76, z: 0}
---- !u!114 &653890298
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 653890296}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d1e487dbf94da6249927ccb299a4c3d4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::StaticCameraView
-  staticCamera: {fileID: 1452211274}
-  managedObjects:
-  - {fileID: 1184366796}
-  - {fileID: 489220780}
-  - {fileID: 2100681396}
-  onEnter:
-    m_PersistentCalls:
-      m_Calls: []
-  onExit:
-    m_PersistentCalls:
-      m_Calls: []
---- !u!65 &653890299
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 653890296}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &668660707
 GameObject:
   m_ObjectHideFlags: 0
@@ -8073,6 +7995,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SM_Lamp_01 (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 4890590842536414472, guid: 0728bdcb0358d774db2d861611635fa2, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5132904346685427647, guid: 0728bdcb0358d774db2d861611635fa2, type: 3}
       propertyPath: m_LocalPosition.y
       value: 0.2719
@@ -9901,6 +9827,9 @@ MonoBehaviour:
   - {fileID: 4247042953601168273}
   - {fileID: 2007415213}
   - {fileID: 349176384}
+  - {fileID: 2007415213}
+  - {fileID: 209244799}
+  - {fileID: 1327018001}
   emergencyLightsToTurnOn:
   - {fileID: 1770318233}
   - {fileID: 1246455260}
@@ -12241,6 +12170,11 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1149086907}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1327018001 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6545600280142803256, guid: 0728bdcb0358d774db2d861611635fa2, type: 3}
+  m_PrefabInstance: {fileID: 929125764}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1369333966
 GameObject:
   m_ObjectHideFlags: 0
@@ -14446,6 +14380,10 @@ PrefabInstance:
       propertyPath: m_Shadows.m_Type
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 4516680036565549296, guid: 0728bdcb0358d774db2d861611635fa2, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4530684508730594084, guid: 0728bdcb0358d774db2d861611635fa2, type: 3}
       propertyPath: m_LocalPosition.y
       value: 0.2961
@@ -14480,7 +14418,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4890590842536414472, guid: 0728bdcb0358d774db2d861611635fa2, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5132904346685427647, guid: 0728bdcb0358d774db2d861611635fa2, type: 3}
       propertyPath: m_LocalPosition.y
@@ -19895,11 +19833,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2917081231858975310, guid: 3f65c66b49d689e469d73c8237691f3c, type: 3}
       propertyPath: onPowerRestored.m_PersistentCalls.m_Calls.Array.size
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2917081231858975310, guid: 3f65c66b49d689e469d73c8237691f3c, type: 3}
       propertyPath: onGeneratorKilled.m_PersistentCalls.m_Calls.Array.size
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2917081231858975310, guid: 3f65c66b49d689e469d73c8237691f3c, type: 3}
       propertyPath: onPowerRestored.m_PersistentCalls.m_Calls.Array.data[2].m_Mode
@@ -19955,7 +19893,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2917081231858975310, guid: 3f65c66b49d689e469d73c8237691f3c, type: 3}
       propertyPath: onPowerRestored.m_PersistentCalls.m_Calls.Array.data[2].m_Arguments.m_BoolArgument
-      value: 1
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2917081231858975310, guid: 3f65c66b49d689e469d73c8237691f3c, type: 3}
+      propertyPath: onGeneratorKilled.m_PersistentCalls.m_Calls.Array.data[2].m_Arguments.m_BoolArgument
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2917081231858975310, guid: 3f65c66b49d689e469d73c8237691f3c, type: 3}
       propertyPath: onPowerRestored.m_PersistentCalls.m_Calls.Array.data[2].m_Arguments.m_ObjectArgumentAssemblyTypeName

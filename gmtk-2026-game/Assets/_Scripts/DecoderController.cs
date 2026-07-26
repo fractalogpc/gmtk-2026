@@ -131,6 +131,11 @@ public class DecoderController : MonoBehaviour
         SetAll(additionalActivatedObjects, shouldBeOn);
     }
 
+    private void ApplyIndicatorLightsState()
+    {
+        SetAll(indicatorLights, hasActivated && powered);
+    }
+
     private void HandleMatched()
     {
         onSignalMatched.Invoke();
@@ -158,7 +163,7 @@ public class DecoderController : MonoBehaviour
     {
         if (hasActivated) return;
         hasActivated = true;
-        SetAll(indicatorLights, true);
+        ApplyIndicatorLightsState();
         ApplyAdditionalObjectsState();
     }
 
@@ -188,6 +193,7 @@ public class DecoderController : MonoBehaviour
         powered = value;
         ApplyInteractable();
         ApplyAdditionalObjectsState();
+        ApplyIndicatorLightsState();
     }
 
     private void ApplyInteractable()
