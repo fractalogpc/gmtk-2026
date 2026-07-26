@@ -59,7 +59,7 @@
 			<destination>{5a0be9e5-4ffd-48ef-900b-312c51dd2a9d}</destination>
 		</relationship>
 		<relationship name="output">
-			<destination>{b2be5d4b-a099-40e4-946e-6ccc28743bf4}</destination>
+			<destination>{f49a7963-8d86-4312-bd0c-b45ab9178752}</destination>
 		</relationship>
 	</object>
 	<object class="EventAutomatableProperties" id="{7dcdcb37-8b04-4b33-8f88-7923cc82138a}" />
@@ -182,6 +182,9 @@
 	<object class="SoundScatterer" id="{73db1662-b212-411f-b755-ef623a7f2c56}">
 		<property name="length">
 			<value>124.32025</value>
+		</property>
+		<property name="volume">
+			<value>-10</value>
 		</property>
 		<property name="polyphony">
 			<value>8</value>
@@ -613,7 +616,6 @@
 		<property name="name">
 			<value>SourcePos</value>
 		</property>
-		<property name="value" />
 		<property name="dataType">
 			<value>-2</value>
 		</property>
@@ -622,7 +624,6 @@
 		<property name="name">
 			<value>OverallGain</value>
 		</property>
-		<property name="value" />
 		<property name="dataType">
 			<value>-1</value>
 		</property>
@@ -951,7 +952,6 @@
 		<property name="name">
 			<value>SimOutputs</value>
 		</property>
-		<property name="value" />
 		<property name="dataType">
 			<value>0</value>
 		</property>
@@ -968,7 +968,6 @@
 		<property name="name">
 			<value>DistRange</value>
 		</property>
-		<property name="value" />
 		<property name="dataType">
 			<value>-6</value>
 		</property>
