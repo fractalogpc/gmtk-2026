@@ -9,6 +9,12 @@ public class LoadingStation : MonoBehaviour
     [SerializeField] private StaticCameraView staticView;
     [Tooltip("Interactables (levers, buttons, dials) that this machine owns but which live OUTSIDE the StaticCameraView's managed list. Toggled alongside the view.")]
     [SerializeField] private MonoBehaviour[] additionalInteractables;
+    [Tooltip("Lights that stay off until the station is first activated (first SetRequiredShell call).")]
+    [SerializeField] private GameObject[] indicatorLights;
+    [Tooltip("Other GameObjects that stay disabled until the station is first activated.")]
+    [SerializeField] private GameObject[] additionalActivatedObjects;
+    [Tooltip("Fires that disable the additional activated objects while burning. All must be out for the objects to come back.")]
+    [SerializeField] private E_FireComponent[] nearbyFires;
 
     [SerializeField] private TextMeshProUGUI powderText;
     [SerializeField] private TextMeshProUGUI shellText;
@@ -65,6 +71,68 @@ public class LoadingStation : MonoBehaviour
         UpdateProgressText();
         UpdateShellText();
         SetInteractable(false);
+        SetAll(indicatorLights, false);
+        SetAll(additionalActivatedObjects, false);
+    }
+
+    private bool hasActivated;
+    private int activeFireCount;
+
+    private void OnEnable()
+    {
+        if (nearbyFires == null) return;
+        foreach (E_FireComponent fire in nearbyFires)
+        {
+            if (fire == null) continue;
+            fire.OnFireStarted.AddListener(HandleFireStarted);
+            fire.OnFireExtinguished.AddListener(HandleFireExtinguished);
+        }
+    }
+
+    private void OnDisable()
+    {
+        if (nearbyFires == null) return;
+        foreach (E_FireComponent fire in nearbyFires)
+        {
+            if (fire == null) continue;
+            fire.OnFireStarted.RemoveListener(HandleFireStarted);
+            fire.OnFireExtinguished.RemoveListener(HandleFireExtinguished);
+        }
+    }
+
+    private void HandleFireStarted()
+    {
+        activeFireCount++;
+        ApplyAdditionalObjectsState();
+    }
+
+    private void HandleFireExtinguished()
+    {
+        activeFireCount = Mathf.Max(0, activeFireCount - 1);
+        ApplyAdditionalObjectsState();
+    }
+
+    private void TurnOnIndicatorLights()
+    {
+        if (hasActivated) return;
+        hasActivated = true;
+        SetAll(indicatorLights, true);
+        ApplyAdditionalObjectsState();
+    }
+
+    private void ApplyAdditionalObjectsState()
+    {
+        bool shouldBeOn = hasActivated && powered && activeFireCount == 0;
+        SetAll(additionalActivatedObjects, shouldBeOn);
+    }
+
+    private static void SetAll(GameObject[] items, bool value)
+    {
+        if (items == null) return;
+        foreach (GameObject go in items)
+        {
+            if (go != null) go.SetActive(value);
+        }
     }
 
     private void Update()
@@ -144,6 +212,7 @@ public class LoadingStation : MonoBehaviour
         requiredShell = shell;
         UpdateShellText();
         SetInteractable(true);
+        TurnOnIndicatorLights();
     }
 
     public void SetInteractable(bool interactable)
@@ -156,6 +225,7 @@ public class LoadingStation : MonoBehaviour
     {
         powered = value;
         ApplyInteractable();
+        ApplyAdditionalObjectsState();
     }
 
     private void ApplyInteractable()

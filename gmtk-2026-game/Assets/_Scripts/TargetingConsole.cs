@@ -10,6 +10,12 @@ public class TargetingConsole : MonoBehaviour
     [SerializeField] private DragLever leverElevation;
     [SerializeField] private Button recieveCoordinatesButton;
     [SerializeField] private StaticCameraView staticView;
+    [Tooltip("Lights that stay off until the console is first activated (first SetTargetValues call).")]
+    [SerializeField] private GameObject[] indicatorLights;
+    [Tooltip("Other GameObjects that stay disabled until the console is first activated.")]
+    [SerializeField] private GameObject[] additionalActivatedObjects;
+    [Tooltip("Fires that disable the additional activated objects while burning. All must be out for the objects to come back.")]
+    [SerializeField] private E_FireComponent[] nearbyFires;
     [SerializeField] private float azimuthForceMin, azimuthForceMax;
     [SerializeField] private float elevationForceMin, elevationForceMax;
     [SerializeField] private float gunMass = 100f;
@@ -66,6 +72,73 @@ public class TargetingConsole : MonoBehaviour
         HasReceivedCoordinates = false;
         UpdateTargetText();
         SetInteractable(true);
+        TurnOnIndicatorLights();
+    }
+
+    private bool hasActivated;
+    private int activeFireCount;
+
+    private void Awake()
+    {
+        SetAll(indicatorLights, false);
+        SetAll(additionalActivatedObjects, false);
+    }
+
+    private void OnEnable()
+    {
+        if (nearbyFires == null) return;
+        foreach (E_FireComponent fire in nearbyFires)
+        {
+            if (fire == null) continue;
+            fire.OnFireStarted.AddListener(HandleFireStarted);
+            fire.OnFireExtinguished.AddListener(HandleFireExtinguished);
+        }
+    }
+
+    private void OnDisable()
+    {
+        if (nearbyFires == null) return;
+        foreach (E_FireComponent fire in nearbyFires)
+        {
+            if (fire == null) continue;
+            fire.OnFireStarted.RemoveListener(HandleFireStarted);
+            fire.OnFireExtinguished.RemoveListener(HandleFireExtinguished);
+        }
+    }
+
+    private void HandleFireStarted()
+    {
+        activeFireCount++;
+        ApplyAdditionalObjectsState();
+    }
+
+    private void HandleFireExtinguished()
+    {
+        activeFireCount = Mathf.Max(0, activeFireCount - 1);
+        ApplyAdditionalObjectsState();
+    }
+
+    private void TurnOnIndicatorLights()
+    {
+        if (hasActivated) return;
+        hasActivated = true;
+        SetAll(indicatorLights, true);
+        ApplyAdditionalObjectsState();
+    }
+
+    private void ApplyAdditionalObjectsState()
+    {
+        bool shouldBeOn = hasActivated && powered && activeFireCount == 0;
+        SetAll(additionalActivatedObjects, shouldBeOn);
+    }
+
+    private static void SetAll(GameObject[] items, bool value)
+    {
+        if (items == null) return;
+        foreach (GameObject go in items)
+        {
+            if (go != null) go.SetActive(value);
+        }
     }
 
     public void RevealCoordinates()
@@ -103,6 +176,7 @@ public class TargetingConsole : MonoBehaviour
     {
         powered = value;
         ApplyInteractable();
+        ApplyAdditionalObjectsState();
     }
 
     private void ApplyInteractable()

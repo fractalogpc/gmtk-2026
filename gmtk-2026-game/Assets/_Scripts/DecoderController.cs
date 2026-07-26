@@ -22,6 +22,12 @@ public class DecoderController : MonoBehaviour
     [Header("Signal / Wave")]
     [SerializeField] private WaveVisual waveVisual;
     [SerializeField] private StaticCameraView staticView;
+    [Tooltip("Lights that stay off until the decoder is first activated (first SetTarget/RandomizeTarget call).")]
+    [SerializeField] private GameObject[] indicatorLights;
+    [Tooltip("Other GameObjects that stay disabled until the decoder is first activated.")]
+    [SerializeField] private GameObject[] additionalActivatedObjects;
+    [Tooltip("Fires that disable the additional activated objects while burning. All must be out for the objects to come back.")]
+    [SerializeField] private E_FireComponent[] nearbyFires;
     [SerializeField] private UnityEvent onSignalMatched;
     [SerializeField] private UnityEvent onSignalLost;
     [SerializeField] private UnityEvent onTargetRandomized;
@@ -52,30 +58,77 @@ public class DecoderController : MonoBehaviour
         {
             // vertical bar offset = -leftDial.Angle * sens, clamped to [clamp.x, clamp.y]
             //   → leftDial.Angle in [-clamp.y / sens, -clamp.x / sens]
-            leftDial.SetBounds(-verticalBarOffsetClamp.y / verticalBarSensitivity,
-                               -verticalBarOffsetClamp.x / verticalBarSensitivity);
+            float min = -verticalBarOffsetClamp.y / verticalBarSensitivity;
+            float max = -verticalBarOffsetClamp.x / verticalBarSensitivity;
+            leftDial.SetBounds(min, max);
+            leftDial.SetAngle((min + max) * 0.5f);
         }
         if (rightDial != null && horizontalBarSensitivity != 0f)
         {
-            rightDial.SetBounds(horizontalBarOffsetClamp.x / horizontalBarSensitivity,
-                                horizontalBarOffsetClamp.y / horizontalBarSensitivity);
+            float min = horizontalBarOffsetClamp.x / horizontalBarSensitivity;
+            float max = horizontalBarOffsetClamp.y / horizontalBarSensitivity;
+            rightDial.SetBounds(min, max);
+            rightDial.SetAngle((min + max) * 0.5f);
         }
     }
 
     private void OnEnable()
     {
-        if (waveVisual == null) return;
-        waveVisual.Matched += HandleMatched;
-        waveVisual.Unmatched += HandleUnmatched;
-        waveVisual.TargetRandomized += HandleTargetRandomized;
+        if (waveVisual != null)
+        {
+            waveVisual.Matched += HandleMatched;
+            waveVisual.Unmatched += HandleUnmatched;
+            waveVisual.TargetRandomized += HandleTargetRandomized;
+        }
+
+        if (nearbyFires != null)
+        {
+            foreach (E_FireComponent fire in nearbyFires)
+            {
+                if (fire == null) continue;
+                fire.OnFireStarted.AddListener(HandleFireStarted);
+                fire.OnFireExtinguished.AddListener(HandleFireExtinguished);
+            }
+        }
     }
 
     private void OnDisable()
     {
-        if (waveVisual == null) return;
-        waveVisual.Matched -= HandleMatched;
-        waveVisual.Unmatched -= HandleUnmatched;
-        waveVisual.TargetRandomized -= HandleTargetRandomized;
+        if (waveVisual != null)
+        {
+            waveVisual.Matched -= HandleMatched;
+            waveVisual.Unmatched -= HandleUnmatched;
+            waveVisual.TargetRandomized -= HandleTargetRandomized;
+        }
+
+        if (nearbyFires != null)
+        {
+            foreach (E_FireComponent fire in nearbyFires)
+            {
+                if (fire == null) continue;
+                fire.OnFireStarted.RemoveListener(HandleFireStarted);
+                fire.OnFireExtinguished.RemoveListener(HandleFireExtinguished);
+            }
+        }
+    }
+
+    private int activeFireCount;
+    private void HandleFireStarted()
+    {
+        activeFireCount++;
+        ApplyAdditionalObjectsState();
+    }
+
+    private void HandleFireExtinguished()
+    {
+        activeFireCount = Mathf.Max(0, activeFireCount - 1);
+        ApplyAdditionalObjectsState();
+    }
+
+    private void ApplyAdditionalObjectsState()
+    {
+        bool shouldBeOn = hasActivated && powered && activeFireCount == 0;
+        SetAll(additionalActivatedObjects, shouldBeOn);
     }
 
     private void HandleMatched()
@@ -90,12 +143,32 @@ public class DecoderController : MonoBehaviour
     {
         if (waveVisual != null) waveVisual.RandomizeTarget();
         SetInteractable(true);
+        TurnOnIndicatorLights();
     }
 
     public void SetTarget(float amplitude, float distortion, float phase)
     {
         if (waveVisual != null) waveVisual.SetTarget(amplitude, distortion, phase);
         SetInteractable(true);
+        TurnOnIndicatorLights();
+    }
+
+    private bool hasActivated;
+    private void TurnOnIndicatorLights()
+    {
+        if (hasActivated) return;
+        hasActivated = true;
+        SetAll(indicatorLights, true);
+        ApplyAdditionalObjectsState();
+    }
+
+    private static void SetAll(GameObject[] items, bool value)
+    {
+        if (items == null) return;
+        foreach (GameObject go in items)
+        {
+            if (go != null) go.SetActive(value);
+        }
     }
 
     public void Reset()
@@ -114,6 +187,7 @@ public class DecoderController : MonoBehaviour
     {
         powered = value;
         ApplyInteractable();
+        ApplyAdditionalObjectsState();
     }
 
     private void ApplyInteractable()
@@ -126,6 +200,8 @@ public class DecoderController : MonoBehaviour
     private void Start()
     {
         SetInteractable(false);
+        SetAll(indicatorLights, false);
+        SetAll(additionalActivatedObjects, false);
     }
 
     private void Update()

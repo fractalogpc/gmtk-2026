@@ -2324,7 +2324,6 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4851972680902226546}
-  - {fileID: 2785272120144717770}
   - {fileID: 2642642869156561595}
   - {fileID: 9050612249597973580}
   m_Father: {fileID: 4937538223127287431}
@@ -2455,11 +2454,11 @@ Transform:
   m_GameObject: {fileID: 4526138018549283940}
   serializedVersion: 2
   m_LocalRotation: {x: 0.19025211, y: 0.0855549, z: -0.016662069, w: 0.9778583}
-  m_LocalPosition: {x: 0.07912418, y: 1.7844071, z: -2.2738938}
-  m_LocalScale: {x: 1.0007002, y: 1.7468702, z: 2.049588}
+  m_LocalPosition: {x: 0.2411, y: 0.66925, z: -2.31566}
+  m_LocalScale: {x: 0.9846, y: 1.005, z: 1.025}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 3262556909165309926}
+  m_Father: {fileID: 4937538223127287431}
   m_LocalEulerAnglesHint: {x: 22.02, y: 10, z: -0.002}
 --- !u!114 &4826837031228521619
 MonoBehaviour:
@@ -4283,6 +4282,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 2785272120144717770}
   - {fileID: 3262556909165309926}
   - {fileID: 3249718834547648325}
   - {fileID: 2698911483779309004}
@@ -4319,6 +4319,10 @@ MonoBehaviour:
   gunText: {fileID: 2902953571993832493}
   leverAzimuth: {fileID: 1144911852922908021}
   leverElevation: {fileID: 6256974396259793794}
+  recieveCoordinatesButton: {fileID: 0}
+  staticView: {fileID: 0}
+  indicatorLights: []
+  additionalActivatedObjects: []
   azimuthForceMin: -1000
   azimuthForceMax: 1000
   elevationForceMin: -300
@@ -4331,6 +4335,7 @@ MonoBehaviour:
   gunBase: {fileID: 0}
   gunBarrel: {fileID: 0}
   stopEmitterAfterSecondsAtZero: 0.2
+  HasReceivedCoordinates: 0
 --- !u!114 &4612470081183424791
 MonoBehaviour:
   m_ObjectHideFlags: 0
