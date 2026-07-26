@@ -9857,6 +9857,8 @@ PlayableDirector:
     value: {fileID: 1932038930}
   - key: {fileID: -5697178352611129211, guid: 5cd3a51945867d74d94fc48bafa9e6ac, type: 2}
     value: {fileID: 2117760250}
+  - key: {fileID: -7134844864292837754, guid: 5cd3a51945867d74d94fc48bafa9e6ac, type: 2}
+    value: {fileID: 1786719762}
   m_ExposedReferences:
     m_References: []
 --- !u!1 &1171419308
@@ -15458,6 +15460,11 @@ MonoBehaviour:
   m_SelectedFaces: 
   m_SelectedEdges: []
   m_SelectedVertices: 
+--- !u!1 &1786719762 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1867304338241623491, guid: 41ac7d59838590341ab96e405592c7b3, type: 3}
+  m_PrefabInstance: {fileID: 2265253249554138868}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1819198195
 GameObject:
   m_ObjectHideFlags: 0
@@ -19324,7 +19331,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 1000
-  field of view: 60.000004
+  field of view: 60
   orthographic: 0
   orthographic size: 5
   m_Depth: -1
@@ -19351,7 +19358,7 @@ Transform:
   m_GameObject: {fileID: 2102256285}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.5, z: 1}
+  m_LocalPosition: {x: 0, y: 3, z: -7}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -20280,7 +20287,7 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 3141113252137267755, guid: 41ac7d59838590341ab96e405592c7b3, type: 3}
   m_PrefabInstance: {fileID: 2265253249554138868}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 1786719762}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}

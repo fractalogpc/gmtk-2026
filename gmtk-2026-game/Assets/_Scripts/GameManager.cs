@@ -79,6 +79,8 @@ public class GameManager : MonoBehaviour
         LogState("BOOT: resetting fire lever");
         fireLever.ResetFireState(0f);
 
+        yield return new WaitForSeconds(15f);
+
         while (true)
         {
             if (currentLevel >= levels.Length)
