@@ -15,7 +15,7 @@ MonoBehaviour:
   sprite: {fileID: 21300000, guid: 16307adf14f5f81409b8dac9eb0b259e, type: 3}
   dialogue:
   - Welcome to your exciting new position operating the largest artillery gun 2045
-    has to offer.
+    has to offer. (LMB/Enter/Space to continue)
   - I'm certain we will become best of friends.
   - Well. Let's get started. Request coordinates, adjust your aim, and pull the lever
     to fire.
