@@ -157,13 +157,29 @@ public class DialogController : MonoBehaviour
     IEnumerator TypewriterAnim()
     {
         dialogueSound.Play();
-        foreach (char c in lines[index].ToCharArray())
+        string line = lines[index];
+        int position = 0;
+
+        while (position < line.Length)
         {
-            if (c == ' ') 
+            if (line[position] == '<')
+            {
+                int tagEnd = line.IndexOf('>', position);
+                if (tagEnd >= 0)
+                {
+                    textComponent.text += line.Substring(position, tagEnd - position + 1);
+                    position = tagEnd + 1;
+                    continue;
+                }
+            }
+
+            char c = line[position];
+            if (c == ' ')
             {
                 dialogueSound.Play();
             }
             textComponent.text += c;
+            position++;
             yield return new WaitForSeconds(textSpeed);
         }
     }

@@ -14145,6 +14145,7 @@ MonoBehaviour:
     - {fileID: 1115693931}
     - {fileID: 906189009}
     - {fileID: 1041358040}
+    - {fileID: 1490137194}
     holdDialogUntilCompleted: 1
     onTriggered:
       m_PersistentCalls:
@@ -16876,6 +16877,29 @@ Mesh:
       - serializedVersion: 1
         m_IndexStart: 0
         m_IndexCount: 0
+--- !u!1 &1490137190 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2459342300844354530, guid: 534f17b2e06bf1e43a7e59facd61853a, type: 3}
+  m_PrefabInstance: {fileID: 7542317377469547560}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1490137194
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1490137190}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Outline
+  outlineMode: 0
+  outlineColor: {r: 1, g: 1, b: 1, a: 1}
+  outlineWidth: 2
+  precomputeOutline: 0
+  bakeKeys: []
+  bakeValues: []
 --- !u!1 &1505701516
 GameObject:
   m_ObjectHideFlags: 0
@@ -24461,6 +24485,10 @@ PrefabInstance:
       value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 2917081231858975310, guid: 3f65c66b49d689e469d73c8237691f3c, type: 3}
+      propertyPath: degreesPerIndicator
+      value: 120
+      objectReference: {fileID: 0}
+    - target: {fileID: 2917081231858975310, guid: 3f65c66b49d689e469d73c8237691f3c, type: 3}
       propertyPath: onPowerRestored.m_PersistentCalls.m_Calls.Array.size
       value: 2
       objectReference: {fileID: 0}
@@ -25633,6 +25661,15 @@ PrefabInstance:
       propertyPath: m_LocalPosition.y
       value: -0.0703
       objectReference: {fileID: 0}
+    - target: {fileID: 2902953571993832493, guid: 9bcfda04cb8b9c848aec614a86110382, type: 3}
+      propertyPath: m_text
+      value: 'GUN ORIENTATION
+
+
+        0.00 AZIM
+
+        0.00 ELEV'
+      objectReference: {fileID: 0}
     - target: {fileID: 4612470081183424791, guid: 9bcfda04cb8b9c848aec614a86110382, type: 3}
       propertyPath: onFire.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
@@ -25689,6 +25726,11 @@ PrefabInstance:
       propertyPath: gunBarrel
       value: 
       objectReference: {fileID: 101692463547631170}
+    - target: {fileID: 8378440250357073018, guid: 9bcfda04cb8b9c848aec614a86110382, type: 3}
+      propertyPath: m_text
+      value: "FIRING ORDERS\n\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\nAWAITING
+        TRANSMISSION PRESS RECEIVE\n"
+      objectReference: {fileID: 0}
     - target: {fileID: 8569129564166649987, guid: 9bcfda04cb8b9c848aec614a86110382, type: 3}
       propertyPath: m_Name
       value: Targeting Console
@@ -26645,6 +26687,30 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5430782434756330204, guid: 534f17b2e06bf1e43a7e59facd61853a, type: 3}
+      propertyPath: m_Size.x
+      value: 0.0033935201
+      objectReference: {fileID: 0}
+    - target: {fileID: 5430782434756330204, guid: 534f17b2e06bf1e43a7e59facd61853a, type: 3}
+      propertyPath: m_Size.y
+      value: 0.0062598353
+      objectReference: {fileID: 0}
+    - target: {fileID: 5430782434756330204, guid: 534f17b2e06bf1e43a7e59facd61853a, type: 3}
+      propertyPath: m_Size.z
+      value: 0.002672324
+      objectReference: {fileID: 0}
+    - target: {fileID: 5430782434756330204, guid: 534f17b2e06bf1e43a7e59facd61853a, type: 3}
+      propertyPath: m_Center.x
+      value: -0.0004267551
+      objectReference: {fileID: 0}
+    - target: {fileID: 5430782434756330204, guid: 534f17b2e06bf1e43a7e59facd61853a, type: 3}
+      propertyPath: m_Center.y
+      value: -3.3108402e-18
+      objectReference: {fileID: 0}
+    - target: {fileID: 5430782434756330204, guid: 534f17b2e06bf1e43a7e59facd61853a, type: 3}
+      propertyPath: m_Center.z
+      value: 0.0006903463
+      objectReference: {fileID: 0}
     - target: {fileID: 5735222230049913456, guid: 534f17b2e06bf1e43a7e59facd61853a, type: 3}
       propertyPath: m_LocalPosition.x
       value: 4.0234
@@ -26665,6 +26731,9 @@ PrefabInstance:
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 2459342300844354530, guid: 534f17b2e06bf1e43a7e59facd61853a, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1490137194}
     - targetCorrespondingSourceObject: {fileID: 2217754130143256661, guid: 534f17b2e06bf1e43a7e59facd61853a, type: 3}
       insertIndex: 5
       addedObject: {fileID: 906189009}
