@@ -7043,7 +7043,7 @@ MonoBehaviour:
     showImpactDialog: 1
   - requiredShell: 0
     obscureCoordinates: 0
-    timeLimit: 60
+    timeLimit: 90
     tolerance: 2
     range: 2500
     fireIntensity: 0
@@ -7082,7 +7082,7 @@ MonoBehaviour:
     showImpactDialog: 0
   - requiredShell: 1
     obscureCoordinates: 1
-    timeLimit: 50
+    timeLimit: 60
     tolerance: 0.6
     range: 1000
     fireIntensity: 3
@@ -7095,7 +7095,7 @@ MonoBehaviour:
     showImpactDialog: 0
   - requiredShell: 2
     obscureCoordinates: 1
-    timeLimit: 40
+    timeLimit: 45
     tolerance: 0.5
     range: 25
     fireIntensity: 0
