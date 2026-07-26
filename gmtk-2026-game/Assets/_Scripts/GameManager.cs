@@ -33,6 +33,7 @@ public class GameManager : MonoBehaviour
     {
         LogState("Decoder matched → revealing coordinates");
         targetingConsole.RevealCoordinates();
+        if (tutorialManager != null) tutorialManager.CompleteLesson("decoder");
     }
 
     [Header("References")]
@@ -53,6 +54,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private UnityEvent onShellAnimation;
     [SerializeField] private Animation shellAnim;
     [SerializeField] private DialogController dialogController;
+    [SerializeField] private TutorialManager tutorialManager;
 
     [Header("Settings")]
     [SerializeField] private float timeToImpact = 10f;
@@ -97,6 +99,9 @@ public class GameManager : MonoBehaviour
                 levelData.showStartDialog = false;
             }
 
+            // Targeting console lesson always shows on first level.
+            if (tutorialManager != null) tutorialManager.TriggerLesson("targeting");
+
             // Roll and stash the target for this round so the fire check and impact-time
             // calculations later on can reference the exact same values the player was given.
             currentTarget = new TargetRequirements(
@@ -137,6 +142,7 @@ public class GameManager : MonoBehaviour
             {
                 LogState($"Activating loading station (shell={levelData.requiredShell})");
                 loadingStation.SetRequiredShell(levelData.requiredShell);
+                if (tutorialManager != null) tutorialManager.TriggerLesson("loading");
             }
             else
             {
@@ -146,6 +152,7 @@ public class GameManager : MonoBehaviour
             // Check for obscured coordinates
             if (levelData.obscureCoordinates)
             {
+                if (tutorialManager != null) tutorialManager.TriggerLesson("decoder");
                 LogState("Activating decoder (obscured level)");
                 decoderController.RandomizeTarget();
             }
@@ -168,6 +175,7 @@ public class GameManager : MonoBehaviour
                 else
                 {
                     LogState("Loading complete");
+                    if (tutorialManager != null) tutorialManager.CompleteLesson("loading");
                 }
             }
 
@@ -191,11 +199,13 @@ public class GameManager : MonoBehaviour
                 else
                 {
                     LogState("Fire lever pulled");
+                    if (tutorialManager != null) tutorialManager.CompleteLesson("targeting");
                 }
             }
 
             if (failed)
             {
+                if (tutorialManager != null) tutorialManager.TriggerLesson("failure");
                 countdown.StopTimer();
                 onImpact?.Invoke();
                 successLight.SetSuccess(false);
@@ -256,6 +266,11 @@ public class GameManager : MonoBehaviour
             if (isSuccess)
             {
                 onTargetHit?.Invoke();
+                if (tutorialManager != null) tutorialManager.TriggerLesson("success");
+            }
+            else
+            {
+                if (tutorialManager != null) tutorialManager.TriggerLesson("failure");
             }
             successLight.SetSuccess(isSuccess);
             if (levelData.showImpactDialog && levelData.impactDialog != null)
@@ -345,11 +360,13 @@ public class GameManager : MonoBehaviour
         if (levelData.fireIntensity > 0)
         {
             eventManager.TriggerFireEvent(levelData.fireIntensity);
+            if (tutorialManager != null) tutorialManager.TriggerLesson("fire");
         }
         if (levelData.doBlackout)
         {
             eventManager.TriggerPowerOutageEvent();
             generatorController.KillGenerator();
+            if (tutorialManager != null) tutorialManager.TriggerLesson("blackout");
         }
     }
 
@@ -367,6 +384,7 @@ public class GameManager : MonoBehaviour
         loadingStation.SetPowered(true);
         decoderController.SetPowered(true);
         generatorController.SetPowered(true);
+        if (tutorialManager != null) tutorialManager.CompleteLesson("blackout");
     }
 
     public void OnSignalDecoded()
