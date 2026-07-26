@@ -6557,45 +6557,110 @@ MonoBehaviour:
   resultTime: 3
   failMessageDuration: 2
   levels:
-  - requiredShell: 0
-    obscureCoordinates: 1
+  - requiredShell: 3
+    obscureCoordinates: 0
     timeLimit: 0
     tolerance: 10
-    range: 3000
-    fireIntensity: 1
-    doBlackout: 1
+    range: 4000
+    fireIntensity: 0
+    doBlackout: 0
     startDialog: {fileID: 11400000, guid: a15a2a905b1423142b8d40314d063cbb, type: 2}
     showStartDialog: 1
     fireDialog: {fileID: 11400000, guid: 6812adff2be362049914ba2a6957335a, type: 2}
     showFireDialog: 1
     impactDialog: {fileID: 11400000, guid: facbaf3a59e923c43b98f5b213a7125f, type: 2}
     showImpactDialog: 1
-  - requiredShell: 3
+  - requiredShell: 0
     obscureCoordinates: 0
     timeLimit: 0
-    tolerance: 1
-    range: 500
+    tolerance: 10
+    range: 3500
+    fireIntensity: 0
+    doBlackout: 0
+    startDialog: {fileID: 11400000, guid: 7f625e92a076016409638cb8120b4789, type: 2}
+    showStartDialog: 1
+    fireDialog: {fileID: 0}
+    showFireDialog: 0
+    impactDialog: {fileID: 0}
+    showImpactDialog: 0
+  - requiredShell: 1
+    obscureCoordinates: 0
+    timeLimit: 0
+    tolerance: 6
+    range: 3000
     fireIntensity: 1
     doBlackout: 0
     startDialog: {fileID: 0}
-    showStartDialog: 1
+    showStartDialog: 0
     fireDialog: {fileID: 0}
+    showFireDialog: 0
+    impactDialog: {fileID: 11400000, guid: 7f335c5fda587fd42bbe006582a721a3, type: 2}
+    showImpactDialog: 1
+  - requiredShell: 0
+    obscureCoordinates: 0
+    timeLimit: 60
+    tolerance: 4
+    range: 2500
+    fireIntensity: 0
+    doBlackout: 0
+    startDialog: {fileID: 11400000, guid: afed230eb0ad37f469e0aaac92ee9ab7, type: 2}
+    showStartDialog: 1
+    fireDialog: {fileID: 11400000, guid: 237b38ed52a135f49a04105a77bd4bf9, type: 2}
     showFireDialog: 1
     impactDialog: {fileID: 0}
-    showImpactDialog: 1
-  - requiredShell: 3
+    showImpactDialog: 0
+  - requiredShell: 0
     obscureCoordinates: 1
     timeLimit: 0
-    tolerance: 1
-    range: 500
-    fireIntensity: 1
+    tolerance: 4
+    range: 2000
+    fireIntensity: 0
     doBlackout: 1
-    startDialog: {fileID: 0}
+    startDialog: {fileID: 11400000, guid: 19434e6ab070af040b6736a63bcddf34, type: 2}
     showStartDialog: 1
     fireDialog: {fileID: 0}
+    showFireDialog: 0
+    impactDialog: {fileID: 11400000, guid: 1e9807ccd00491745b4160e5be87bab2, type: 2}
+    showImpactDialog: 1
+  - requiredShell: 2
+    obscureCoordinates: 0
+    timeLimit: 0
+    tolerance: 3
+    range: 1500
+    fireIntensity: 2
+    doBlackout: 0
+    startDialog: {fileID: 0}
+    showStartDialog: 0
+    fireDialog: {fileID: 0}
+    showFireDialog: 0
+    impactDialog: {fileID: 0}
+    showImpactDialog: 0
+  - requiredShell: 1
+    obscureCoordinates: 1
+    timeLimit: 45
+    tolerance: 2
+    range: 1000
+    fireIntensity: 3
+    doBlackout: 1
+    startDialog: {fileID: 0}
+    showStartDialog: 0
+    fireDialog: {fileID: 11400000, guid: f9a9ce8d1f594b446944fc4afe8b2973, type: 2}
     showFireDialog: 1
     impactDialog: {fileID: 0}
-    showImpactDialog: 1
+    showImpactDialog: 0
+  - requiredShell: 2
+    obscureCoordinates: 1
+    timeLimit: 30
+    tolerance: 1
+    range: 25
+    fireIntensity: 0
+    doBlackout: 0
+    startDialog: {fileID: 0}
+    showStartDialog: 0
+    fireDialog: {fileID: 11400000, guid: 17fad6b1946e90d41bfdb0f9dca0f59d, type: 2}
+    showFireDialog: 0
+    impactDialog: {fileID: 0}
+    showImpactDialog: 0
 --- !u!114 &677906279
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11079,165 +11144,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1184366793}
   m_Mesh: {fileID: 4613669112504159012, guid: 8eb5467aef1959944b7f70b03e27bdf9, type: 3}
---- !u!1 &1226645804
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1226645805}
-  - component: {fileID: 1226645806}
-  - component: {fileID: 1226645807}
-  - component: {fileID: 1226645808}
-  m_Layer: 0
-  m_Name: EndCutscene
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1226645805
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1226645804}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.79858, y: 1.21359, z: 6.5}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 189642177}
-  - {fileID: 461671946}
-  - {fileID: 865811417}
-  - {fileID: 2100149983}
-  - {fileID: 79319615}
-  - {fileID: 1871269595}
-  - {fileID: 1154328921}
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!320 &1226645806
-PlayableDirector:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1226645804}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_PlayableAsset: {fileID: 11400000, guid: 3b63488dfef28e549bf7159d42bf90ae, type: 2}
-  m_InitialState: 0
-  m_WrapMode: 2
-  m_DirectorUpdateMode: 1
-  m_InitialTime: 0
-  m_SceneBindings:
-  - key: {fileID: -4878263928308477924, guid: 3b63488dfef28e549bf7159d42bf90ae, type: 2}
-    value: {fileID: 189642174}
-  - key: {fileID: 6222753423531121393, guid: 3b63488dfef28e549bf7159d42bf90ae, type: 2}
-    value: {fileID: 926686198}
-  - key: {fileID: 6478646896233221588, guid: 3b63488dfef28e549bf7159d42bf90ae, type: 2}
-    value: {fileID: 1753515217}
-  - key: {fileID: -5015343033742282688, guid: 3b63488dfef28e549bf7159d42bf90ae, type: 2}
-    value: {fileID: 1600856782}
-  - key: {fileID: 7391325761297764819, guid: 3b63488dfef28e549bf7159d42bf90ae, type: 2}
-    value: {fileID: 1226645808}
-  - key: {fileID: 3775208601345687819, guid: 3b63488dfef28e549bf7159d42bf90ae, type: 2}
-    value: {fileID: 1154328920}
-  - key: {fileID: 353841331399113814, guid: 3b63488dfef28e549bf7159d42bf90ae, type: 2}
-    value: {fileID: 1154328923}
-  - key: {fileID: 1069466705573939932, guid: 3b63488dfef28e549bf7159d42bf90ae, type: 2}
-    value: {fileID: 79319616}
-  - key: {fileID: 5312360025145405094, guid: 3b63488dfef28e549bf7159d42bf90ae, type: 2}
-    value: {fileID: 1871269596}
-  m_ExposedReferences:
-    m_References: []
---- !u!114 &1226645807
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1226645804}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 180ecf9b41d478f468eb3e9083753217, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Unity.Cinemachine::Unity.Cinemachine.CinemachineImpulseSource
-  ImpulseDefinition:
-    ImpulseChannel: 1
-    ImpulseShape: 3
-    CustomImpulseShape:
-      serializedVersion: 2
-      m_Curve: []
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    ImpulseDuration: 0.2
-    ImpulseType: 0
-    DissipationRate: 0.25
-    RawSignal: {fileID: 0}
-    AmplitudeGain: 1
-    FrequencyGain: 1
-    RepeatMode: 0
-    Randomize: 1
-    TimeEnvelope:
-      AttackShape:
-        serializedVersion: 2
-        m_Curve: []
-        m_PreInfinity: 2
-        m_PostInfinity: 2
-        m_RotationOrder: 4
-      DecayShape:
-        serializedVersion: 2
-        m_Curve: []
-        m_PreInfinity: 2
-        m_PostInfinity: 2
-        m_RotationOrder: 4
-      AttackTime: 0
-      SustainTime: 0.2
-      DecayTime: 0.7
-      ScaleWithImpact: 1
-      HoldForever: 0
-    ImpactRadius: 100
-    DirectionMode: 0
-    DissipationMode: 2
-    DissipationDistance: 100
-    PropagationSpeed: 343
-  DefaultVelocity: {x: 0.3, y: -0.2, z: 0.5}
---- !u!114 &1226645808
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1226645804}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e52de21a22b6dd44c9cc19f810c65059, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Unity.Timeline::UnityEngine.Timeline.SignalReceiver
-  m_Events:
-    m_Signals:
-    - {fileID: 11400000, guid: 90cb4f211f870d843ba0852c6a1a8099, type: 2}
-    m_Events:
-    - m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 1226645807}
-          m_TargetAssemblyTypeName: Unity.Cinemachine.CinemachineImpulseSource, Unity.Cinemachine
-          m_MethodName: GenerateImpulse
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
 --- !u!114 &1184366799
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12593,6 +12499,165 @@ MonoBehaviour:
     - {x: 0.10682622, y: 0.10682561, z: -0.98852235}
     - {x: 0.14592834, y: -0.039101776, z: -0.9885221}
     - {x: 0.14592797, y: 0.03910046, z: -0.9885222}
+--- !u!1 &1226645804
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1226645805}
+  - component: {fileID: 1226645806}
+  - component: {fileID: 1226645807}
+  - component: {fileID: 1226645808}
+  m_Layer: 0
+  m_Name: EndCutscene
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1226645805
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1226645804}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1.79858, y: 1.21359, z: 6.5}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 189642177}
+  - {fileID: 461671946}
+  - {fileID: 865811417}
+  - {fileID: 2100149983}
+  - {fileID: 79319615}
+  - {fileID: 1871269595}
+  - {fileID: 1154328921}
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!320 &1226645806
+PlayableDirector:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1226645804}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_PlayableAsset: {fileID: 11400000, guid: 3b63488dfef28e549bf7159d42bf90ae, type: 2}
+  m_InitialState: 0
+  m_WrapMode: 2
+  m_DirectorUpdateMode: 1
+  m_InitialTime: 0
+  m_SceneBindings:
+  - key: {fileID: -4878263928308477924, guid: 3b63488dfef28e549bf7159d42bf90ae, type: 2}
+    value: {fileID: 189642174}
+  - key: {fileID: 6222753423531121393, guid: 3b63488dfef28e549bf7159d42bf90ae, type: 2}
+    value: {fileID: 926686198}
+  - key: {fileID: 6478646896233221588, guid: 3b63488dfef28e549bf7159d42bf90ae, type: 2}
+    value: {fileID: 1753515217}
+  - key: {fileID: -5015343033742282688, guid: 3b63488dfef28e549bf7159d42bf90ae, type: 2}
+    value: {fileID: 1600856782}
+  - key: {fileID: 7391325761297764819, guid: 3b63488dfef28e549bf7159d42bf90ae, type: 2}
+    value: {fileID: 1226645808}
+  - key: {fileID: 3775208601345687819, guid: 3b63488dfef28e549bf7159d42bf90ae, type: 2}
+    value: {fileID: 1154328920}
+  - key: {fileID: 353841331399113814, guid: 3b63488dfef28e549bf7159d42bf90ae, type: 2}
+    value: {fileID: 1154328923}
+  - key: {fileID: 1069466705573939932, guid: 3b63488dfef28e549bf7159d42bf90ae, type: 2}
+    value: {fileID: 79319616}
+  - key: {fileID: 5312360025145405094, guid: 3b63488dfef28e549bf7159d42bf90ae, type: 2}
+    value: {fileID: 1871269596}
+  m_ExposedReferences:
+    m_References: []
+--- !u!114 &1226645807
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1226645804}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 180ecf9b41d478f468eb3e9083753217, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.Cinemachine::Unity.Cinemachine.CinemachineImpulseSource
+  ImpulseDefinition:
+    ImpulseChannel: 1
+    ImpulseShape: 3
+    CustomImpulseShape:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    ImpulseDuration: 0.2
+    ImpulseType: 0
+    DissipationRate: 0.25
+    RawSignal: {fileID: 0}
+    AmplitudeGain: 1
+    FrequencyGain: 1
+    RepeatMode: 0
+    Randomize: 1
+    TimeEnvelope:
+      AttackShape:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+      DecayShape:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+      AttackTime: 0
+      SustainTime: 0.2
+      DecayTime: 0.7
+      ScaleWithImpact: 1
+      HoldForever: 0
+    ImpactRadius: 100
+    DirectionMode: 0
+    DissipationMode: 2
+    DissipationDistance: 100
+    PropagationSpeed: 343
+  DefaultVelocity: {x: 0.3, y: -0.2, z: 0.5}
+--- !u!114 &1226645808
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1226645804}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e52de21a22b6dd44c9cc19f810c65059, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.Timeline::UnityEngine.Timeline.SignalReceiver
+  m_Events:
+    m_Signals:
+    - {fileID: 11400000, guid: 90cb4f211f870d843ba0852c6a1a8099, type: 2}
+    m_Events:
+    - m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1226645807}
+          m_TargetAssemblyTypeName: Unity.Cinemachine.CinemachineImpulseSource, Unity.Cinemachine
+          m_MethodName: GenerateImpulse
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1 &1227488099
 GameObject:
   m_ObjectHideFlags: 0
@@ -17659,42 +17724,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4862c1125ce9d984cb9dc31e72bbd771, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Interactable
---- !u!1 &1753515217 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1121192042590650, guid: e1b08032bec16ba4eb1ae23cbd572664, type: 3}
-  m_PrefabInstance: {fileID: 865811416}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1753515220
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1753515217}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: FMODUnity::FMODUnity.StudioEventEmitter
-  CollisionTag: 
-  EventReference:
-    Guid:
-      Data1: -157361050
-      Data2: 1102627213
-      Data3: -1825179756
-      Data4: -1316992624
-    Path: event:/Explosion
-  Event: 
-  EventPlayTrigger: 11
-  EventStopTrigger: 0
-  AllowFadeout: 1
-  TriggerOnce: 0
-  Preload: 0
-  NonRigidbodyVelocity: 0
-  Params: []
-  OverrideAttenuation: 0
-  OverrideMinDistance: 1
-  OverrideMaxDistance: 20
 --- !u!114 &1736036674
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -17736,6 +17765,42 @@ MonoBehaviour:
   precomputeOutline: 0
   bakeKeys: []
   bakeValues: []
+--- !u!1 &1753515217 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1121192042590650, guid: e1b08032bec16ba4eb1ae23cbd572664, type: 3}
+  m_PrefabInstance: {fileID: 865811416}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1753515220
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1753515217}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: FMODUnity::FMODUnity.StudioEventEmitter
+  CollisionTag: 
+  EventReference:
+    Guid:
+      Data1: -157361050
+      Data2: 1102627213
+      Data3: -1825179756
+      Data4: -1316992624
+    Path: event:/Explosion
+  Event: 
+  EventPlayTrigger: 11
+  EventStopTrigger: 0
+  AllowFadeout: 1
+  TriggerOnce: 0
+  Preload: 0
+  NonRigidbodyVelocity: 0
+  Params: []
+  OverrideAttenuation: 0
+  OverrideMinDistance: 1
+  OverrideMaxDistance: 20
 --- !u!1 &1762304760 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 4890590842536414472, guid: 0728bdcb0358d774db2d861611635fa2, type: 3}
@@ -19788,11 +19853,6 @@ MonoBehaviour:
   OverrideAttenuation: 0
   OverrideMinDistance: 1
   OverrideMaxDistance: 20
---- !u!1 &1906974062 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7119967220653055305, guid: 534f17b2e06bf1e43a7e59facd61853a, type: 3}
-  m_PrefabInstance: {fileID: 7542317377469547560}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1917419099
 GameObject:
   m_ObjectHideFlags: 0
@@ -22535,7 +22595,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 1000
-  field of view: 60
+  field of view: 60.000004
   orthographic: 0
   orthographic size: 5
   m_Depth: -1
@@ -22562,7 +22622,7 @@ Transform:
   m_GameObject: {fileID: 2102256285}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 3, z: -7}
+  m_LocalPosition: {x: 0, y: 1.5, z: 1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
