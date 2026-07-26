@@ -30126,6 +30126,14 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5203728149199241232, guid: ccbdf309b49202f4f8f0090ee0e80c70, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1122521807}
+    - target: {fileID: 5203728149199241232, guid: ccbdf309b49202f4f8f0090ee0e80c70, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: QuitButton
+      objectReference: {fileID: 0}
     - target: {fileID: 5889798891013050366, guid: ccbdf309b49202f4f8f0090ee0e80c70, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -30226,6 +30234,14 @@ PrefabInstance:
       propertyPath: slider
       value: 
       objectReference: {fileID: 1440152985}
+    - target: {fileID: 7160711055082125667, guid: ccbdf309b49202f4f8f0090ee0e80c70, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1122521807}
+    - target: {fileID: 7160711055082125667, guid: ccbdf309b49202f4f8f0090ee0e80c70, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: ResumeButton
+      objectReference: {fileID: 0}
     - target: {fileID: 7551666250662462481, guid: ccbdf309b49202f4f8f0090ee0e80c70, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
