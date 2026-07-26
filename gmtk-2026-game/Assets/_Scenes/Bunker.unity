@@ -3274,7 +3274,7 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 3981256159172761418, guid: 67f1833459133ed44b7b4bf39c68e8cf, type: 3}
   m_PrefabInstance: {fileID: 5670267144387979567}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 5670267144387979568}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b6a9e26d1b4bbc646b0cffa989c1463a, type: 3}
@@ -21274,6 +21274,10 @@ PrefabInstance:
       propertyPath: playerInput
       value: 
       objectReference: {fileID: 2265253249554138869}
+    - target: {fileID: 3981256159172761418, guid: 67f1833459133ed44b7b4bf39c68e8cf, type: 3}
+      propertyPath: dialogueSound
+      value: 
+      objectReference: {fileID: 5670267144387979569}
     - target: {fileID: 4844042336903271074, guid: 67f1833459133ed44b7b4bf39c68e8cf, type: 3}
       propertyPath: m_Color.a
       value: 1
@@ -21413,8 +21417,47 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 8728441727705307434, guid: 67f1833459133ed44b7b4bf39c68e8cf, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 5670267144387979569}
   m_SourcePrefab: {fileID: 100100000, guid: 67f1833459133ed44b7b4bf39c68e8cf, type: 3}
+--- !u!1 &5670267144387979568 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8728441727705307434, guid: 67f1833459133ed44b7b4bf39c68e8cf, type: 3}
+  m_PrefabInstance: {fileID: 5670267144387979567}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &5670267144387979569
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5670267144387979568}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: FMODUnity::FMODUnity.StudioEventEmitter
+  CollisionTag: 
+  EventReference:
+    Guid:
+      Data1: 1607427057
+      Data2: 1248024729
+      Data3: 1708112564
+      Data4: 1260762270
+    Path: event:/Dialogue
+  Event: 
+  EventPlayTrigger: 0
+  EventStopTrigger: 0
+  AllowFadeout: 1
+  TriggerOnce: 0
+  Preload: 0
+  NonRigidbodyVelocity: 0
+  Params: []
+  OverrideAttenuation: 0
+  OverrideMinDistance: 1
+  OverrideMaxDistance: 20
 --- !u!33 &5704841853773839491
 MeshFilter:
   m_ObjectHideFlags: 0
