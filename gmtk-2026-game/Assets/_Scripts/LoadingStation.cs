@@ -6,6 +6,9 @@ public class LoadingStation : MonoBehaviour
 {
 
     [SerializeField] private Button loadButton;
+    [SerializeField] private StaticCameraView staticView;
+    [Tooltip("Interactables (levers, buttons, dials) that this machine owns but which live OUTSIDE the StaticCameraView's managed list. Toggled alongside the view.")]
+    [SerializeField] private MonoBehaviour[] additionalInteractables;
 
     [SerializeField] private TextMeshProUGUI powderText;
     [SerializeField] private TextMeshProUGUI shellText;
@@ -38,9 +41,17 @@ public class LoadingStation : MonoBehaviour
     private float currentFillSpeed;
     private bool wasPressed;
     private bool overloaded;
+    private bool gameActive;
+    private bool powered = true;
+    private bool IsInteractable => gameActive && powered;
 
     public float CurrentPowder => currentPowderLoaded;
     public bool IsLocked => locked;
+
+    public bool IsReady => locked
+        && !overloaded
+        && loadedShell != GameManager.ShellType.None
+        && (requiredShell == GameManager.ShellType.None || loadedShell == requiredShell);
 
     public void SelectShell(int shell)
     {
@@ -53,11 +64,12 @@ public class LoadingStation : MonoBehaviour
     {
         UpdateProgressText();
         UpdateShellText();
+        SetInteractable(false);
     }
 
     private void Update()
     {
-        if (locked || loadButton == null) return;
+        if (!IsInteractable || locked || loadButton == null) return;
 
         bool pressed = loadButton.IsPressed();
         float previous = currentPowderLoaded;
@@ -125,6 +137,57 @@ public class LoadingStation : MonoBehaviour
             return;
         }
         powderText.text = $"POWDER LOADING\n\n[{GenerateBar(currentPowderLoaded)}]\n\n{(currentPowderLoaded == 0 ? "HOLD TO LOAD" : "DO NOT OVERFILL\n\nPULL TO LOCK")}";
+    }
+
+    public void SetRequiredShell(GameManager.ShellType shell)
+    {
+        requiredShell = shell;
+        UpdateShellText();
+        SetInteractable(true);
+    }
+
+    public void SetInteractable(bool interactable)
+    {
+        gameActive = interactable;
+        ApplyInteractable();
+    }
+
+    public void SetPowered(bool value)
+    {
+        powered = value;
+        ApplyInteractable();
+    }
+
+    private void ApplyInteractable()
+    {
+        if (staticView != null)
+        {
+            if (IsInteractable) staticView.ReactivateManagedObjects();
+            else staticView.DeactivateManagedObjects();
+        }
+
+        if (additionalInteractables != null)
+        {
+            foreach (MonoBehaviour mb in additionalInteractables)
+            {
+                if (mb is IInteractable interactable) interactable.SetInteractionEnabled(IsInteractable);
+            }
+        }
+    }
+
+    public void Reset()
+    {
+        locked = false;
+        loadedShell = GameManager.ShellType.None;
+        currentPowderLoaded = 0f;
+        currentFillSpeed = 0f;
+        overloaded = false;
+        wasPressed = false;
+        requiredShell = GameManager.ShellType.None;
+        onPowderChanged.Invoke(currentPowderLoaded);
+        UpdateProgressText();
+        UpdateShellText();
+        SetInteractable(false);
     }
 
     private GameManager.ShellType requiredShell = GameManager.ShellType.None;

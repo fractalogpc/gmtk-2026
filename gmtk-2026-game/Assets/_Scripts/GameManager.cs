@@ -19,12 +19,33 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    private void OnEnable()
+    {
+        if (decoderController != null) decoderController.SignalMatched += HandleSignalDecoded;
+    }
+
+    private void OnDisable()
+    {
+        if (decoderController != null) decoderController.SignalMatched -= HandleSignalDecoded;
+    }
+
+    private void HandleSignalDecoded()
+    {
+        LogState("Decoder matched → revealing coordinates");
+        targetingConsole.RevealCoordinates();
+    }
+
     [Header("References")]
     [SerializeField] private TargetingConsole targetingConsole;
+    [SerializeField] private DecoderController decoderController;
+    [SerializeField] private LoadingStation loadingStation;
+    [SerializeField] private GeneratorController generatorController;
+    [SerializeField] private EventManager eventManager;
+
     [SerializeField] private NixieClock countdown;
     [SerializeField] private FireLever fireLever;
     [SerializeField] private SuccessLight successLight;
-    [SerializeField] private TargetRequirements currentTarget;
+    private TargetRequirements currentTarget;
     [SerializeField] private UnityEvent onPostImpact;
     [SerializeField] private UnityEvent onImpact;
     [SerializeField] private UnityEvent onTargetHit;
@@ -45,31 +66,131 @@ public class GameManager : MonoBehaviour
 
     private Coroutine gameCoroutine;
 
+    private void LogState(string state)
+    {
+        Debug.Log($"[GameManager] Level {currentLevel} → {state}", this);
+    }
+
     private IEnumerator GameCoroutine()
     {
+        LogState("BOOT: resetting fire lever");
         fireLever.ResetFireState(0f);
 
         while (true)
         {
             if (currentLevel >= levels.Length)
+            {
+                LogState("ALL LEVELS COMPLETE");
                 yield break;
+            }
             Level levelData = levels[currentLevel];
-            
-            onNewTarget?.Invoke();
-            float elev = levelData.elevation();
-            currentTarget = new TargetRequirements(randomAzimuthMin, randomAzimuthMax, elev - elevationVariation, elev + elevationVariation, levelData.tolerance);
-            targetingConsole.SetTargetValues(currentTarget.azimuth, currentTarget.elevation);
-            while (!fireLever.IsFired)
+            LogState($"START level (shell={levelData.requiredShell}, obscured={levelData.obscureCoordinates}, timeLimit={levelData.timeLimit})");
+
+            // Roll and stash the target for this round so the fire check and impact-time
+            // calculations later on can reference the exact same values the player was given.
+            currentTarget = new TargetRequirements(
+                Random.Range(randomAzimuthMin, randomAzimuthMax),
+                levelData.elevation(),
+                levelData.tolerance);
+            LogState($"Target: az={currentTarget.azimuth:F2} el={currentTarget.elevation:F2} tol={currentTarget.tolerance:F2}");
+
+            // Set new coordinates (encrypted until decoded if the level obscures them)
+            targetingConsole.SetTargetValues(
+                currentTarget.azimuth,
+                currentTarget.elevation,
+                levelData.obscureCoordinates);
+
+            LogState("WAITING for player to receive coordinates");
+            while (!targetingConsole.HasReceivedCoordinates)
             {
                 yield return null;
             }
-            // Lever has been fired
+            LogState("Coordinates received");
+
+            // Trigger countdown
+            bool hasTimer = levelData.timeLimit > 0f;
+            if (hasTimer)
+            {
+                LogState($"Starting countdown ({levelData.timeLimit}s)");
+                countdown.StartTimer(levelData.timeLimit);
+            }
+            else
+            {
+                LogState("No timer this level");
+            }
+
+            // Only activate + wait on the loading station when a shell is required.
+            bool requiresLoading = levelData.requiredShell != ShellType.None;
+            if (requiresLoading)
+            {
+                LogState($"Activating loading station (shell={levelData.requiredShell})");
+                loadingStation.SetRequiredShell(levelData.requiredShell);
+            }
+            else
+            {
+                LogState("Skipping loading step (requiredShell=None)");
+            }
+
+            // Check for obscured coordinates
+            if (levelData.obscureCoordinates)
+            {
+                LogState("Activating decoder (obscured level)");
+                decoderController.RandomizeTarget();
+            }
+
+            if (requiresLoading)
+            {
+                LogState("WAITING for loading station IsReady (or timeout)");
+                while (!loadingStation.IsReady && (!hasTimer || countdown.Timer > 0f))
+                {
+                    yield return null;
+                }
+
+                if (hasTimer && countdown.Timer <= 0f && !loadingStation.IsReady)
+                {
+                    LogState("FAILURE: loading timed out");
+                }
+                else
+                {
+                    LogState("Loading complete");
+                }
+            }
+
+            // Loaded, unlock fire lever
+            LogState("Unlocking fire lever");
+            fireLever.UnlockFireLever();
+
+            LogState("WAITING for fire lever pulled (or timeout)");
+            while (!fireLever.IsFired && (!hasTimer || countdown.Timer > 0f))
+            {
+                yield return null;
+            }
+
+            if (hasTimer && countdown.Timer <= 0f && !fireLever.IsFired)
+            {
+                LogState("FAILURE: fire timed out");
+            }
+            else
+            {
+                LogState("Fire lever pulled");
+            }
+
+            // At the point the shot has been fired
+
+            // Reset countdown clock
+            countdown.StopTimer();
+
             bool isSuccess = Mathf.Abs(targetingConsole.GunAzimuth - currentTarget.azimuth) <= currentTarget.tolerance &&
                             Mathf.Abs(targetingConsole.GunElevation - currentTarget.elevation) <= currentTarget.tolerance;
+            LogState($"Aim check → success={isSuccess} (gun az={targetingConsole.GunAzimuth:F2} el={targetingConsole.GunElevation:F2})");
 
-            targetingConsole.SetLocked(true);
-            yield return new WaitForSeconds(3f); // Wait for firing animations
-            countdown.StartTimer(timeToImpact);
+            LogState("Waiting 3s for firing animation");
+            yield return new WaitForSeconds(3f);
+            float impactTime = levelData.timeToImpact(levelData.range, currentTarget.elevation);
+            LogState($"Starting impact countdown ({impactTime:F2}s)");
+            countdown.StartTimer(impactTime);
+
+            // If success, do success animation
             while (countdown.Timer > 0f)
             {
                 if (countdown.Timer < 1f)
@@ -83,24 +204,122 @@ public class GameManager : MonoBehaviour
                 yield return null;
             }
 
-            // Impact
+            LogState("IMPACT");
             onImpact?.Invoke();
             if (isSuccess)
             {
                 onTargetHit?.Invoke();
             }
-            EventManager.Instance.TriggerFireEvent(1);
+            successLight.SetSuccess(isSuccess);
+
+            LogState($"Waiting {impactViewTime}s (impactViewTime)");
             yield return new WaitForSeconds(impactViewTime);
             onPostImpact?.Invoke();
-            // Reset the lever
-            successLight.SetSuccess(isSuccess);
+
+
             targetingConsole.DisplayMessage(isSuccess ? "SUCCESS" : "FAILURE");
+            LogState($"Displaying result, waiting {resultTime}s");
             yield return new WaitForSeconds(resultTime);
+
+            // Reset everything
+            LogState("RESET: cycling all stations");
+            targetingConsole.Reset();
+            loadingStation.Reset();
+            decoderController.Reset();
+            fireLever.ResetFireState();
             successLight.Reset();
-            fireLever.ResetFireState(3f);
-            targetingConsole.SetLocked(false);
+
+            // Sound delay
+            StartCoroutine(TriggerEvents(levelData, Mathf.Max(levelData.soundDelay(currentTarget.elevation) - impactViewTime - resultTime, 0f)));
+            // yield return new WaitForSeconds(Mathf.Max(levelData.soundDelay(currentTarget.elevation) - impactViewTime - resultTime, 0f));
+
             currentLevel++;
+
+            onNewTarget?.Invoke();
+
+            // onNewTarget?.Invoke();
+            // float elev = levelData.elevation();
+            // currentTarget = new TargetRequirements(randomAzimuthMin, randomAzimuthMax, elev - elevationVariation, elev + elevationVariation, levelData.tolerance);
+            // targetingConsole.SetTargetValues(currentTarget.azimuth, currentTarget.elevation);
+            // while (!fireLever.IsFired)
+            // {
+            //     yield return null;
+            // }
+            // // Lever has been fired
+            // bool isSuccess = Mathf.Abs(targetingConsole.GunAzimuth - currentTarget.azimuth) <= currentTarget.tolerance &&
+            //                 Mathf.Abs(targetingConsole.GunElevation - currentTarget.elevation) <= currentTarget.tolerance;
+
+            // targetingConsole.SetLocked(true);
+            // yield return new WaitForSeconds(3f); // Wait for firing animations
+            // countdown.StartTimer(timeToImpact);
+            // while (countdown.Timer > 0f)
+            // {
+            //     if (countdown.Timer < 1f)
+            //     {
+            //         if (!shellAnim.isPlaying && isSuccess)
+            //         {
+            //             onShellAnimation?.Invoke();
+            //             shellAnim.Play();
+            //         }
+            //     }
+            //     yield return null;
+            // }
+
+            // // Impact
+            // onImpact?.Invoke();
+            // if (isSuccess)
+            // {
+            //     onTargetHit?.Invoke();
+            // }
+            // EventManager.Instance.TriggerFireEvent(1);
+            // yield return new WaitForSeconds(impactViewTime);
+            // onPostImpact?.Invoke();
+            // // Reset the lever
+            // successLight.SetSuccess(isSuccess);
+            // targetingConsole.DisplayMessage(isSuccess ? "SUCCESS" : "FAILURE");
+            // yield return new WaitForSeconds(resultTime);
+            // successLight.Reset();
+            // fireLever.ResetFireState(3f);
+            // targetingConsole.SetLocked(false);
+            // currentLevel++;
         }
+    }
+
+    private IEnumerator TriggerEvents(Level levelData, float delay)
+    {
+        if (delay > 0f)
+        {
+            yield return new WaitForSeconds(delay);
+        }
+
+        if (levelData.fireIntensity > 0)
+        {
+            eventManager.TriggerFireEvent(levelData.fireIntensity);
+        }
+        if (levelData.doBlackout)
+        {
+            eventManager.TriggerPowerOutageEvent();
+            generatorController.KillGenerator();
+        }
+    }
+
+    public void OnPowerCut()
+    {
+        targetingConsole.SetPowered(false);
+        loadingStation.SetPowered(false);
+        decoderController.SetPowered(false);
+    }
+
+    public void OnPowerRestored()
+    {
+        targetingConsole.SetPowered(true);
+        loadingStation.SetPowered(true);
+        decoderController.SetPowered(true);
+    }
+
+    public void OnSignalDecoded()
+    {
+        targetingConsole.RevealCoordinates();
     }
 
     private void Start()
@@ -137,7 +356,7 @@ public class TargetRequirements
         this.elevation = Mathf.Clamp(elevation, 0f, 90f);
         this.tolerance = tolerance;
     }
-    
+
     /// <summary>
     /// Generates target values within the specified ranges for azimuth and elevation, and a given tolerance.
     /// </summary>
@@ -154,23 +373,44 @@ public class TargetRequirements
 public class Level
 {
     public const float MAX_RANGE = 11f;
-    public GameManager.ShellType requiredShell;
+    public GameManager.ShellType requiredShell; // Set None to not require shell loading
     public bool obscureCoordinates;
     public float timeLimit;
     public float tolerance;
-    public float range;
+    public float range; // Distance in meters
+    public int fireIntensity; // 0 is no fire, don't go over 4
+    public bool doBlackout;
 
     public Level()
     {
-        requiredShell = GameManager.ShellType.AP;
+        requiredShell = GameManager.ShellType.None;
         obscureCoordinates = false;
         timeLimit = 0f;
         tolerance = 1f;
         range = 10f;
+        fireIntensity = 0;
+        doBlackout = false;
     }
 
     public float elevation()
     {
-        return 90f - Mathf.Asin(range / MAX_RANGE) * Mathf.Rad2Deg;
+        float exitVelocity = 200f; // m/s
+        float gravity = 9.81f; // m/s^2
+
+        float angle = Mathf.Asin(gravity * range / (exitVelocity * exitVelocity)) * Mathf.Rad2Deg / 2f;
+
+        return 90f - angle;
+    }
+
+    public float soundDelay(float range)
+    {
+        return range / 343f;
+    }
+
+    public float timeToImpact(float range, float elevation)
+    {
+        float exitVelocity = 200f; // m/s
+        float time = 2f * exitVelocity * Mathf.Sin(elevation * Mathf.Deg2Rad) / 9.81f;
+        return time / 5;
     }
 }

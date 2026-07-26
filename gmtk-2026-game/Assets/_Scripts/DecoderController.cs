@@ -21,9 +21,14 @@ public class DecoderController : MonoBehaviour
 
     [Header("Signal / Wave")]
     [SerializeField] private WaveVisual waveVisual;
+    [SerializeField] private StaticCameraView staticView;
     [SerializeField] private UnityEvent onSignalMatched;
     [SerializeField] private UnityEvent onSignalLost;
     [SerializeField] private UnityEvent onTargetRandomized;
+
+    private bool gameActive;
+    private bool powered = true;
+    private bool IsInteractable => gameActive && powered;
 
     private Vector3 verticalBarInitialWorldPos;
     private Vector3 horizontalBarInitialWorldPos;
@@ -32,6 +37,9 @@ public class DecoderController : MonoBehaviour
     public float CurrentAmplitude => waveVisual != null ? waveVisual.CurrentAmplitude : 0f;
     public float CurrentDistortion => waveVisual != null ? waveVisual.CurrentDistortion : 0f;
     public float CurrentPhase => waveVisual != null ? waveVisual.CurrentPhase : 0f;
+
+    // C# event so other scripts (e.g. GameManager) can subscribe without needing an inspector hookup.
+    public event System.Action SignalMatched;
 
     private void Awake()
     {
@@ -70,18 +78,54 @@ public class DecoderController : MonoBehaviour
         waveVisual.TargetRandomized -= HandleTargetRandomized;
     }
 
-    private void HandleMatched() => onSignalMatched.Invoke();
+    private void HandleMatched()
+    {
+        onSignalMatched.Invoke();
+        SignalMatched?.Invoke();
+    }
     private void HandleUnmatched() => onSignalLost.Invoke();
     private void HandleTargetRandomized() => onTargetRandomized.Invoke();
 
     public void RandomizeTarget()
     {
         if (waveVisual != null) waveVisual.RandomizeTarget();
+        SetInteractable(true);
     }
 
     public void SetTarget(float amplitude, float distortion, float phase)
     {
         if (waveVisual != null) waveVisual.SetTarget(amplitude, distortion, phase);
+        SetInteractable(true);
+    }
+
+    public void Reset()
+    {
+        if (waveVisual != null) waveVisual.ResetState();
+        SetInteractable(false);
+    }
+
+    public void SetInteractable(bool interactable)
+    {
+        gameActive = interactable;
+        ApplyInteractable();
+    }
+
+    public void SetPowered(bool value)
+    {
+        powered = value;
+        ApplyInteractable();
+    }
+
+    private void ApplyInteractable()
+    {
+        if (staticView == null) return;
+        if (IsInteractable) staticView.ReactivateManagedObjects();
+        else staticView.DeactivateManagedObjects();
+    }
+
+    private void Start()
+    {
+        SetInteractable(false);
     }
 
     private void Update()

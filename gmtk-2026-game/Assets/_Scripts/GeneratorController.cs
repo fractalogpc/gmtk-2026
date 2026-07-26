@@ -29,6 +29,9 @@ public class GeneratorController : MonoBehaviour
     [Tooltip("Speed passed to lever.SetAngle when the breaker snaps back up. -1 uses the lever's own setting.")]
     [SerializeField] private float breakerResetSpeed = -1f;
 
+    [Header("Interactability")]
+    [SerializeField] private StaticCameraView staticView;
+
     [Header("Events")]
     [SerializeField] private UnityEvent onGeneratorRestored;
     [SerializeField] private UnityEvent onGeneratorKilled;
@@ -54,7 +57,14 @@ public class GeneratorController : MonoBehaviour
 
     private void Start()
     {
-        KillGenerator();
+        SetInteractable(false);
+    }
+
+    public void SetInteractable(bool interactable)
+    {
+        if (staticView == null) return;
+        if (interactable) staticView.ReactivateManagedObjects();
+        else staticView.DeactivateManagedObjects();
     }
 
     public void KillGenerator()
@@ -68,6 +78,7 @@ public class GeneratorController : MonoBehaviour
 
         breakerState = BreakerState.GeneratorDead;
         ResetBreakerToUp();
+        SetInteractable(true);
 
         onGeneratorKilled.Invoke();
     }
@@ -128,6 +139,7 @@ public class GeneratorController : MonoBehaviour
                 if (v >= breakerUpThreshold)
                 {
                     breakerState = BreakerState.Powered;
+                    SetInteractable(false);
                     onPowerRestored.Invoke();
                 }
                 break;
