@@ -124,7 +124,7 @@ public class TargetingConsole : MonoBehaviour
     {
         if (hasActivated) return;
         hasActivated = true;
-        SetAll(indicatorLights, true);
+        ApplyIndicatorLightsState();
         ApplyAdditionalObjectsState();
     }
 
@@ -132,6 +132,11 @@ public class TargetingConsole : MonoBehaviour
     {
         bool shouldBeOn = hasActivated && powered && activeFireCount == 0;
         SetAll(additionalActivatedObjects, shouldBeOn);
+    }
+
+    private void ApplyIndicatorLightsState()
+    {
+        SetAll(indicatorLights, hasActivated && powered);
     }
 
     private static void SetAll(GameObject[] items, bool value)
@@ -179,6 +184,7 @@ public class TargetingConsole : MonoBehaviour
         powered = value;
         ApplyInteractable();
         ApplyAdditionalObjectsState();
+        ApplyIndicatorLightsState();
     }
 
     private void ApplyInteractable()
