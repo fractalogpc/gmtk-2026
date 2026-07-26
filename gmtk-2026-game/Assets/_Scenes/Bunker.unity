@@ -6569,6 +6569,7 @@ MonoBehaviour:
   shellAnim: {fileID: 386942559}
   dialogController: {fileID: 431839965}
   tutorialManager: {fileID: 1265142789}
+  finalDialog: {fileID: 11400000, guid: 5e1dd1c47cd9098429392782e4378048, type: 2}
   timeToImpact: 10
   randomAzimuthMin: -180
   randomAzimuthMax: 180

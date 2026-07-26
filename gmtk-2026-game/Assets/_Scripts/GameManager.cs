@@ -57,6 +57,8 @@ public class GameManager : MonoBehaviour
     [SerializeField] private DialogController dialogController;
     [SerializeField] private TutorialManager tutorialManager;
 
+    [SerializeField] private DialogObject finalDialog;
+
     [Header("Settings")]
     [SerializeField] private float timeToImpact = 10f;
     [SerializeField] private float randomAzimuthMin = -180f;
@@ -287,6 +289,10 @@ public class GameManager : MonoBehaviour
                 if (currentLevel == levels.Length - 1)
                 {
                     onFinalImpact?.Invoke();
+                    if (finalDialog != null)
+                    {
+                        dialogController.StartDialogue(finalDialog);
+                    }
                 }
                 if (tutorialManager != null) tutorialManager.TriggerLesson("success");
             }
