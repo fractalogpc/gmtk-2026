@@ -111,6 +111,7 @@ public class E_FireComponent : MonoBehaviour
             if (currentFireIntensity == 0)
             {
                 fireAmount = 0f;
+                fireSoundEmitter.Stop();
             }
             else if (currentFireIntensity == 1)
             {
