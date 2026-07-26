@@ -6083,7 +6083,7 @@ MonoBehaviour:
     timeLimit: 0
     tolerance: 10
     range: 3000
-    fireIntensity: 0
+    fireIntensity: 1
     doBlackout: 1
     startDialog: {fileID: 11400000, guid: a15a2a905b1423142b8d40314d063cbb, type: 2}
     showStartDialog: 1
@@ -21068,14 +21068,6 @@ PrefabInstance:
       propertyPath: onFire.m_PersistentCalls.m_Calls.Array.data[2].m_Target
       value: 
       objectReference: {fileID: 238040542}
-    - target: {fileID: 4851972680902226546, guid: 9bcfda04cb8b9c848aec614a86110382, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0.251
-      objectReference: {fileID: 0}
-    - target: {fileID: 4851972680902226546, guid: 9bcfda04cb8b9c848aec614a86110382, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0.775
-      objectReference: {fileID: 0}
     - target: {fileID: 4937538223127287431, guid: 9bcfda04cb8b9c848aec614a86110382, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0.23809004
@@ -21128,12 +21120,7 @@ PrefabInstance:
       propertyPath: m_Name
       value: Targeting Console
       objectReference: {fileID: 0}
-    - target: {fileID: 9070563560731443646, guid: 9bcfda04cb8b9c848aec614a86110382, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 1586072562682820834, guid: 9bcfda04cb8b9c848aec614a86110382, type: 3}
+    m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
