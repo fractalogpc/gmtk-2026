@@ -127,7 +127,7 @@
 	<object class="MixerBusPanner" id="{e5fcbcee-f0de-4d4c-b909-4ecb4e541679}" />
 	<object class="SingleSound" id="{377d701a-9e69-4219-b078-71a5cf1b8f36}">
 		<property name="length">
-			<value>65.549999999999997</value>
+			<value>63.960000000000001</value>
 		</property>
 		<relationship name="audioFile">
 			<destination>{db9120e7-889d-4aab-9d63-f6dbfa55aa35}</destination>
@@ -135,7 +135,7 @@
 	</object>
 	<object class="SingleSound" id="{9b7843dd-e387-4ee8-874b-cc6e73a48a4c}">
 		<property name="start">
-			<value>65.549999999999997</value>
+			<value>63.960000000000001</value>
 		</property>
 		<property name="length">
 			<value>2.4000000000000057</value>
@@ -163,7 +163,7 @@
 	</object>
 	<object class="SingleSound" id="{fee3e994-94ab-49b4-8ae6-3082b24402a2}">
 		<property name="length">
-			<value>65.549999999999997</value>
+			<value>63.960000000000001</value>
 		</property>
 		<relationship name="audioFile">
 			<destination>{3e918d54-7a88-42e2-88f5-59f8666093d4}</destination>
@@ -171,7 +171,7 @@
 	</object>
 	<object class="EventMixerGroup" id="{99ad8276-521d-4bfe-b4fe-3e55af3c9f3a}">
 		<property name="volume">
-			<value>-9</value>
+			<value>-17</value>
 		</property>
 		<property name="name">
 			<value>Audio 2</value>
@@ -233,7 +233,7 @@
 			<value>26</value>
 		</property>
 		<property name="length">
-			<value>39.549999999999997</value>
+			<value>37.960000000000001</value>
 		</property>
 		<relationship name="timeline">
 			<destination>{f2d20c30-24e3-4575-b483-5baadb04b302}</destination>
@@ -244,7 +244,7 @@
 	</object>
 	<object class="NamedMarker" id="{3efe7623-0509-4076-81bd-4727d27b3258}">
 		<property name="position">
-			<value>65.549999999999997</value>
+			<value>63.960000000000001</value>
 		</property>
 		<property name="name">
 			<value>End</value>
@@ -261,7 +261,7 @@
 			<value>0</value>
 		</property>
 		<property name="length">
-			<value>65.549999999999997</value>
+			<value>63.960000000000001</value>
 		</property>
 		<relationship name="timeline">
 			<destination>{f2d20c30-24e3-4575-b483-5baadb04b302}</destination>
