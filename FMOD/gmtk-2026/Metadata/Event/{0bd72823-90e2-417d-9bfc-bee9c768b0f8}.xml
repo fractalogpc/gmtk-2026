@@ -106,14 +106,14 @@
 		<property name="timelockedOffset">
 			<value>1</value>
 		</property>
+		<property name="volume">
+			<value>8</value>
+		</property>
 		<relationship name="audioFile">
 			<destination>{4fa7e55d-5ec4-4763-a4a6-c4163a8b380b}</destination>
 		</relationship>
 	</object>
 	<object class="EventMixerGroup" id="{7043bcf0-b882-46d0-b163-108d5acf457f}">
-		<property name="volume">
-			<value>6</value>
-		</property>
 		<property name="name">
 			<value>Audio 1</value>
 		</property>
@@ -444,7 +444,7 @@
 			<value>DAMaxDist</value>
 		</property>
 		<property name="value">
-			<value>20</value>
+			<value>50</value>
 		</property>
 		<property name="curve">
 			<value>{(0.000000,0.000000)(1.000000,10000.000000)}</value>

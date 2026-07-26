@@ -308,6 +308,7 @@ public class GameManager : MonoBehaviour
         targetingConsole.SetPowered(false);
         loadingStation.SetPowered(false);
         decoderController.SetPowered(false);
+        generatorController.SetPowered(false);
     }
 
     public void OnPowerRestored()
@@ -315,6 +316,7 @@ public class GameManager : MonoBehaviour
         targetingConsole.SetPowered(true);
         loadingStation.SetPowered(true);
         decoderController.SetPowered(true);
+        generatorController.SetPowered(true);
     }
 
     public void OnSignalDecoded()

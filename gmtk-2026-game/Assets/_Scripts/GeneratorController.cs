@@ -31,6 +31,12 @@ public class GeneratorController : MonoBehaviour
 
     [Header("Interactability")]
     [SerializeField] private StaticCameraView staticView;
+    [Tooltip("Lights that stay off until the generator is first killed (first KillGenerator call).")]
+    [SerializeField] private GameObject[] indicatorLights;
+    [Tooltip("Other GameObjects that stay disabled until the generator is first killed.")]
+    [SerializeField] private GameObject[] additionalActivatedObjects;
+    [Tooltip("Fires that disable the additional activated objects while burning. All must be out for the objects to come back.")]
+    [SerializeField] private E_FireComponent[] nearbyFires;
 
     [Header("Events")]
     [SerializeField] private UnityEvent onGeneratorRestored;
@@ -58,6 +64,75 @@ public class GeneratorController : MonoBehaviour
     private void Start()
     {
         SetInteractable(false);
+        SetAll(indicatorLights, false);
+        SetAll(additionalActivatedObjects, false);
+    }
+
+    private bool hasActivated;
+    private int activeFireCount;
+    private bool powered = true;
+
+    private void OnEnable()
+    {
+        if (nearbyFires == null) return;
+        foreach (E_FireComponent fire in nearbyFires)
+        {
+            if (fire == null) continue;
+            fire.OnFireStarted.AddListener(HandleFireStarted);
+            fire.OnFireExtinguished.AddListener(HandleFireExtinguished);
+        }
+    }
+
+    private void OnDisable()
+    {
+        if (nearbyFires == null) return;
+        foreach (E_FireComponent fire in nearbyFires)
+        {
+            if (fire == null) continue;
+            fire.OnFireStarted.RemoveListener(HandleFireStarted);
+            fire.OnFireExtinguished.RemoveListener(HandleFireExtinguished);
+        }
+    }
+
+    private void HandleFireStarted()
+    {
+        activeFireCount++;
+        ApplyAdditionalObjectsState();
+    }
+
+    private void HandleFireExtinguished()
+    {
+        activeFireCount = Mathf.Max(0, activeFireCount - 1);
+        ApplyAdditionalObjectsState();
+    }
+
+    private void TurnOnIndicatorLights()
+    {
+        if (hasActivated) return;
+        hasActivated = true;
+        SetAll(indicatorLights, true);
+        ApplyAdditionalObjectsState();
+    }
+
+    public void SetPowered(bool value)
+    {
+        powered = value;
+        ApplyAdditionalObjectsState();
+    }
+
+    private void ApplyAdditionalObjectsState()
+    {
+        bool shouldBeOn = hasActivated && powered && activeFireCount == 0;
+        SetAll(additionalActivatedObjects, shouldBeOn);
+    }
+
+    private static void SetAll(GameObject[] items, bool value)
+    {
+        if (items == null) return;
+        foreach (GameObject go in items)
+        {
+            if (go != null) go.SetActive(value);
+        }
     }
 
     public void SetInteractable(bool interactable)
@@ -79,6 +154,7 @@ public class GeneratorController : MonoBehaviour
         breakerState = BreakerState.GeneratorDead;
         ResetBreakerToUp();
         SetInteractable(true);
+        TurnOnIndicatorLights();
 
         onGeneratorKilled.Invoke();
     }
