@@ -38,6 +38,9 @@ public class DecoderController : MonoBehaviour
     public float CurrentDistortion => waveVisual != null ? waveVisual.CurrentDistortion : 0f;
     public float CurrentPhase => waveVisual != null ? waveVisual.CurrentPhase : 0f;
 
+    // C# event so other scripts (e.g. GameManager) can subscribe without needing an inspector hookup.
+    public event System.Action SignalMatched;
+
     private void Awake()
     {
         if (verticalBar != null) verticalBarInitialWorldPos = verticalBar.transform.position;
@@ -75,7 +78,11 @@ public class DecoderController : MonoBehaviour
         waveVisual.TargetRandomized -= HandleTargetRandomized;
     }
 
-    private void HandleMatched() => onSignalMatched.Invoke();
+    private void HandleMatched()
+    {
+        onSignalMatched.Invoke();
+        SignalMatched?.Invoke();
+    }
     private void HandleUnmatched() => onSignalLost.Invoke();
     private void HandleTargetRandomized() => onTargetRandomized.Invoke();
 

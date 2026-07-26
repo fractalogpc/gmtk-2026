@@ -63,6 +63,7 @@ public class TargetingConsole : MonoBehaviour
         pendingAzimuth = azimuth;
         pendingElevation = elevation;
         coordinatesEncrypted = encrypted;
+        HasReceivedCoordinates = false;
         UpdateTargetText();
         SetInteractable(true);
     }
@@ -77,6 +78,11 @@ public class TargetingConsole : MonoBehaviour
     private void UpdateTargetText()
     {
         if (targetText == null) return;
+        if (!HasReceivedCoordinates)
+        {
+            targetText.text = "FIRING ORDERS\n_______________\nAWAITING TRANSMISSION\nPRESS RECEIVE";
+            return;
+        }
         if (coordinatesEncrypted)
         {
             targetText.text = "FIRING ORDERS\n_______________\n<< ENCRYPTED >>\nDECODE SIGNAL";
@@ -198,6 +204,7 @@ public class TargetingConsole : MonoBehaviour
             && recieveCoordinatesButton != null && recieveCoordinatesButton.IsPressed())
         {
             HasReceivedCoordinates = true;
+            UpdateTargetText();
         }
 
         if (locked) return;
