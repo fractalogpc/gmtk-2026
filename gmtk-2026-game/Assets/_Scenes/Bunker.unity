@@ -7082,7 +7082,7 @@ MonoBehaviour:
     showImpactDialog: 0
   - requiredShell: 1
     obscureCoordinates: 1
-    timeLimit: 45
+    timeLimit: 50
     tolerance: 0.6
     range: 1000
     fireIntensity: 3
@@ -7095,7 +7095,7 @@ MonoBehaviour:
     showImpactDialog: 0
   - requiredShell: 2
     obscureCoordinates: 1
-    timeLimit: 30
+    timeLimit: 40
     tolerance: 0.5
     range: 25
     fireIntensity: 0
@@ -24315,6 +24315,26 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1975721805}
     m_Modifications:
+    - target: {fileID: 1298102497700451044, guid: 3f65c66b49d689e469d73c8237691f3c, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1.8295968
+      objectReference: {fileID: 0}
+    - target: {fileID: 1298102497700451044, guid: 3f65c66b49d689e469d73c8237691f3c, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1.1753826
+      objectReference: {fileID: 0}
+    - target: {fileID: 1298102497700451044, guid: 3f65c66b49d689e469d73c8237691f3c, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.0705
+      objectReference: {fileID: 0}
+    - target: {fileID: 1298102497700451044, guid: 3f65c66b49d689e469d73c8237691f3c, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.892
+      objectReference: {fileID: 0}
+    - target: {fileID: 1298102497700451044, guid: 3f65c66b49d689e469d73c8237691f3c, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.2791
+      objectReference: {fileID: 0}
     - target: {fileID: 2238923050542970905, guid: 3f65c66b49d689e469d73c8237691f3c, type: 3}
       propertyPath: m_Name
       value: Generator
