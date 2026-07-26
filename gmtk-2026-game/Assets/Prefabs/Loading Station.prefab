@@ -1158,6 +1158,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: '::'
   loadButton: {fileID: 3540912939640456194}
+  loadCommitLever: {fileID: 0}
   staticView: {fileID: 6612086274894469435}
   additionalInteractables:
   - {fileID: 5134525446259977996}
@@ -1609,6 +1610,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: f7b68d577ec578e4b93745704ff24a62, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1557738394956956146}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: f7b68d577ec578e4b93745704ff24a62, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 5957955474229199210}
   m_SourcePrefab: {fileID: 100100000, guid: f7b68d577ec578e4b93745704ff24a62, type: 3}
 --- !u!4 &1552856820633598703 stripped
 Transform:
@@ -1650,12 +1654,36 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 5957955474229199210}
+        m_TargetAssemblyTypeName: FMODUnity.StudioEventEmitter, FMODUnity
+        m_MethodName: Play
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   OnButtonReleased:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1557738394956956146}
         m_TargetAssemblyTypeName: FMODUnity.StudioEventEmitter, FMODUnity
         m_MethodName: Play
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 5957955474229199210}
+        m_TargetAssemblyTypeName: FMODUnity.StudioEventEmitter, FMODUnity
+        m_MethodName: Stop
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1737,6 +1765,37 @@ MonoBehaviour:
       Data3: -31969639
       Data4: -1811866389
     Path: event:/ButtonOff
+  Event: 
+  EventPlayTrigger: 0
+  EventStopTrigger: 0
+  AllowFadeout: 1
+  TriggerOnce: 0
+  Preload: 0
+  NonRigidbodyVelocity: 0
+  Params: []
+  OverrideAttenuation: 0
+  OverrideMinDistance: 1
+  OverrideMaxDistance: 20
+--- !u!114 &5957955474229199210
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2217754130143256661}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: FMODUnity::FMODUnity.StudioEventEmitter
+  CollisionTag: 
+  EventReference:
+    Guid:
+      Data1: -738540271
+      Data2: 1133542410
+      Data3: 22738074
+      Data4: 1892556155
+    Path: event:/FillPowder
   Event: 
   EventPlayTrigger: 0
   EventStopTrigger: 0
