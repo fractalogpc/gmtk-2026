@@ -52,6 +52,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private UnityEvent onTargetHit;
     [SerializeField] private UnityEvent onNewTarget;
     [SerializeField] private UnityEvent onShellAnimation;
+    [SerializeField] private UnityEvent onFinalImpact;
     [SerializeField] private Animation shellAnim;
     [SerializeField] private DialogController dialogController;
     [SerializeField] private TutorialManager tutorialManager;
@@ -263,9 +264,14 @@ public class GameManager : MonoBehaviour
 
             LogState("IMPACT");
             onImpact?.Invoke();
+            StartCoroutine(TriggerEvents(levelData, Mathf.Max(levelData.soundDelay(currentTarget.elevation) - impactViewTime - resultTime, 0f)));
             if (isSuccess)
             {
                 onTargetHit?.Invoke();
+                if (currentLevel == levels.Length - 1)
+                {
+                    onFinalImpact?.Invoke();
+                }
                 if (tutorialManager != null) tutorialManager.TriggerLesson("success");
             }
             else
@@ -295,7 +301,6 @@ public class GameManager : MonoBehaviour
             successLight.Reset();
 
             // Sound delay
-            StartCoroutine(TriggerEvents(levelData, Mathf.Max(levelData.soundDelay(currentTarget.elevation) - impactViewTime - resultTime, 0f)));
             // yield return new WaitForSeconds(Mathf.Max(levelData.soundDelay(currentTarget.elevation) - impactViewTime - resultTime, 0f));
 
             if (isSuccess) currentLevel++;
