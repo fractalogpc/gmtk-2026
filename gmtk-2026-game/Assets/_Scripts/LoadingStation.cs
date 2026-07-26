@@ -63,6 +63,15 @@ public class LoadingStation : MonoBehaviour
     {
         currentSelectedShell = (GameManager.ShellType)shell;
 
+        if (!locked)
+        {
+            currentPowderLoaded = 0f;
+            currentFillSpeed = 0f;
+            overloaded = false;
+            onPowderChanged?.Invoke(currentPowderLoaded);
+            UpdateProgressText();
+        }
+
         UpdateShellText();
     }
 
