@@ -85,7 +85,7 @@ public class GameManager : MonoBehaviour
         LogState("BOOT: resetting fire lever");
         fireLever.ResetFireState(0f);
 
-        yield return new WaitForSeconds(15f);
+        yield return new WaitForSeconds(14f);
 
         while (true)
         {
@@ -290,7 +290,6 @@ public class GameManager : MonoBehaviour
 
             LogState("IMPACT");
             onImpact?.Invoke();
-            StartCoroutine(TriggerEvents(levelData, Mathf.Max(levelData.soundDelay(currentTarget.elevation) - impactViewTime - resultTime, 0f)));
             if (isSuccess)
             {
                 onTargetHit?.Invoke();
@@ -314,6 +313,8 @@ public class GameManager : MonoBehaviour
                 dialogController.StartDialogue(levelData.impactDialog);
                 levelData.showImpactDialog = false;
             }
+
+            StartCoroutine(TriggerEvents(levelData, Mathf.Max(levelData.soundDelay(currentTarget.elevation) - impactViewTime - resultTime, 0f)));
             LogState($"Waiting {impactViewTime}s (impactViewTime)");
             yield return new WaitForSeconds(impactViewTime);
             onPostImpact?.Invoke();
