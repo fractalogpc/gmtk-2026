@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::DialogObject
   sprite: {fileID: 21300000, guid: 16307adf14f5f81409b8dac9eb0b259e, type: 3}
   dialogue:
-  - When you're ready, pull the lever to fire. Duck and cover!
+  - When you're ready, pull the lever on your left to fire. Duck and cover!
