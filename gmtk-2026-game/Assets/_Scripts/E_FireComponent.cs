@@ -72,7 +72,7 @@ public class E_FireComponent : MonoBehaviour
                 break;
         }
 
-        GameObject fire = Instantiate(firePrefabToUse, transform.position, Quaternion.identity);
+        GameObject fire = Instantiate(firePrefabToUse, transform.position + Vector3.up * 0.5f, Quaternion.identity);
 
         currentFireInstance = fire;
     }
