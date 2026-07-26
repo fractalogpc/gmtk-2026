@@ -35,8 +35,10 @@ public class GeneratorController : MonoBehaviour
     [SerializeField] private GameObject[] indicatorLights;
     [Tooltip("Other GameObjects that stay disabled until the generator is first killed.")]
     [SerializeField] private GameObject[] additionalActivatedObjects;
-    [Tooltip("Fires that disable the additional activated objects while burning. All must be out for the objects to come back.")]
+    [Tooltip("Auto-populated at Awake by scanning within Fire Detection Radius. Any manual entries are overwritten.")]
     [SerializeField] private E_FireComponent[] nearbyFires;
+    [Tooltip("Radius (world units) around this machine to scan for E_FireComponent instances at Awake. 0 disables the scan.")]
+    [SerializeField] private float fireDetectionRadius = 5f;
 
     [Header("Events")]
     [SerializeField] private UnityEvent onGeneratorRestored;
@@ -59,6 +61,22 @@ public class GeneratorController : MonoBehaviour
     {
         SetAllIndicators(onMaterial);
         litCount = indicators.Length;
+        AutoDetectNearbyFires();
+    }
+
+    private void AutoDetectNearbyFires()
+    {
+        if (fireDetectionRadius <= 0f) return;
+        E_FireComponent[] all = FindObjectsByType<E_FireComponent>(FindObjectsSortMode.None);
+        System.Collections.Generic.List<E_FireComponent> nearby = new();
+        Vector3 pos = transform.position;
+        foreach (E_FireComponent fire in all)
+        {
+            if (fire == null) continue;
+            if (Vector3.Distance(pos, fire.transform.position) <= fireDetectionRadius)
+                nearby.Add(fire);
+        }
+        nearbyFires = nearby.ToArray();
     }
 
     private void Start()
