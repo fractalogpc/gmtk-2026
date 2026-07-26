@@ -67,6 +67,27 @@ public class TargetingConsole : MonoBehaviour
         gunText.text = message;
     }
 
+    /// <summary>
+    /// Shows a persistent red failure message on the gun-orientation screen. Stays visible
+    /// until the player presses the receive-coordinates button (i.e. HasReceivedCoordinates
+    /// flips back true for the next round).
+    /// </summary>
+    public void ShowFailureMessage(string message)
+    {
+        hasFailureMessage = true;
+        if (gunText != null)
+            gunText.text = $"<color=#ff3232>{message}</color>";
+    }
+
+    private void ClearFailureMessage()
+    {
+        if (!hasFailureMessage) return;
+        hasFailureMessage = false;
+        UpdateGunText();
+    }
+
+    private bool hasFailureMessage;
+
     public void SetTargetValues(float azimuth, float elevation, float tolerance, bool encrypted = false)
     {
         pendingAzimuth = azimuth;
@@ -232,6 +253,7 @@ public class TargetingConsole : MonoBehaviour
 
     private void UpdateGunText()
     {
+        if (hasFailureMessage) return; // preserve the red failure message across normal updates
         gunText.text = $"GUN ORIENTATION\n———————————————\n{gunAzimuth:F2} AZIM\n{gunElevation:F2} ELEV";
     }
 
@@ -304,6 +326,7 @@ public class TargetingConsole : MonoBehaviour
             && recieveCoordinatesButton != null && recieveCoordinatesButton.IsPressed())
         {
             HasReceivedCoordinates = true;
+            ClearFailureMessage();
             UpdateTargetText();
         }
 

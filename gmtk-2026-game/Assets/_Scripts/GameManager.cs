@@ -210,7 +210,23 @@ public class GameManager : MonoBehaviour
                 countdown.StopTimer();
                 onImpact?.Invoke();
                 successLight.SetSuccess(false);
-                targetingConsole.DisplayMessage("TIME OUT\nRETRY");
+
+                // Pick a specific reason for the on-screen red message.
+                string reason;
+                if (requiresLoading && loadingStation.LoadedShell != GameManager.ShellType.None &&
+                    loadingStation.LoadedShell != levelData.requiredShell)
+                {
+                    reason = "WRONG AMMO\nLOADED";
+                }
+                else if (requiresLoading && !loadingStation.IsReady)
+                {
+                    reason = "FAILED TO LOAD\nSHELL IN TIME";
+                }
+                else
+                {
+                    reason = "FAILED TO FIRE\nIN TIME";
+                }
+                targetingConsole.ShowFailureMessage(reason);
 
                 yield return new WaitForSeconds(failMessageDuration);
 
@@ -288,7 +304,14 @@ public class GameManager : MonoBehaviour
             yield return new WaitForSeconds(impactViewTime);
             onPostImpact?.Invoke();
 
-            targetingConsole.DisplayMessage(isSuccess ? "SUCCESS" : "FAILURE");
+            if (isSuccess)
+            {
+                targetingConsole.DisplayMessage("SUCCESS");
+            }
+            else
+            {
+                targetingConsole.ShowFailureMessage("MISSED\nTARGET");
+            }
             LogState($"Displaying result, waiting {resultTime}s");
             yield return new WaitForSeconds(resultTime);
 
@@ -484,15 +507,17 @@ public class Level
         return 90f - angle;
     }
 
+    private const float DELAY_FACTOR = 4f;
+
     public float soundDelay(float range)
     {
-        return range / 343f;
+        return range / 343f / DELAY_FACTOR;
     }
 
     public float timeToImpact(float range, float elevation)
     {
         float exitVelocity = 200f; // m/s
         float time = 2f * exitVelocity * Mathf.Sin(elevation * Mathf.Deg2Rad) / 9.81f;
-        return time / 5;
+        return time / DELAY_FACTOR;
     }
 }
