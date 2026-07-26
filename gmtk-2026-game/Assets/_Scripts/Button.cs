@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Events;
 
 public class Button : MonoBehaviour, IInteractable
 {
@@ -9,6 +10,8 @@ public class Button : MonoBehaviour, IInteractable
 
     private Vector3 originalPosition;
     private bool isPressed = false;
+    public UnityEvent OnButtonPressed;
+    public UnityEvent OnButtonReleased;
 
     private void Awake()
     {
@@ -29,6 +32,7 @@ public class Button : MonoBehaviour, IInteractable
 
     public InteractionSettings OnInteractStart(InteractionData data)
     {
+        OnButtonPressed?.Invoke();
         isPressed = true;
         return new InteractionSettings(false);
     }
@@ -41,6 +45,7 @@ public class Button : MonoBehaviour, IInteractable
     public InteractionSettings OnInteractEnd(InteractionData data)
     {
         isPressed = false;
+        OnButtonReleased?.Invoke();
         return new InteractionSettings(false);
     }
 

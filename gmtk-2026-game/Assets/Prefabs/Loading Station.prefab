@@ -1163,6 +1163,9 @@ MonoBehaviour:
   - {fileID: 5134525446259977996}
   - {fileID: 4400940824630008295}
   - {fileID: 8504765436251446508}
+  indicatorLights: []
+  additionalActivatedObjects: []
+  nearbyFires: []
   powderText: {fileID: 1521574333521145732}
   shellText: {fileID: 9103472646873496519}
   startFillSpeed: 4
@@ -1596,6 +1599,12 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: f7b68d577ec578e4b93745704ff24a62, type: 3}
       insertIndex: -1
       addedObject: {fileID: 8004163542462025866}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: f7b68d577ec578e4b93745704ff24a62, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1053314827805297235}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: f7b68d577ec578e4b93745704ff24a62, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1557738394956956146}
   m_SourcePrefab: {fileID: 100100000, guid: f7b68d577ec578e4b93745704ff24a62, type: 3}
 --- !u!4 &1552856820633598703 stripped
 Transform:
@@ -1622,6 +1631,12 @@ MonoBehaviour:
   buttonTransform: {fileID: 3446868291628228387}
   pressedPosition: {x: 0, y: -0.01, z: 0}
   animationSpeed: 10
+  OnButtonPressed:
+    m_PersistentCalls:
+      m_Calls: []
+  OnButtonReleased:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!65 &8004163542462025866
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1643,6 +1658,68 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: -0.06, y: 0, z: 0.18}
+--- !u!114 &1053314827805297235
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2217754130143256661}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: FMODUnity::FMODUnity.StudioEventEmitter
+  CollisionTag: 
+  EventReference:
+    Guid:
+      Data1: -900895336
+      Data2: 1267123399
+      Data3: 878740892
+      Data4: -1745600740
+    Path: event:/ButtonOn
+  Event: 
+  EventPlayTrigger: 0
+  EventStopTrigger: 0
+  AllowFadeout: 1
+  TriggerOnce: 0
+  Preload: 0
+  NonRigidbodyVelocity: 0
+  Params: []
+  OverrideAttenuation: 0
+  OverrideMinDistance: 1
+  OverrideMaxDistance: 20
+--- !u!114 &1557738394956956146
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2217754130143256661}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: FMODUnity::FMODUnity.StudioEventEmitter
+  CollisionTag: 
+  EventReference:
+    Guid:
+      Data1: 1007360603
+      Data2: 1150239532
+      Data3: -31969639
+      Data4: -1811866389
+    Path: event:/ButtonOff
+  Event: 
+  EventPlayTrigger: 0
+  EventStopTrigger: 0
+  AllowFadeout: 1
+  TriggerOnce: 0
+  Preload: 0
+  NonRigidbodyVelocity: 0
+  Params: []
+  OverrideAttenuation: 0
+  OverrideMinDistance: 1
+  OverrideMaxDistance: 20
 --- !u!4 &3446868291628228387 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -4768223477660663257, guid: f7b68d577ec578e4b93745704ff24a62, type: 3}
