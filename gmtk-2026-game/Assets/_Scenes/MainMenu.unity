@@ -2672,8 +2672,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294967295
-  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+    rgba: 3741319167
+  m_fontColor: {r: 1, g: 1, b: 1, a: 0.87058824}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -3438,8 +3438,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294967295
-  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+    rgba: 3741319167
+  m_fontColor: {r: 1, g: 1, b: 1, a: 0.87058824}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -4074,8 +4074,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b2468292f7ab6d94588680d23f615cad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ButtonHover
-  hoverColor: {r: 1, g: 0, b: 0, a: 1}
-  normalColor: {r: 1, g: 1, b: 1, a: 1}
+  hoverColor: {r: 1, g: 0, b: 0, a: 0.47058824}
+  normalColor: {r: 1, g: 1, b: 1, a: 0.47058824}
   animationSpeed: 20
 --- !u!1001 &386189890
 PrefabInstance:
@@ -5278,8 +5278,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b2468292f7ab6d94588680d23f615cad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ButtonHover
-  hoverColor: {r: 1, g: 0, b: 0, a: 1}
-  normalColor: {r: 1, g: 1, b: 1, a: 1}
+  hoverColor: {r: 1, g: 0, b: 0, a: 0.47058824}
+  normalColor: {r: 1, g: 1, b: 1, a: 0.47058824}
   animationSpeed: 20
 --- !u!1 &493379201
 GameObject:
@@ -6237,6 +6237,81 @@ Transform:
   - {fileID: 1121426633}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &608663459
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 608663460}
+  - component: {fileID: 608663462}
+  - component: {fileID: 608663461}
+  m_Layer: 5
+  m_Name: logo
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &608663460
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 608663459}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 8, y: 8, z: 8}
+  m_ConstrainProportionsScale: 1
+  m_Children: []
+  m_Father: {fileID: 611123547}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 288.51}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &608663461
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 608663459}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.62352943}
+  m_RaycastTarget: 0
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 21300000, guid: bdf4d8f661329db41be9d501c59efc7b, type: 3}
+  m_Type: 0
+  m_PreserveAspect: 1
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &608663462
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 608663459}
+  m_CullTransparentMesh: 1
 --- !u!1001 &610125134
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -7589,8 +7664,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b2468292f7ab6d94588680d23f615cad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ButtonHover
-  hoverColor: {r: 1, g: 0, b: 0, a: 1}
-  normalColor: {r: 1, g: 1, b: 1, a: 1}
+  hoverColor: {r: 1, g: 0, b: 0, a: 0.47058824}
+  normalColor: {r: 1, g: 1, b: 1, a: 0.47058824}
   animationSpeed: 20
 --- !u!1001 &832515719
 PrefabInstance:
@@ -11313,8 +11388,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b2468292f7ab6d94588680d23f615cad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ButtonHover
-  hoverColor: {r: 1, g: 0, b: 0, a: 1}
-  normalColor: {r: 1, g: 1, b: 1, a: 1}
+  hoverColor: {r: 1, g: 0, b: 0, a: 0.47058824}
+  normalColor: {r: 1, g: 1, b: 1, a: 0.47058824}
   animationSpeed: 20
 --- !u!114 &1174619955
 MonoBehaviour:
@@ -12025,6 +12100,10 @@ MonoBehaviour:
   targetDistortion: 0.4
   targetPhase: 0.5
   matchTolerance: 0.043
+  amplitudeTolerance: 0
+  distortionTolerance: 0
+  phaseTolerance: 0
+  debugMatchDiffs: 0
   onMatchEntered:
     m_PersistentCalls:
       m_Calls: []
@@ -13231,6 +13310,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 2054255580}
     m_Modifications:
+    - target: {fileID: 1333310010933545395, guid: 9bcfda04cb8b9c848aec614a86110382, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2902953571993832493, guid: 9bcfda04cb8b9c848aec614a86110382, type: 3}
       propertyPath: m_text
       value: TIME TO IMPACT
@@ -13377,6 +13460,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 5081479542822474770, guid: 9bcfda04cb8b9c848aec614a86110382, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1666643334}
+    - targetCorrespondingSourceObject: {fileID: 5081479542822474770, guid: 9bcfda04cb8b9c848aec614a86110382, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 608663460}
     - targetCorrespondingSourceObject: {fileID: 4389886081998684684, guid: 9bcfda04cb8b9c848aec614a86110382, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1174619953}
@@ -14393,7 +14479,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 106.24}
+  m_AnchoredPosition: {x: 0, y: 48.33}
   m_SizeDelta: {x: 800, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1666643335
@@ -15984,6 +16070,7 @@ MonoBehaviour:
   verticalBarOffsetClamp: {x: -0.034, y: 0.014}
   horizontalBarOffsetClamp: {x: -0.0085, y: 0.004}
   waveVisual: {fileID: 1273255499}
+  staticView: {fileID: 0}
   onSignalMatched:
     m_PersistentCalls:
       m_Calls:
@@ -18731,8 +18818,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294967295
-  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+    rgba: 3741319167
+  m_fontColor: {r: 1, g: 1, b: 1, a: 0.87058824}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
