@@ -15474,7 +15474,7 @@ MonoBehaviour:
     dialog: {fileID: 11400000, guid: 6ef159bf87898974c9cc21c808027039, type: 2}
     outlines:
     - {fileID: 1736036674}
-    holdDialogUntilCompleted: 0
+    holdDialogUntilCompleted: 1
     onTriggered:
       m_PersistentCalls:
         m_Calls: []
