@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.03.00">
+	<object class="ParameterPreset" id="{cb0b13e3-e656-4014-bbc7-54a099c8d2fa}">
+		<property name="name">
+			<value>Matching</value>
+		</property>
+		<relationship name="folder">
+			<destination>{4d66e914-92ab-47d0-9992-d8a25e7b3acb}</destination>
+		</relationship>
+		<relationship name="parameter">
+			<destination>{c66ca08a-3d9a-496e-a190-bf7bdcddf2dc}</destination>
+		</relationship>
+	</object>
+	<object class="GameParameter" id="{c66ca08a-3d9a-496e-a190-bf7bdcddf2dc}">
+		<property name="initialValue">
+			<value>0</value>
+		</property>
+	</object>
+</objects>
