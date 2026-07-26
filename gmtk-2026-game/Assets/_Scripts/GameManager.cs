@@ -268,7 +268,7 @@ public class GameManager : MonoBehaviour
                 if (levelData.showFireDialog && levelData.fireDialog != null)
                 {
                     dialogController.StartDialogue(levelData.fireDialog);
-                    levelData.showImpactDialog = false;
+                    levelData.showFireDialog = false;
                 }
             }
             LogState($"Starting impact countdown ({impactTime:F2}s)");
