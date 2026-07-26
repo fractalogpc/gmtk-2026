@@ -45,6 +45,7 @@ public class TargetingConsole : MonoBehaviour
     // Power gating is the only thing that can knock it out at runtime.
     private bool gameActive = true;
     private bool powered = true;
+    private bool hasDoneTutorial = false;
     private bool IsInteractable => gameActive && powered;
 
     public void SetLocked(bool isLocked)
@@ -338,6 +339,18 @@ public class TargetingConsole : MonoBehaviour
         gunBase.localRotation = Quaternion.Euler(0f, -gunAzimuth, 0f);
         gunBarrel.localRotation = Quaternion.Euler(-gunElevation, 0f, 0f);
         UpdateGunText();
+
+        // Tutorial
+        if (TutorialManager.Instance != null && !hasDoneTutorial)
+        {
+            float maxError = Mathf.Max(Mathf.Abs(gunAzimuth - pendingAzimuth), Mathf.Abs(gunElevation - pendingElevation));
+            if (maxError <= 5.0f)
+            {
+                TutorialManager.Instance.CompleteLesson("target");
+                TutorialManager.Instance.TriggerLesson("fire");
+                hasDoneTutorial = true;
+            }
+        }
     }
 
 }

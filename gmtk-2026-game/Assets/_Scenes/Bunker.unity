@@ -6558,7 +6558,7 @@ MonoBehaviour:
   - requiredShell: 3
     obscureCoordinates: 0
     timeLimit: 0
-    tolerance: 10
+    tolerance: 5
     range: 4000
     fireIntensity: 0
     doBlackout: 0
@@ -6571,7 +6571,7 @@ MonoBehaviour:
   - requiredShell: 0
     obscureCoordinates: 0
     timeLimit: 0
-    tolerance: 10
+    tolerance: 4
     range: 3500
     fireIntensity: 0
     doBlackout: 0
@@ -6584,7 +6584,7 @@ MonoBehaviour:
   - requiredShell: 1
     obscureCoordinates: 0
     timeLimit: 0
-    tolerance: 6
+    tolerance: 3
     range: 3000
     fireIntensity: 1
     doBlackout: 0
@@ -6597,7 +6597,7 @@ MonoBehaviour:
   - requiredShell: 0
     obscureCoordinates: 0
     timeLimit: 60
-    tolerance: 4
+    tolerance: 2
     range: 2500
     fireIntensity: 0
     doBlackout: 0
@@ -6610,7 +6610,7 @@ MonoBehaviour:
   - requiredShell: 0
     obscureCoordinates: 1
     timeLimit: 0
-    tolerance: 4
+    tolerance: 1
     range: 2000
     fireIntensity: 0
     doBlackout: 1
@@ -6623,7 +6623,7 @@ MonoBehaviour:
   - requiredShell: 2
     obscureCoordinates: 0
     timeLimit: 0
-    tolerance: 3
+    tolerance: 0.8
     range: 1500
     fireIntensity: 2
     doBlackout: 0
@@ -6636,7 +6636,7 @@ MonoBehaviour:
   - requiredShell: 1
     obscureCoordinates: 1
     timeLimit: 45
-    tolerance: 2
+    tolerance: 0.6
     range: 1000
     fireIntensity: 3
     doBlackout: 1
@@ -6649,7 +6649,7 @@ MonoBehaviour:
   - requiredShell: 2
     obscureCoordinates: 1
     timeLimit: 30
-    tolerance: 1
+    tolerance: 0.5
     range: 25
     fireIntensity: 0
     doBlackout: 0

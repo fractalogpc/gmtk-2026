@@ -202,7 +202,7 @@ public class GameManager : MonoBehaviour
                 else
                 {
                     LogState("Fire lever pulled");
-                    if (tutorialManager != null) tutorialManager.CompleteLesson("targeting");
+                    if (tutorialManager != null) tutorialManager.CompleteLesson("fire");
                 }
             }
 
