@@ -56,6 +56,8 @@ public class TargetingConsole : MonoBehaviour
         {
             gunText.text = "CONTROLS LOCKED";
             gunMovementEmitter.Stop();
+            leverAzimuth.ResetLever();
+            leverElevation.ResetLever();
         }
         else
         {
