@@ -1088,12 +1088,28 @@ PrefabInstance:
       value: -80
       objectReference: {fileID: 0}
     - target: {fileID: 4889678355141586362, guid: 232dfb9e2177ceb4f9e177bbf4085c4f, type: 3}
+      propertyPath: segments
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 4889678355141586362, guid: 232dfb9e2177ceb4f9e177bbf4085c4f, type: 3}
+      propertyPath: leverSpeed
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 4889678355141586362, guid: 232dfb9e2177ceb4f9e177bbf4085c4f, type: 3}
       propertyPath: startAngle
       value: 80
       objectReference: {fileID: 0}
     - target: {fileID: 4889678355141586362, guid: 232dfb9e2177ceb4f9e177bbf4085c4f, type: 3}
       propertyPath: defaultAngle
       value: 80
+      objectReference: {fileID: 0}
+    - target: {fileID: 4889678355141586362, guid: 232dfb9e2177ceb4f9e177bbf4085c4f, type: 3}
+      propertyPath: returnOnRelease
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4889678355141586362, guid: 232dfb9e2177ceb4f9e177bbf4085c4f, type: 3}
+      propertyPath: dontReturnOnReleaseIfAtMax
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7577404344443423950, guid: 232dfb9e2177ceb4f9e177bbf4085c4f, type: 3}
       propertyPath: m_Name
