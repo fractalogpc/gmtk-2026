@@ -4902,10 +4902,10 @@ MonoBehaviour:
   musicSoundSlider: {fileID: 6136107490411956838}
   sfxSoundSlider: {fileID: 5581812365767156622}
   ambientSoundSlider: {fileID: 2942833719358202105}
-  masterVcaPath: vca:/Master
-  musicVcaPath: vca:/Music
-  sfxVcaPath: vca:/SFX
-  ambientVcaPath: vca:/Ambient
+  masterBusPath: bus:/
+  musicBusPath: bus:/Music
+  sfxBusPath: bus:/SFX
+  ambientBusPath: bus:/Ambient
   freezeTime: 1
 --- !u!225 &4681623004721660703
 CanvasGroup:

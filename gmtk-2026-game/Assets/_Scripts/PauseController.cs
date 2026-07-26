@@ -33,10 +33,10 @@ public class PauseController : MonoBehaviour
     [SerializeField] private Slider sfxSoundSlider;
     [SerializeField] private Slider ambientSoundSlider;
     [Header("FMOD Volumes")]
-    [SerializeField] private string masterBusPath = "bus:/Master";
-    [SerializeField] private string musicBusPath = "bus:/Master/Music";
-    [SerializeField] private string sfxBusPath = "bus:/Master/SFX";
-    [SerializeField] private string ambientBusPath = "bus:/Master/Ambient";
+    [SerializeField] private string masterBusPath = "bus:/";
+    [SerializeField] private string musicBusPath = "bus:/Music";
+    [SerializeField] private string sfxBusPath = "bus:/SFX";
+    [SerializeField] private string ambientBusPath = "bus:/Ambient";
     [SerializeField] private Bus masterBus;
     [SerializeField] private Bus musicBus;
     [SerializeField] private Bus sfxBus;
