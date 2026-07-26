@@ -15,4 +15,4 @@ MonoBehaviour:
   sprite: {fileID: 21300000, guid: 16307adf14f5f81409b8dac9eb0b259e, type: 3}
   dialogue:
   - You will need to start up your generator, though. Head over there, give it a
-    few good twists, and flip the breaker switch on to restore power.
+    few twists, and flip the breaker switch on to restore power.
