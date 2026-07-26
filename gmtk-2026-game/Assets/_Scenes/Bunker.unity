@@ -6554,45 +6554,110 @@ MonoBehaviour:
   resultTime: 3
   failMessageDuration: 2
   levels:
-  - requiredShell: 0
-    obscureCoordinates: 1
+  - requiredShell: 3
+    obscureCoordinates: 0
     timeLimit: 0
     tolerance: 10
-    range: 3000
-    fireIntensity: 1
-    doBlackout: 1
+    range: 4000
+    fireIntensity: 0
+    doBlackout: 0
     startDialog: {fileID: 11400000, guid: a15a2a905b1423142b8d40314d063cbb, type: 2}
     showStartDialog: 1
     fireDialog: {fileID: 11400000, guid: 6812adff2be362049914ba2a6957335a, type: 2}
     showFireDialog: 1
     impactDialog: {fileID: 11400000, guid: facbaf3a59e923c43b98f5b213a7125f, type: 2}
     showImpactDialog: 1
-  - requiredShell: 3
+  - requiredShell: 0
     obscureCoordinates: 0
     timeLimit: 0
-    tolerance: 1
-    range: 500
+    tolerance: 10
+    range: 3500
+    fireIntensity: 0
+    doBlackout: 0
+    startDialog: {fileID: 11400000, guid: 7f625e92a076016409638cb8120b4789, type: 2}
+    showStartDialog: 1
+    fireDialog: {fileID: 0}
+    showFireDialog: 0
+    impactDialog: {fileID: 0}
+    showImpactDialog: 0
+  - requiredShell: 1
+    obscureCoordinates: 0
+    timeLimit: 0
+    tolerance: 6
+    range: 3000
     fireIntensity: 1
     doBlackout: 0
     startDialog: {fileID: 0}
-    showStartDialog: 1
+    showStartDialog: 0
     fireDialog: {fileID: 0}
+    showFireDialog: 0
+    impactDialog: {fileID: 11400000, guid: 7f335c5fda587fd42bbe006582a721a3, type: 2}
+    showImpactDialog: 1
+  - requiredShell: 0
+    obscureCoordinates: 0
+    timeLimit: 60
+    tolerance: 4
+    range: 2500
+    fireIntensity: 0
+    doBlackout: 0
+    startDialog: {fileID: 11400000, guid: afed230eb0ad37f469e0aaac92ee9ab7, type: 2}
+    showStartDialog: 1
+    fireDialog: {fileID: 11400000, guid: 237b38ed52a135f49a04105a77bd4bf9, type: 2}
     showFireDialog: 1
     impactDialog: {fileID: 0}
-    showImpactDialog: 1
-  - requiredShell: 3
+    showImpactDialog: 0
+  - requiredShell: 0
     obscureCoordinates: 1
     timeLimit: 0
-    tolerance: 1
-    range: 500
-    fireIntensity: 1
+    tolerance: 4
+    range: 2000
+    fireIntensity: 0
     doBlackout: 1
-    startDialog: {fileID: 0}
+    startDialog: {fileID: 11400000, guid: 19434e6ab070af040b6736a63bcddf34, type: 2}
     showStartDialog: 1
     fireDialog: {fileID: 0}
+    showFireDialog: 0
+    impactDialog: {fileID: 11400000, guid: 1e9807ccd00491745b4160e5be87bab2, type: 2}
+    showImpactDialog: 1
+  - requiredShell: 2
+    obscureCoordinates: 0
+    timeLimit: 0
+    tolerance: 3
+    range: 1500
+    fireIntensity: 2
+    doBlackout: 0
+    startDialog: {fileID: 0}
+    showStartDialog: 0
+    fireDialog: {fileID: 0}
+    showFireDialog: 0
+    impactDialog: {fileID: 0}
+    showImpactDialog: 0
+  - requiredShell: 1
+    obscureCoordinates: 1
+    timeLimit: 45
+    tolerance: 2
+    range: 1000
+    fireIntensity: 3
+    doBlackout: 1
+    startDialog: {fileID: 0}
+    showStartDialog: 0
+    fireDialog: {fileID: 11400000, guid: f9a9ce8d1f594b446944fc4afe8b2973, type: 2}
     showFireDialog: 1
     impactDialog: {fileID: 0}
-    showImpactDialog: 1
+    showImpactDialog: 0
+  - requiredShell: 2
+    obscureCoordinates: 1
+    timeLimit: 30
+    tolerance: 1
+    range: 25
+    fireIntensity: 0
+    doBlackout: 0
+    startDialog: {fileID: 0}
+    showStartDialog: 0
+    fireDialog: {fileID: 11400000, guid: 17fad6b1946e90d41bfdb0f9dca0f59d, type: 2}
+    showFireDialog: 0
+    impactDialog: {fileID: 0}
+    showImpactDialog: 0
 --- !u!114 &677906279
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13107,18 +13172,6 @@ MonoBehaviour:
     - {fileID: 1378592317}
     - {fileID: 700681521080843636}
     holdDialogUntilCompleted: 1
-    onTriggered:
-      m_PersistentCalls:
-        m_Calls: []
-    onCompleted:
-      m_PersistentCalls:
-        m_Calls: []
-    shown: 0
-    completed: 0
-  - id: success
-    dialog: {fileID: 11400000, guid: f38c70cb607386c4c8b55a3682720e41, type: 2}
-    outlines: []
-    holdDialogUntilCompleted: 0
     onTriggered:
       m_PersistentCalls:
         m_Calls: []
@@ -19963,7 +20016,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Unity.RenderPipelines.Universal.Runtime::UnityEngine.Rendering.Universal.UniversalAdditionalLightData
   m_UsePipelineSettings: 1
-  m_AdditionalLightsShadowResolutionTier: 2
+  m_AdditionalLightsShadowResolutionTier: 1
   m_CustomShadowLayers: 0
   m_LightCookieSize: {x: 1, y: 1}
   m_LightCookieOffset: {x: 0, y: 0}
@@ -24144,6 +24197,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1975721805}
     m_Modifications:
+    - target: {fileID: 2642642869156561595, guid: 9bcfda04cb8b9c848aec614a86110382, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.0703
+      objectReference: {fileID: 0}
     - target: {fileID: 4612470081183424791, guid: 9bcfda04cb8b9c848aec614a86110382, type: 3}
       propertyPath: onFire.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
@@ -24203,6 +24260,10 @@ PrefabInstance:
     - target: {fileID: 8569129564166649987, guid: 9bcfda04cb8b9c848aec614a86110382, type: 3}
       propertyPath: m_Name
       value: Targeting Console
+      objectReference: {fileID: 0}
+    - target: {fileID: 9050612249597973580, guid: 9bcfda04cb8b9c848aec614a86110382, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.064
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -25166,6 +25227,38 @@ PrefabInstance:
       propertyPath: 'indicatorLights.Array.data[0]'
       value: 
       objectReference: {fileID: 954361405}
+    - target: {fileID: 1463128223868495399, guid: 534f17b2e06bf1e43a7e59facd61853a, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 4.1727
+      objectReference: {fileID: 0}
+    - target: {fileID: 2342182130173413786, guid: 534f17b2e06bf1e43a7e59facd61853a, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 4.172
+      objectReference: {fileID: 0}
+    - target: {fileID: 2743382138109227458, guid: 534f17b2e06bf1e43a7e59facd61853a, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 3.905
+      objectReference: {fileID: 0}
+    - target: {fileID: 2743382138109227458, guid: 534f17b2e06bf1e43a7e59facd61853a, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 3.802
+      objectReference: {fileID: 0}
+    - target: {fileID: 3801656842507151879, guid: 534f17b2e06bf1e43a7e59facd61853a, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 4.171
+      objectReference: {fileID: 0}
+    - target: {fileID: 4530569529829386710, guid: 534f17b2e06bf1e43a7e59facd61853a, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 3.964
+      objectReference: {fileID: 0}
+    - target: {fileID: 4530569529829386710, guid: 534f17b2e06bf1e43a7e59facd61853a, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.165
+      objectReference: {fileID: 0}
+    - target: {fileID: 4530569529829386710, guid: 534f17b2e06bf1e43a7e59facd61853a, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 4.295
+      objectReference: {fileID: 0}
     - target: {fileID: 5162266931047315444, guid: 534f17b2e06bf1e43a7e59facd61853a, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -25205,6 +25298,18 @@ PrefabInstance:
     - target: {fileID: 5162266931047315444, guid: 534f17b2e06bf1e43a7e59facd61853a, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5735222230049913456, guid: 534f17b2e06bf1e43a7e59facd61853a, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 4.0234
+      objectReference: {fileID: 0}
+    - target: {fileID: 5735222230049913456, guid: 534f17b2e06bf1e43a7e59facd61853a, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.163
+      objectReference: {fileID: 0}
+    - target: {fileID: 5735222230049913456, guid: 534f17b2e06bf1e43a7e59facd61853a, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 4.8002
       objectReference: {fileID: 0}
     - target: {fileID: 7292879720645337010, guid: 534f17b2e06bf1e43a7e59facd61853a, type: 3}
       propertyPath: m_Name
