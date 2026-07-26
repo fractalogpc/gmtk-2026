@@ -1,3 +1,4 @@
+using FMODUnity;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -8,6 +9,7 @@ public class DecoderController : MonoBehaviour
 
     public GameObject verticalBar;
     public GameObject horizontalBar;
+    [SerializeField] private StudioEventEmitter decoderSoundEmitter;
 
     [Tooltip("Local units the horizontal bar shifts vertically per degree of right-dial rotation.")]
     [SerializeField] private float horizontalBarSensitivity = 0.005f;
@@ -215,6 +217,13 @@ public class DecoderController : MonoBehaviour
         ApplyInteractable();
         ApplyAdditionalObjectsState();
         ApplyIndicatorLightsState();
+        if (powered) {
+            decoderSoundEmitter.Play();
+        }
+        else
+        {
+            decoderSoundEmitter.Stop();
+        }
     }
 
     private void ApplyInteractable()
@@ -256,6 +265,8 @@ public class DecoderController : MonoBehaviour
             hLocal.x = verticalBar.transform.localPosition.x;
             horizontalBar.transform.localPosition = hLocal;
         }
+
+        decoderSoundEmitter.SetParameter("Accuracy", NormalizedAccuracy);
     }
 
 #if UNITY_EDITOR
