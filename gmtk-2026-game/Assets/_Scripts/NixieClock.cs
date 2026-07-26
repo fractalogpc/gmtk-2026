@@ -9,6 +9,7 @@ public class NixieClock : MonoBehaviour
     {
         public Renderer[] numbers;
         public bool colon;
+        public int numberCount;
         public int value; // Seconds per number
     }
 
@@ -63,7 +64,7 @@ public class NixieClock : MonoBehaviour
                 }
                 else
                 {
-                    int activeNumber = Mathf.FloorToInt(timer / tubes[i].value) % tubes[i].numbers.Length;
+                    int activeNumber = Mathf.FloorToInt(timer / tubes[i].value) % tubes[i].numberCount;
                     for (int j = 0; j < tubes[i].numbers.Length; j++)
                     {
                         tubes[i].numbers[j].material = j == activeNumber ? onMaterial : offMaterial;

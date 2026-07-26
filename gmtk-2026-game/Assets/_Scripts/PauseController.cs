@@ -3,6 +3,7 @@ using UnityEngine.UI;
 using FMODUnity;
 using UnityEngine.SceneManagement;
 using UnityEngine.InputSystem;
+using FMOD.Studio;
 
 [DefaultExecutionOrder(-100)]
 public class PauseController : MonoBehaviour
@@ -32,10 +33,14 @@ public class PauseController : MonoBehaviour
     [SerializeField] private Slider sfxSoundSlider;
     [SerializeField] private Slider ambientSoundSlider;
     [Header("FMOD Volumes")]
-    [SerializeField] private string masterVcaPath = "vca:/Master";
-    [SerializeField] private string musicVcaPath = "vca:/Music";
-    [SerializeField] private string sfxVcaPath = "vca:/SFX";
-    [SerializeField] private string ambientVcaPath = "vca:/Ambient";
+    [SerializeField] private string masterBusPath = "bus:/";
+    [SerializeField] private string musicBusPath = "bus:/Music";
+    [SerializeField] private string sfxBusPath = "bus:/SFX";
+    [SerializeField] private string ambientBusPath = "bus:/Ambient";
+    [SerializeField] private Bus masterBus;
+    [SerializeField] private Bus musicBus;
+    [SerializeField] private Bus sfxBus;
+    [SerializeField] private Bus ambientBus;
     [Tooltip("If true, sets Time.timeScale = 0 while paused.")]
     [SerializeField] private bool freezeTime = true;
 
@@ -60,12 +65,6 @@ public class PauseController : MonoBehaviour
         {
             playerController = FindFirstObjectByType<PlayerController>();
         }
-
-        masterVca = ResolveVca(masterVcaPath);
-        musicVca = ResolveVca(musicVcaPath);
-        sfxVca = ResolveVca(sfxVcaPath);
-        ambientVca = ResolveVca(ambientVcaPath);
-
         BindSettingsUi();
 
         ApplySavedSettings();
@@ -75,6 +74,19 @@ public class PauseController : MonoBehaviour
 
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
+    }
+
+    private void Start()
+    {
+        BindBuses();
+    }
+
+    private void BindBuses()
+    {
+        masterBus = RuntimeManager.GetBus(masterBusPath);
+        musicBus = RuntimeManager.GetBus(musicBusPath);
+        sfxBus = RuntimeManager.GetBus(sfxBusPath);
+        ambientBus = RuntimeManager.GetBus(ambientBusPath);
     }
 
     /// <summary>
@@ -166,22 +178,22 @@ public class PauseController : MonoBehaviour
     }
 
     public void SetMasterSound(float value) {
-        SetVcaVolume(ref masterVca, masterVcaPath, value);
+        masterBus.setVolume(value);
         PlayerPrefs.SetFloat(MasterSoundPrefKey, value);
     }
 
     public void SetMusicSound(float value) {
-        SetVcaVolume(ref musicVca, musicVcaPath, value);
+        musicBus.setVolume(value);
         PlayerPrefs.SetFloat(MusicSoundPrefKey, value);
     }
 
     public void SetSFXSound(float value) {
-        SetVcaVolume(ref sfxVca, sfxVcaPath, value);
+        sfxBus.setVolume(value);
         PlayerPrefs.SetFloat(SFXSoundPrefKey, value);
     }
 
     public void SetAmbientSound(float value) {
-        SetVcaVolume(ref ambientVca, ambientVcaPath, value);
+        ambientBus.setVolume(value);
         PlayerPrefs.SetFloat(AmbientSoundPrefKey, value);
     }
 
@@ -314,7 +326,7 @@ public class PauseController : MonoBehaviour
         }
     }
 
-    private void SetVcaVolume(ref FMOD.Studio.VCA vca, string path, float value)
+    private void SetBusVolume(ref FMOD.Studio.VCA vca, string path, float value)
     {
         if (!vca.isValid())
         {
