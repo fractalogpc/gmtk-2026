@@ -7039,8 +7039,8 @@ MonoBehaviour:
     showStartDialog: 0
     fireDialog: {fileID: 0}
     showFireDialog: 0
-    impactDialog: {fileID: 11400000, guid: 7f335c5fda587fd42bbe006582a721a3, type: 2}
-    showImpactDialog: 1
+    impactDialog: {fileID: 0}
+    showImpactDialog: 0
   - requiredShell: 0
     obscureCoordinates: 0
     timeLimit: 60
@@ -25516,6 +25516,26 @@ PrefabInstance:
       propertyPath: endEmitter
       value: 
       objectReference: {fileID: 2865407346528988534}
+    - target: {fileID: 1880637182733103745, guid: 9bcfda04cb8b9c848aec614a86110382, type: 3}
+      propertyPath: tubes.Array.data[0].numberCount
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 1880637182733103745, guid: 9bcfda04cb8b9c848aec614a86110382, type: 3}
+      propertyPath: tubes.Array.data[1].numberCount
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 1880637182733103745, guid: 9bcfda04cb8b9c848aec614a86110382, type: 3}
+      propertyPath: tubes.Array.data[2].numberCount
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1880637182733103745, guid: 9bcfda04cb8b9c848aec614a86110382, type: 3}
+      propertyPath: tubes.Array.data[3].numberCount
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 1880637182733103745, guid: 9bcfda04cb8b9c848aec614a86110382, type: 3}
+      propertyPath: tubes.Array.data[4].numberCount
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 2642642869156561595, guid: 9bcfda04cb8b9c848aec614a86110382, type: 3}
       propertyPath: m_LocalPosition.y
       value: -0.0703
