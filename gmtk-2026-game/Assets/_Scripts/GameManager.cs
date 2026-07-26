@@ -118,8 +118,8 @@ public class GameManager : MonoBehaviour
 
     public enum ShellType
     {
-        Normal,
         AP,
+        INC,
         HE,
         None
     }
@@ -162,7 +162,7 @@ public class Level
 
     public Level()
     {
-        requiredShell = GameManager.ShellType.Normal;
+        requiredShell = GameManager.ShellType.AP;
         obscureCoordinates = false;
         timeLimit = 0f;
         tolerance = 1f;

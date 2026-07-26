@@ -1,3 +1,4 @@
+using FMODUnity;
 using UnityEngine;
 
 public class NixieClock : MonoBehaviour
@@ -15,6 +16,7 @@ public class NixieClock : MonoBehaviour
     [SerializeField] private float blinkInterval = 0.5f;
     [SerializeField] private Material offMaterial;
     [SerializeField] private Material onMaterial;
+    [SerializeField] private StudioEventEmitter tickEmitter;
 
     public float Timer => timer;
     private float timer = 0f;
@@ -22,11 +24,13 @@ public class NixieClock : MonoBehaviour
     public void StartTimer(float countdown)
     {
         timer = countdown;
+        tickEmitter?.Play();
     }
 
     public void StopTimer()
     {
         timer = 0f;
+        tickEmitter?.Stop();
     }
 
     private void Start()
@@ -63,6 +67,10 @@ public class NixieClock : MonoBehaviour
         }
         else
         {
+            if (tickEmitter.IsPlaying())
+            {
+                tickEmitter.Stop();
+            }
             // Expired; set all to 0 and don't blink
             for (int i = 0; i < tubes.Length; i++)
             {

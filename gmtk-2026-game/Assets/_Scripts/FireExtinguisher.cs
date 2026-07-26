@@ -1,10 +1,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using FMODUnity;
 
 public class FireExtinguisher : MonoBehaviour
 {
     public GameObject obj;
+    [SerializeField] private StudioEventEmitter extinguisherSoundEmitter;
 
     bool isEnabled;
 
@@ -21,6 +23,10 @@ public class FireExtinguisher : MonoBehaviour
     {
         isEnabled = true;
         obj.SetActive(true);
+        if (gameObject.activeSelf)
+        {
+            extinguisherSoundEmitter.Play();
+        }
     }
 
     private void Disable()
@@ -28,11 +34,13 @@ public class FireExtinguisher : MonoBehaviour
         isEnabled = false;
         obj.SetActive(false);
         ClearExtinguishing();
+        extinguisherSoundEmitter.Stop();
     }
 
     private void OnDisable()
     {
         ClearExtinguishing();
+        extinguisherSoundEmitter.Stop();
     }
 
     private void Update()

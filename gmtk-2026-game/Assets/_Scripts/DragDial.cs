@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.InputSystem;
 
 public enum DialDirectionMode
 {
@@ -54,6 +55,7 @@ public class DragDial : MonoBehaviour, IInteractable
     private Camera dragCamera;
     private CursorLockMode savedCursorLockMode;
     private bool savedCursorVisible;
+    private Vector2 savedCursorPosition;
     private bool wasAtMax;
     private bool wasAtMin;
     private bool isInteracting;
@@ -97,6 +99,7 @@ public class DragDial : MonoBehaviour, IInteractable
         dragCamera = Camera.main;
         savedCursorLockMode = Cursor.lockState;
         savedCursorVisible = Cursor.visible;
+        savedCursorPosition = Mouse.current != null ? Mouse.current.position.ReadValue() : Vector2.zero;
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
         rawAngle = currentAngle;
@@ -132,6 +135,7 @@ public class DragDial : MonoBehaviour, IInteractable
         isInteracting = false;
         Cursor.lockState = savedCursorLockMode;
         Cursor.visible = savedCursorVisible;
+        RestoreCursorPosition();
         if (returnOnRelease) ApplyAngle(defaultAngle, ignoreDirection: true);
         return new InteractionSettings(lockCameraAndMovement: false);
     }
@@ -148,10 +152,17 @@ public class DragDial : MonoBehaviour, IInteractable
         {
             Cursor.lockState = savedCursorLockMode;
             Cursor.visible = savedCursorVisible;
+            RestoreCursorPosition();
             overrideLerpSpeed = null;
             isInteracting = false;
         }
         enabled = false;
+    }
+
+    private void RestoreCursorPosition()
+    {
+        if (savedCursorLockMode == CursorLockMode.Locked || Mouse.current == null) return;
+        Mouse.current.WarpCursorPosition(savedCursorPosition);
     }
 
     private Vector3 GetHandleDirection(Vector3 axis)
@@ -244,5 +255,13 @@ public class DragDial : MonoBehaviour, IInteractable
     {
         if (speed != -1) overrideLerpSpeed = speed;
         ApplyAngle(defaultAngle, ignoreDirection: true);
+    }
+
+    public void SetBounds(float min, float max)
+    {
+        continuous = false;
+        minAngle = min;
+        maxAngle = max;
+        ApplyAngle(Mathf.Clamp(rawAngle, min, max), ignoreDirection: true);
     }
 }

@@ -115,10 +115,10 @@
 	</object>
 	<object class="SingleSound" id="{e09ac728-a977-49e8-86c0-7e7f8a484496}">
 		<property name="length">
-			<value>22.030000000000001</value>
+			<value>21.760000000000002</value>
 		</property>
 		<property name="timelockedOffset">
-			<value>0.14000000000000001</value>
+			<value>0.17999999999999999</value>
 		</property>
 		<relationship name="audioFile">
 			<destination>{6f832146-791b-440f-8979-4d995dff02c5}</destination>
@@ -188,6 +188,7 @@
 	</object>
 	<object class="MixerBusEffectChain" id="{746e25aa-f064-4ccd-ba95-dc40ae487a64}">
 		<relationship name="effects">
+			<destination>{b6b8af10-6c94-48f9-9526-3e7b02568dc3}</destination>
 			<destination>{45048fff-fcfc-493d-9e62-d0f55fd5d901}</destination>
 		</relationship>
 	</object>
@@ -203,6 +204,14 @@
 	<object class="EventCondition" id="{d0cee0a5-7616-46d6-8e3b-dca562b00ab7}">
 		<property name="eventState">
 			<value>1</value>
+		</property>
+	</object>
+	<object class="ThreeEQEffect" id="{b6b8af10-6c94-48f9-9526-3e7b02568dc3}">
+		<property name="midGain">
+			<value>3.5</value>
+		</property>
+		<property name="highGain">
+			<value>4.5</value>
 		</property>
 	</object>
 	<object class="MixerBusFader" id="{45048fff-fcfc-493d-9e62-d0f55fd5d901}" />

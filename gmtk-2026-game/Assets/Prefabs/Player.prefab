@@ -1,5 +1,68 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1203559058909573487
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3925848498129306748}
+  - component: {fileID: 4284967392199775339}
+  m_Layer: 0
+  m_Name: Footstep Emitter
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3925848498129306748
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1203559058909573487}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1810535502672390980}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4284967392199775339
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1203559058909573487}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: FMODUnity::FMODUnity.StudioEventEmitter
+  CollisionTag: 
+  EventReference:
+    Guid:
+      Data1: 1119289600
+      Data2: 1076050327
+      Data3: -1225809732
+      Data4: -421364434
+    Path: event:/Footstep
+  Event: 
+  EventPlayTrigger: 0
+  EventStopTrigger: 0
+  AllowFadeout: 1
+  TriggerOnce: 0
+  Preload: 0
+  NonRigidbodyVelocity: 0
+  Params: []
+  OverrideAttenuation: 0
+  OverrideMinDistance: 1
+  OverrideMaxDistance: 20
 --- !u!1 &1867304338241623491
 GameObject:
   m_ObjectHideFlags: 0
@@ -33,6 +96,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 3925848498129306748}
   - {fileID: 2919120724347004605}
   - {fileID: 7527517185964595832}
   - {fileID: 1272348420133247702}
@@ -77,6 +141,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerController
   moveSpeed: 3
+  footstepEmitter: {fileID: 4284967392199775339}
   cameraPivot: {fileID: 1272348420133247702}
   lookSensitivity: 0.1
   minPitch: -85
@@ -516,7 +581,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &2919120724347004605
 Transform:
   m_ObjectHideFlags: 0
@@ -547,7 +612,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8022496218322251542}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -722,6 +787,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 7527517185964595832}
     m_Modifications:
+    - target: {fileID: 809527551542782431, guid: 73fcd2c56a3482846aecb3d994e184bb, type: 3}
+      propertyPath: obj
+      value: 
+      objectReference: {fileID: 7199887090813544220}
     - target: {fileID: 7390288561460274350, guid: 73fcd2c56a3482846aecb3d994e184bb, type: 3}
       propertyPath: m_Name
       value: Held Fire Extinguisher
@@ -776,34 +845,24 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 7794599131868978967, guid: 73fcd2c56a3482846aecb3d994e184bb, type: 3}
       insertIndex: -1
       addedObject: {fileID: 7197263926139850438}
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 7390288561460274350, guid: 73fcd2c56a3482846aecb3d994e184bb, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 14647191524429481}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 73fcd2c56a3482846aecb3d994e184bb, type: 3}
---- !u!4 &7432054371619338337 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 7794599131868978967, guid: 73fcd2c56a3482846aecb3d994e184bb, type: 3}
-  m_PrefabInstance: {fileID: 794899146415548278}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &7892444845663634392 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7390288561460274350, guid: 73fcd2c56a3482846aecb3d994e184bb, type: 3}
-  m_PrefabInstance: {fileID: 794899146415548278}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &14647191524429481
+--- !u!114 &14647191524429481 stripped
 MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 809527551542782431, guid: 73fcd2c56a3482846aecb3d994e184bb, type: 3}
+  m_PrefabInstance: {fileID: 794899146415548278}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7892444845663634392}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3e3c9fec59e6d9447af42a57f9b5c0f3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
-  obj: {fileID: 7199887090813544220}
+--- !u!4 &7432054371619338337 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 7794599131868978967, guid: 73fcd2c56a3482846aecb3d994e184bb, type: 3}
+  m_PrefabInstance: {fileID: 794899146415548278}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &7200782224729439130
 PrefabInstance:
   m_ObjectHideFlags: 0
