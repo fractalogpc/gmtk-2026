@@ -58,7 +58,7 @@ public class DragLever : MonoBehaviour, IInteractable
     private bool wasAtMax;
     private bool wasAtMin;
     private bool isInteracting;
-    private bool canInteract = true;
+    private bool hardDisabled;
 
     public float Angle => currentAngle;
     public float NormalizedValue => Mathf.InverseLerp(minAngle, maxAngle, currentAngle);
@@ -92,7 +92,7 @@ public class DragLever : MonoBehaviour, IInteractable
 
     public InteractionSettings OnInteractStart(InteractionData data)
     {
-        if (!canInteract) return new InteractionSettings(lockCameraAndMovement: false);
+        if (!enabled || hardDisabled) return new InteractionSettings(lockCameraAndMovement: false);
         isInteracting = true;
         dragCamera = Camera.main;
         savedCursorLockMode = Cursor.lockState;
@@ -107,7 +107,6 @@ public class DragLever : MonoBehaviour, IInteractable
 
     public InteractionSettings DuringInteract(InteractionData data)
     {
-        if (!canInteract) return new InteractionSettings(lockCameraAndMovement: false);
         if (!isInteracting) return new InteractionSettings(lockCameraAndMovement: false);
         if (dragCamera == null) return new InteractionSettings(lockCameraAndMovement: true);
 
@@ -130,7 +129,6 @@ public class DragLever : MonoBehaviour, IInteractable
 
     public InteractionSettings OnInteractEnd(InteractionData data)
     {
-        if (!canInteract) return new InteractionSettings(lockCameraAndMovement: false);
         if (!isInteracting) return new InteractionSettings(lockCameraAndMovement: false);
         isInteracting = false;
         Cursor.lockState = savedCursorLockMode;
@@ -143,7 +141,24 @@ public class DragLever : MonoBehaviour, IInteractable
     public void SetInteractionEnabled(bool value)
     {
         if (!value) SafeDisable();
-        else canInteract = true;
+        else enabled = true;
+    }
+
+    /// <summary>
+    /// Hard-lock that overrides SetInteractionEnabled — used when a system (like FireLever)
+    /// wants the lever unusable even when the containing StaticCameraView reactivates it.
+    /// </summary>
+    public void SetHardDisabled(bool value)
+    {
+        hardDisabled = value;
+        if (value && isInteracting)
+        {
+            Cursor.lockState = savedCursorLockMode;
+            Cursor.visible = savedCursorVisible;
+            RestoreCursorPosition();
+            overrideLerpSpeed = null;
+            isInteracting = false;
+        }
     }
 
     public void SafeDisable()
@@ -156,7 +171,7 @@ public class DragLever : MonoBehaviour, IInteractable
             overrideLerpSpeed = null;
             isInteracting = false;
         }
-        canInteract = false;
+        enabled = false;
     }
 
     private void RestoreCursorPosition()
@@ -215,13 +230,6 @@ public class DragLever : MonoBehaviour, IInteractable
         if (atMin && !wasAtMin) onReachedMin.Invoke();
         wasAtMax = atMax;
         wasAtMin = atMin;
-
-        // Snap the pivot immediately if lerping isn't wanted or Update won't run to catch it.
-        float effectiveSpeed = overrideLerpSpeed ?? leverSpeed;
-        if (effectiveSpeed <= 0f || !enabled || !gameObject.activeInHierarchy)
-        {
-            leverPivot.localRotation = TargetRotation();
-        }
     }
 
     private float SnapAngle(float angle)

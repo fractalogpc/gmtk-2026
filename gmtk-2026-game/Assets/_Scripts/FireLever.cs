@@ -10,7 +10,7 @@ public class FireLever : MonoBehaviour
     [SerializeField] private Light[] lightSources;
     [SerializeField] private Material onMaterial;
     [SerializeField] private Material offMaterial;
-    [SerializeField][Range(0, 1)] private float fireThreshold = 0.8f; 
+    [SerializeField][Range(0, 1)] private float fireThreshold = 0.8f;
     [SerializeField] private CinemachineImpulseSource gunMoveImpulse;
     [SerializeField] private CinemachineImpulseSource fireImpulse;
     [SerializeField] private UnityEvent onFire;
@@ -74,11 +74,12 @@ public class FireLever : MonoBehaviour
 
     public void UnlockFireLever()
     {
+        lever.SetHardDisabled(false);
         lever.SetInteractionEnabled(true);
     }
 
     public void LockFireLever()
     {
-        lever.SetInteractionEnabled(false);
+        lever.SetHardDisabled(true);
     }
 }
