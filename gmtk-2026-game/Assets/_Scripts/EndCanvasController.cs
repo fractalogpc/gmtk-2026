@@ -11,6 +11,13 @@ public class EndCanvasController : MonoBehaviour
         StartCoroutine(EndCoroutine());
     }
 
+    private void Start()
+    {
+        endCanvasGroup.alpha = 0f; // Start with the canvas invisible
+        endCanvasGroup.blocksRaycasts = false; // Disable interaction with the canvas
+        endCanvasGroup.interactable = false; // Disable interaction with the canvas
+    }
+
     private System.Collections.IEnumerator EndCoroutine()
     {
         // Your end logic here
