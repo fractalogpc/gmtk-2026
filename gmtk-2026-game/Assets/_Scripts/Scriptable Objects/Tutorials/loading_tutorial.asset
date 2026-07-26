@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::DialogObject
   sprite: {fileID: 21300000, guid: 16307adf14f5f81409b8dac9eb0b259e, type: 3}
   dialogue:
-  - Select the correct shell type with via the levers, then use the button at the
-    computer to fill it with powder. Don't overfill!
+  - Select the correct shell type via the levers, then use the button at the computer
+    to fill it with powder. Don't overfill!
