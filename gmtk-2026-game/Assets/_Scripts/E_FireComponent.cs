@@ -37,6 +37,13 @@ public class E_FireComponent : MonoBehaviour
         this.explosionPrefab = explosionPrefab;
     }
 
+    private void Start()
+    {
+        // Reset scale to 1 to avoid any scaling issues with the fire prefabs
+        transform.parent = null;
+        transform.localScale = Vector3.one;
+    }
+
     public void Trigger(int intensity)
     {
         if (intensity > 3) intensity = 3;
