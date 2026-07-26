@@ -6083,20 +6083,33 @@ MonoBehaviour:
   resultTime: 3
   failMessageDuration: 2
   levels:
-  - requiredShell: 3
+  - requiredShell: 0
     obscureCoordinates: 1
     timeLimit: 0
     tolerance: 10
     range: 3000
-    fireIntensity: 3
-    doBlackout: 0
+    fireIntensity: 0
+    doBlackout: 1
     startDialog: {fileID: 11400000, guid: a15a2a905b1423142b8d40314d063cbb, type: 2}
     showStartDialog: 1
     fireDialog: {fileID: 11400000, guid: 6812adff2be362049914ba2a6957335a, type: 2}
     showFireDialog: 1
     impactDialog: {fileID: 11400000, guid: facbaf3a59e923c43b98f5b213a7125f, type: 2}
     showImpactDialog: 1
-  - requiredShell: 0
+  - requiredShell: 3
+    obscureCoordinates: 0
+    timeLimit: 0
+    tolerance: 1
+    range: 500
+    fireIntensity: 1
+    doBlackout: 0
+    startDialog: {fileID: 0}
+    showStartDialog: 1
+    fireDialog: {fileID: 0}
+    showFireDialog: 1
+    impactDialog: {fileID: 0}
+    showImpactDialog: 1
+  - requiredShell: 3
     obscureCoordinates: 1
     timeLimit: 0
     tolerance: 1
@@ -20839,6 +20852,14 @@ PrefabInstance:
       propertyPath: onFire.m_PersistentCalls.m_Calls.Array.data[2].m_Target
       value: 
       objectReference: {fileID: 238040542}
+    - target: {fileID: 4851972680902226546, guid: 9bcfda04cb8b9c848aec614a86110382, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.251
+      objectReference: {fileID: 0}
+    - target: {fileID: 4851972680902226546, guid: 9bcfda04cb8b9c848aec614a86110382, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.775
+      objectReference: {fileID: 0}
     - target: {fileID: 4937538223127287431, guid: 9bcfda04cb8b9c848aec614a86110382, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0.23809004
