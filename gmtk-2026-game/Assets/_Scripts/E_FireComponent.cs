@@ -40,9 +40,6 @@ public class E_FireComponent : MonoBehaviour
 
     private void Start()
     {
-        // Reset scale to 1 to avoid any scaling issues with the fire prefabs
-        transform.parent = null;
-        transform.localScale = Vector3.one;
     }
 
     public void Trigger(int intensity)
@@ -59,7 +56,6 @@ public class E_FireComponent : MonoBehaviour
         internalFlameInfluence = 6f;
 
         GameObject explosion = Instantiate(explosionPrefab, transform.position, Quaternion.identity);
-        explosion.transform.parent = transform;
 
         GameObject firePrefabToUse = null;
 
@@ -77,7 +73,6 @@ public class E_FireComponent : MonoBehaviour
         }
 
         GameObject fire = Instantiate(firePrefabToUse, transform.position, Quaternion.identity);
-        fire.transform.parent = transform;
 
         currentFireInstance = fire;
     }
@@ -111,6 +106,7 @@ public class E_FireComponent : MonoBehaviour
             if (currentFireIntensity == 0)
             {
                 fireAmount = 0f;
+                fireSoundEmitter.Stop();
             }
             else if (currentFireIntensity == 1)
             {

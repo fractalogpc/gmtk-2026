@@ -27,6 +27,9 @@ public class DialogController : MonoBehaviour
     [SerializeField] DialogObject testDialog;
     // Speed of the Tween for Dialogue box >
     [SerializeField] float dialogueAppearAnimSpeed;
+    [SerializeField] GameObject progressableIcon;
+    [SerializeField] GameObject notProgressableIcon;
+
     [SerializeField] StudioEventEmitter dialogueSound;
 
     // String var for Dialog text >
@@ -113,6 +116,7 @@ public class DialogController : MonoBehaviour
         index = 0;
         textComponent.text = string.Empty;
         dialogueBox.transform.DOMove(tweenDestination, dialogueAppearAnimSpeed);
+        SetProgressableIcon(!preventEarlyDismiss);
         StopAllCoroutines();
         StartCoroutine(TypewriterAnim());
     }
@@ -125,6 +129,12 @@ public class DialogController : MonoBehaviour
         if (!dialogueVisible) return;
         preventDismiss = false;
         DismissAndAdvance();
+    }
+
+    private void SetProgressableIcon(bool progressable)
+    {
+        progressableIcon.SetActive(progressable);
+        notProgressableIcon.SetActive(!progressable);
     }
 
     private void DismissAndAdvance()

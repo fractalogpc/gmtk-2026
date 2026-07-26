@@ -127,6 +127,7 @@ public class GameManager : MonoBehaviour
             }
             LogState("Coordinates received");
 
+            eventManager.TriggerFireEvent(4);
             // Trigger countdown
             bool hasTimer = levelData.timeLimit > 0f;
             if (hasTimer)
