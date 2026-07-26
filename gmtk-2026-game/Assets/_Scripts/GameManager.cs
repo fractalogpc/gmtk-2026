@@ -52,6 +52,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private UnityEvent onNewTarget;
     [SerializeField] private UnityEvent onShellAnimation;
     [SerializeField] private Animation shellAnim;
+    [SerializeField] private DialogController dialogController;
 
     [Header("Settings")]
     [SerializeField] private float timeToImpact = 10f;
@@ -85,6 +86,12 @@ public class GameManager : MonoBehaviour
             }
             Level levelData = levels[currentLevel];
             LogState($"START level (shell={levelData.requiredShell}, obscured={levelData.obscureCoordinates}, timeLimit={levelData.timeLimit})");
+
+            if (levelData.showStartDialog && levelData.startDialog != null)
+            {
+                dialogController.StartDialogue(levelData.startDialog);
+                levelData.showStartDialog = false;
+            }
 
             // Roll and stash the target for this round so the fire check and impact-time
             // calculations later on can reference the exact same values the player was given.
@@ -187,6 +194,14 @@ public class GameManager : MonoBehaviour
             LogState("Waiting 3s for firing animation");
             yield return new WaitForSeconds(3f);
             float impactTime = levelData.timeToImpact(levelData.range, currentTarget.elevation);
+            if ((hasTimer && countdown.Timer > 0f) || !hasTimer)
+            {
+                if (levelData.showFireDialog && levelData.fireDialog != null)
+                {
+                    dialogController.StartDialogue(levelData.fireDialog);
+                    levelData.showImpactDialog = false;
+                }
+            }
             LogState($"Starting impact countdown ({impactTime:F2}s)");
             countdown.StartTimer(impactTime);
 
@@ -211,11 +226,14 @@ public class GameManager : MonoBehaviour
                 onTargetHit?.Invoke();
             }
             successLight.SetSuccess(isSuccess);
-
+            if (levelData.showImpactDialog && levelData.impactDialog != null)
+            {
+                dialogController.StartDialogue(levelData.impactDialog);
+                levelData.showImpactDialog = false;
+            }
             LogState($"Waiting {impactViewTime}s (impactViewTime)");
             yield return new WaitForSeconds(impactViewTime);
             onPostImpact?.Invoke();
-
 
             targetingConsole.DisplayMessage(isSuccess ? "SUCCESS" : "FAILURE");
             LogState($"Displaying result, waiting {resultTime}s");
@@ -233,7 +251,7 @@ public class GameManager : MonoBehaviour
             StartCoroutine(TriggerEvents(levelData, Mathf.Max(levelData.soundDelay(currentTarget.elevation) - impactViewTime - resultTime, 0f)));
             // yield return new WaitForSeconds(Mathf.Max(levelData.soundDelay(currentTarget.elevation) - impactViewTime - resultTime, 0f));
 
-            currentLevel++;
+            if (isSuccess) currentLevel++;
 
             onNewTarget?.Invoke();
 
@@ -382,6 +400,13 @@ public class Level
     public float range; // Distance in meters
     public int fireIntensity; // 0 is no fire, don't go over 4
     public bool doBlackout;
+
+    public DialogObject startDialog;
+    public bool showStartDialog = true;
+    public DialogObject fireDialog;
+    public bool showFireDialog = true;
+    public DialogObject impactDialog;
+    public bool showImpactDialog = true;
 
     public Level()
     {

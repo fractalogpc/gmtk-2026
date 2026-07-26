@@ -43,7 +43,7 @@ public class DialogController : MonoBehaviour
         dialogueVisible = false;
         textComponent.text = string.Empty;
         image = dialogueImage.GetComponent<UnityEngine.UI.Image>();
-        dialogueBox.SetActive(false);
+        dialogueBox.transform.position = new Vector3(tweenDestination.x, -1000, 0);
         //StartDialogue(testDialog);
     }
 
@@ -69,7 +69,6 @@ public class DialogController : MonoBehaviour
     // This is called by another script to start a dialogue
     public void StartDialogue(DialogObject dialogue)
     {
-        dialogueBox.SetActive(true);
         dialogueVisible = true;
         image.sprite = dialogue.sprite;
         lines = dialogue.dialogue;
@@ -99,7 +98,8 @@ public class DialogController : MonoBehaviour
         }
         else
         {
-            dialogueBox.SetActive(false);
+            if (!dialogueVisible) return;
+            dialogueBox.transform.DOMove(new Vector3(tweenDestination.x, -1000, 0), 0.5f);
             dialogueVisible = false;
         }
     }

@@ -3196,6 +3196,17 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 401231264}
   m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &431839965 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3981256159172761418, guid: 67f1833459133ed44b7b4bf39c68e8cf, type: 3}
+  m_PrefabInstance: {fileID: 5670267144387979567}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b6a9e26d1b4bbc646b0cffa989c1463a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::DialogController
 --- !u!1001 &432816161
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6069,6 +6080,7 @@ MonoBehaviour:
           m_BoolArgument: 1
         m_CallState: 2
   shellAnim: {fileID: 386942559}
+  dialogController: {fileID: 431839965}
   timeToImpact: 10
   randomAzimuthMin: -180
   randomAzimuthMax: 180
@@ -6083,6 +6095,12 @@ MonoBehaviour:
     range: 500
     fireIntensity: 0
     doBlackout: 1
+    startDialog: {fileID: 11400000, guid: a15a2a905b1423142b8d40314d063cbb, type: 2}
+    showStartDialog: 1
+    fireDialog: {fileID: 11400000, guid: 6812adff2be362049914ba2a6957335a, type: 2}
+    showFireDialog: 1
+    impactDialog: {fileID: 11400000, guid: facbaf3a59e923c43b98f5b213a7125f, type: 2}
+    showImpactDialog: 1
   - requiredShell: 0
     obscureCoordinates: 1
     timeLimit: 0
@@ -6090,6 +6108,12 @@ MonoBehaviour:
     range: 500
     fireIntensity: 1
     doBlackout: 1
+    startDialog: {fileID: 0}
+    showStartDialog: 1
+    fireDialog: {fileID: 0}
+    showFireDialog: 1
+    impactDialog: {fileID: 0}
+    showImpactDialog: 1
 --- !u!114 &677906279
 MonoBehaviour:
   m_ObjectHideFlags: 0
