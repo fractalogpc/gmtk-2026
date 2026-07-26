@@ -42,6 +42,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private LoadingStation loadingStation;
     [SerializeField] private GeneratorController generatorController;
     [SerializeField] private EventManager eventManager;
+    [SerializeField] private TimeLImitLight timeLimitLight;
 
     [SerializeField] private NixieClock countdown;
     [SerializeField] private FireLever fireLever;
@@ -127,12 +128,12 @@ public class GameManager : MonoBehaviour
             }
             LogState("Coordinates received");
 
-            eventManager.TriggerFireEvent(4);
             // Trigger countdown
             bool hasTimer = levelData.timeLimit > 0f;
             if (hasTimer)
             {
-                LogState($"Starting countdown ({levelData.timeLimit}s)");
+                LogState($"Starting time limit light and countdown ({levelData.timeLimit}s)");
+                timeLimitLight.Activate();
                 countdown.StartTimer(levelData.timeLimit);
             }
             else
@@ -210,6 +211,8 @@ public class GameManager : MonoBehaviour
 
                 }
             }
+
+            timeLimitLight.Deactivate();
 
             if (failed)
             {

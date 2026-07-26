@@ -59,9 +59,13 @@ public class PlayerInteractor : MonoBehaviour
     {
         if (currentInteractable == null)
         {
-            if (InteractableInView(out bool interactableEnabled))
+            if (InteractableInView(out bool interactableEnabled, out bool staticCamera))
             {
-                if (interactableEnabled)
+                if (staticCamera)
+                {
+                    crosshairManager.ShowStaticCameraCrosshair();
+                }
+                else if (interactableEnabled)
                 {
                     crosshairManager.ShowInteractableCrosshair();
                 }
@@ -79,9 +83,10 @@ public class PlayerInteractor : MonoBehaviour
         ApplyInteractionSettings(currentInteractable.DuringInteract(BuildData(GetInteractRay(), GetMouseDelta())));
     }
 
-    private bool InteractableInView(out bool canInteract)
+    private bool InteractableInView(out bool canInteract, out bool staticCamera)
     {
         canInteract = false;
+        staticCamera = false;
         Ray ray = GetInteractRay();
         float distance = activeStaticView != null ? staticViewInteractDistance : interactDistance;
         if (!Physics.Raycast(ray, out RaycastHit hit, distance, interactLayers)) 
@@ -95,12 +100,12 @@ public class PlayerInteractor : MonoBehaviour
         IStaticCamera staticView = hit.collider.GetComponentInParent<IStaticCamera>();
         if (staticView != null)
         {
+            staticCamera = true;
             canInteract = true;
             return true;
         }
         if (interactable is DragLever lever && !lever.CanInteract)
         {
-            canInteract = false;
             return true;
         }
         if (interactable is MonoBehaviour mb && !mb.enabled) {
