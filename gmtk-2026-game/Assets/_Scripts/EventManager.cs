@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Collections.Generic;
 using System.Collections;
+using FMODUnity;
 
 public class EventManager : MonoBehaviour
 {
@@ -25,6 +26,7 @@ public class EventManager : MonoBehaviour
     [Header("Power Outage Event")]
     [SerializeField] private GameObject[] lightsToTurnOff;
     [SerializeField] private GameObject[] emergencyLightsToTurnOn;
+    [SerializeField] private StudioEventEmitter blackoutSoundEmitter;
 
 
     float updateInterval = 0.25f; // Update every second
@@ -178,7 +180,7 @@ public class EventManager : MonoBehaviour
             lightsToTurnOffList[i] = lightsToTurnOffList[randomIndex];
             lightsToTurnOffList[randomIndex] = temp;
         }
-
+        blackoutSoundEmitter.Play();
         StartCoroutine(TurnOffLightsCoroutine(lightsToTurnOffList));
     }
 
