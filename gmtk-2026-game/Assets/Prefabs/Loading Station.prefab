@@ -942,6 +942,7 @@ Transform:
   m_Children:
   - {fileID: 107800890994501251}
   - {fileID: 1552856820633598703}
+  - {fileID: 8536144452203734894}
   m_Father: {fileID: 5162266931047315444}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!65 &8754974212648795503
@@ -980,6 +981,7 @@ MonoBehaviour:
   staticCamera: {fileID: 7149259723151982090}
   managedObjects:
   - {fileID: 3540912939640456194}
+  - {fileID: 870474927782781324}
   onEnter:
     m_PersistentCalls:
       m_Calls: []
@@ -1156,6 +1158,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: '::'
   loadButton: {fileID: 3540912939640456194}
+  staticView: {fileID: 6612086274894469435}
+  additionalInteractables:
+  - {fileID: 5134525446259977996}
+  - {fileID: 4400940824630008295}
+  - {fileID: 8504765436251446508}
   powderText: {fileID: 1521574333521145732}
   shellText: {fileID: 9103472646873496519}
   startFillSpeed: 4
@@ -3456,6 +3463,278 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 669872121124089526, guid: c1f98793213f757478a22d93ecd883be, type: 3}
   m_PrefabInstance: {fileID: 6194426890227364816}
   m_PrefabAsset: {fileID: 0}
+--- !u!1001 &8213654613337505925
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 6742898348794519403}
+    m_Modifications:
+    - target: {fileID: -8679921383154817045, guid: 3711454e9b4ad734ab6ecd66b300eede, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 58.68644
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 3711454e9b4ad734ab6ecd66b300eede, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 58.68644
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 3711454e9b4ad734ab6ecd66b300eede, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 58.68644
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 3711454e9b4ad734ab6ecd66b300eede, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 2.646
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 3711454e9b4ad734ab6ecd66b300eede, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.2417
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 3711454e9b4ad734ab6ecd66b300eede, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 5.3523
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 3711454e9b4ad734ab6ecd66b300eede, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.6733825
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 3711454e9b4ad734ab6ecd66b300eede, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0.000000025419482
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 3711454e9b4ad734ab6ecd66b300eede, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0.7392943
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 3711454e9b4ad734ab6ecd66b300eede, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0.00000002790759
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 3711454e9b4ad734ab6ecd66b300eede, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 3711454e9b4ad734ab6ecd66b300eede, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: -95.343
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 3711454e9b4ad734ab6ecd66b300eede, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: 3711454e9b4ad734ab6ecd66b300eede, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 784d1960d64abef4aa4b2bd9da4a5fb0, type: 2}
+    - target: {fileID: -802881719455405903, guid: 3711454e9b4ad734ab6ecd66b300eede, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 1580dbfff9e285945a6bebaa29042b8a, type: 2}
+    - target: {fileID: -248005119892688762, guid: 3711454e9b4ad734ab6ecd66b300eede, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 4060aef9054e0ec488dc3a9baa91bc35, type: 2}
+    - target: {fileID: 919132149155446097, guid: 3711454e9b4ad734ab6ecd66b300eede, type: 3}
+      propertyPath: m_Name
+      value: Fire Lever (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 3711454e9b4ad734ab6ecd66b300eede, type: 3}
+      propertyPath: m_TagString
+      value: Interactable
+      objectReference: {fileID: 0}
+    - target: {fileID: 5212638044745319135, guid: 3711454e9b4ad734ab6ecd66b300eede, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 1580dbfff9e285945a6bebaa29042b8a, type: 2}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 3711454e9b4ad734ab6ecd66b300eede, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 870474927782781324}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 3711454e9b4ad734ab6ecd66b300eede, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 3935977389845204146}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 3711454e9b4ad734ab6ecd66b300eede, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 4426788247677986389}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 3711454e9b4ad734ab6ecd66b300eede, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 5430782434756330204}
+  m_SourcePrefab: {fileID: 100100000, guid: 3711454e9b4ad734ab6ecd66b300eede, type: 3}
+--- !u!4 &8231542127308743900 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -8953001399111801767, guid: 3711454e9b4ad734ab6ecd66b300eede, type: 3}
+  m_PrefabInstance: {fileID: 8213654613337505925}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &8536144452203734894 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 3711454e9b4ad734ab6ecd66b300eede, type: 3}
+  m_PrefabInstance: {fileID: 8213654613337505925}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &9024556745446800852 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 3711454e9b4ad734ab6ecd66b300eede, type: 3}
+  m_PrefabInstance: {fileID: 8213654613337505925}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &870474927782781324
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9024556745446800852}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 18c9aa04f2ee4124cb93c4600a689502, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::DragLever
+  leverPivot: {fileID: 8231542127308743900}
+  rotationAxis: {x: 1, y: 0, z: 0}
+  handleAxis: {x: 0, y: 0, z: 1}
+  minAngle: 0
+  maxAngle: 110
+  startAngle: 0
+  sensitivity: 1
+  segments: 8
+  leverSpeed: 30
+  directionMode: 1
+  returnOnRelease: 1
+  dontReturnOnReleaseIfAtMax: 1
+  defaultAngle: 0
+  onValueChanged:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 3935977389845204146}
+        m_TargetAssemblyTypeName: FMODUnity.StudioEventEmitter, FMODUnity
+        m_MethodName: Play
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  onAngleChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  onReachedMax:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 4426788247677986389}
+        m_TargetAssemblyTypeName: FMODUnity.StudioEventEmitter, FMODUnity
+        m_MethodName: Play
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 951713222979092153}
+        m_TargetAssemblyTypeName: LoadingStation, Assembly-CSharp
+        m_MethodName: LoadShell
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  onReachedMin:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!114 &3935977389845204146
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9024556745446800852}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: FMODUnity::FMODUnity.StudioEventEmitter
+  CollisionTag: 
+  EventReference:
+    Guid:
+      Data1: 20453352
+      Data2: 1085551849
+      Data3: -214345292
+      Data4: -407585690
+    Path: event:/Lever
+  Event: 
+  EventPlayTrigger: 0
+  EventStopTrigger: 0
+  AllowFadeout: 1
+  TriggerOnce: 0
+  Preload: 0
+  NonRigidbodyVelocity: 0
+  Params: []
+  OverrideAttenuation: 0
+  OverrideMinDistance: 1
+  OverrideMaxDistance: 20
+--- !u!114 &4426788247677986389
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9024556745446800852}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: FMODUnity::FMODUnity.StudioEventEmitter
+  CollisionTag: 
+  EventReference:
+    Guid:
+      Data1: 1164751000
+      Data2: 1234732286
+      Data3: -901635928
+      Data4: 1149051436
+    Path: event:/LeverFire
+  Event: 
+  EventPlayTrigger: 0
+  EventStopTrigger: 0
+  AllowFadeout: 1
+  TriggerOnce: 0
+  Preload: 0
+  NonRigidbodyVelocity: 0
+  Params: []
+  OverrideAttenuation: 0
+  OverrideMinDistance: 1
+  OverrideMaxDistance: 20
+--- !u!65 &5430782434756330204
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9024556745446800852}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.0025400005, y: 0.0050799996, z: 0.0011430004}
+  m_Center: {x: 0.0000000037252903, y: 1.1641532e-10, z: 0.0005715036}
 --- !u!1001 &8575992944166889302
 PrefabInstance:
   m_ObjectHideFlags: 0

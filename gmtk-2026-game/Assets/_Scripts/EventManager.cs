@@ -52,7 +52,7 @@ public class EventManager : MonoBehaviour
         }
 
         // TriggerFireEvent(4); // Example trigger with intensity 2
-        Invoke(nameof(TriggerPowerOutageEvent), 5f); // Example trigger after 5 seconds
+        // Invoke(nameof(TriggerPowerOutageEvent), 5f); // Example trigger after 5 seconds
     }
 
     private void Update()

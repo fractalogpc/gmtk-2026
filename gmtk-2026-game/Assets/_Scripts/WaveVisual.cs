@@ -37,8 +37,14 @@ public class WaveVisual : MonoBehaviour
     [SerializeField, Range(0f, 1f)] private float targetPhase = 0.5f;
 
     [Header("Match Detection")]
-    [Tooltip("How close (0..1) each parameter must be to count as a match.")]
-    [SerializeField, Range(0f, 0.5f)] private float matchTolerance = 0.05f;
+    [Tooltip("Default tolerance if the per-parameter values below are 0.")]
+    [SerializeField, Range(0f, 0.5f)] private float matchTolerance = 0.15f;
+    [Tooltip("Optional per-parameter tolerances. Leave at 0 to fall back to matchTolerance.")]
+    [SerializeField, Range(0f, 0.5f)] private float amplitudeTolerance = 0f;
+    [SerializeField, Range(0f, 0.5f)] private float distortionTolerance = 0f;
+    [SerializeField, Range(0f, 0.5f)] private float phaseTolerance = 0f;
+    [Tooltip("If true, logs how close the player is on each parameter every frame — useful for tuning tolerances.")]
+    [SerializeField] private bool debugMatchDiffs = false;
     [SerializeField] private UnityEngine.Events.UnityEvent onMatchEntered;
     [SerializeField] private UnityEngine.Events.UnityEvent onMatchExited;
 
@@ -126,11 +132,22 @@ public class WaveVisual : MonoBehaviour
     {
         // Phase is circular — 0.02 and 0.98 are actually 0.04 apart, not 0.96.
         float phaseDiff = Mathf.Abs(Mathf.DeltaAngle(CurrentPhase * 360f, targetPhase * 360f)) / 360f;
+        float ampDiff = Mathf.Abs(CurrentAmplitude - targetAmplitude);
+        float distDiff = Mathf.Abs(CurrentDistortion - targetDistortion);
+
+        float ampTol = amplitudeTolerance > 0f ? amplitudeTolerance : matchTolerance;
+        float distTol = distortionTolerance > 0f ? distortionTolerance : matchTolerance;
+        float phaseTol = phaseTolerance > 0f ? phaseTolerance : matchTolerance;
+
+        if (debugMatchDiffs)
+        {
+            Debug.Log($"[Decoder] amp {ampDiff:F3}/{ampTol:F3}  dist {distDiff:F3}/{distTol:F3}  phase {phaseDiff:F3}/{phaseTol:F3}", this);
+        }
 
         bool nowMatched =
-            Mathf.Abs(CurrentAmplitude - targetAmplitude) <= matchTolerance &&
-            Mathf.Abs(CurrentDistortion - targetDistortion) <= matchTolerance &&
-            phaseDiff <= matchTolerance;
+            ampDiff <= ampTol &&
+            distDiff <= distTol &&
+            phaseDiff <= phaseTol;
 
         if (nowMatched == isMatched) return;
         isMatched = nowMatched;
@@ -151,7 +168,18 @@ public class WaveVisual : MonoBehaviour
         targetAmplitude = Mathf.Clamp01(amplitude);
         targetDistortion = Mathf.Clamp01(distortion);
         targetPhase = Mathf.Clamp01(phase);
-        if (targetLine != null) DrawWave(targetLine, targetAmplitude, targetDistortion, targetPhase);
+        if (targetLine != null)
+        {
+            targetLine.enabled = showTarget;
+            DrawWave(targetLine, targetAmplitude, targetDistortion, targetPhase);
+        }
+    }
+
+    public void ResetState()
+    {
+        if (targetLine != null) targetLine.enabled = false;
+        // Clear match state without firing an "unmatched" event — this is a programmatic reset.
+        isMatched = false;
     }
 
     public void RandomizeTarget()

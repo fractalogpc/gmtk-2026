@@ -497,7 +497,8 @@ MonoBehaviour:
   verticalBarSensitivity: 0.00005
   verticalBarOffsetClamp: {x: -0.034, y: 0.014}
   horizontalBarOffsetClamp: {x: -0.0085, y: 0.004}
-  waveVisual: {fileID: 0}
+  waveVisual: {fileID: 250034884159169906}
+  staticView: {fileID: 621609417429680061}
   onSignalMatched:
     m_PersistentCalls:
       m_Calls: []
@@ -692,6 +693,10 @@ MonoBehaviour:
   targetDistortion: 0.4
   targetPhase: 0.5
   matchTolerance: 0.043
+  amplitudeTolerance: 0
+  distortionTolerance: 0
+  phaseTolerance: 0
+  debugMatchDiffs: 0
   onMatchEntered:
     m_PersistentCalls:
       m_Calls: []

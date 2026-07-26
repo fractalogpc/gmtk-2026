@@ -8,6 +8,8 @@ public class TargetingConsole : MonoBehaviour
     [SerializeField] private TextMeshProUGUI gunText;
     [SerializeField] private DragLever leverAzimuth;
     [SerializeField] private DragLever leverElevation;
+    [SerializeField] private Button recieveCoordinatesButton;
+    [SerializeField] private StaticCameraView staticView;
     [SerializeField] private float azimuthForceMin, azimuthForceMax;
     [SerializeField] private float elevationForceMin, elevationForceMax;
     [SerializeField] private float gunMass = 100f;
@@ -23,7 +25,18 @@ public class TargetingConsole : MonoBehaviour
     private float gunAzimuth, gunElevation;
     private float gunVelocityAzimuth, gunVelocityElevation;
 
+    public bool HasReceivedCoordinates;
+
+    private float pendingAzimuth;
+    private float pendingElevation;
+    private bool coordinatesEncrypted;
+
     private bool locked = false;
+    // Targeting is interactable by default — the player is always allowed to aim the gun.
+    // Power gating is the only thing that can knock it out at runtime.
+    private bool gameActive = true;
+    private bool powered = true;
+    private bool IsInteractable => gameActive && powered;
 
     public void SetLocked(bool isLocked)
     {
@@ -45,9 +58,65 @@ public class TargetingConsole : MonoBehaviour
         gunText.text = message;
     }
 
-    public void SetTargetValues(float azimuth, float elevation)
+    public void SetTargetValues(float azimuth, float elevation, bool encrypted = false)
     {
-        targetText.text = $"FIRING ORDERS\n_______________\n{azimuth:F2} AZIM\n{elevation:F2} ELEV";
+        pendingAzimuth = azimuth;
+        pendingElevation = elevation;
+        coordinatesEncrypted = encrypted;
+        UpdateTargetText();
+        SetInteractable(true);
+    }
+
+    public void RevealCoordinates()
+    {
+        if (!coordinatesEncrypted) return;
+        coordinatesEncrypted = false;
+        UpdateTargetText();
+    }
+
+    private void UpdateTargetText()
+    {
+        if (targetText == null) return;
+        if (coordinatesEncrypted)
+        {
+            targetText.text = "FIRING ORDERS\n_______________\n<< ENCRYPTED >>\nDECODE SIGNAL";
+        }
+        else
+        {
+            targetText.text = $"FIRING ORDERS\n_______________\n{pendingAzimuth:F2} AZIM\n{pendingElevation:F2} ELEV";
+        }
+    }
+
+    public void SetInteractable(bool interactable)
+    {
+        gameActive = interactable;
+        ApplyInteractable();
+    }
+
+    public void SetPowered(bool value)
+    {
+        powered = value;
+        ApplyInteractable();
+    }
+
+    private void ApplyInteractable()
+    {
+        if (staticView == null) return;
+        if (IsInteractable) staticView.ReactivateManagedObjects();
+        else staticView.DeactivateManagedObjects();
+    }
+
+    public void Reset()
+    {
+        HasReceivedCoordinates = false;
+        locked = false;
+        coordinatesEncrypted = false;
+        pendingAzimuth = 0f;
+        pendingElevation = 0f;
+        if (targetText != null) targetText.text = string.Empty;
+        UpdateGunText();
+        // Note: intentionally leave interactability alone. The gun should always be aim-able
+        // between rounds — power cuts are the only thing that should lock the levers.
     }
 
     private float MapNormalizedToRange(float normalizedValue, float min, float max)
@@ -125,6 +194,12 @@ public class TargetingConsole : MonoBehaviour
 
     private void Update()
     {
+        if (IsInteractable && !HasReceivedCoordinates
+            && recieveCoordinatesButton != null && recieveCoordinatesButton.IsPressed())
+        {
+            HasReceivedCoordinates = true;
+        }
+
         if (locked) return;
         float deltaTime = Time.deltaTime;
         UpdateAccelFromLevers(deltaTime);

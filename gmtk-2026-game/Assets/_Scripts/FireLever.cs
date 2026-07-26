@@ -17,6 +17,11 @@ public class FireLever : MonoBehaviour
     public bool IsFired => hasFired;
     private bool hasFired = false;
 
+    private void Awake()
+    {
+        LockFireLever();
+    }
+
     public void ResetFireState(float speed = -1f)
     {
         hasFired = false;
@@ -29,8 +34,9 @@ public class FireLever : MonoBehaviour
         {
             light.enabled = false;
         }
+        LockFireLever();
     }
-    
+
     private void Update()
     {
         if (!hasFired && lever.NormalizedValue >= fireThreshold)
@@ -38,15 +44,13 @@ public class FireLever : MonoBehaviour
             hasFired = true;
             Fire();
         }
-        else if (hasFired && lever.NormalizedValue < fireThreshold)
-        {
-            hasFired = false; // Reset the fire state when the lever is released
-        }
+        // Note: once fired the lever is locked in place by Fire(), so we don't need to
+        // handle the "lever came back below threshold" case — the player can't move it.
     }
 
     private void Fire()
     {
-        // play sounds or something
+        LockFireLever();
         StartCoroutine(FireCoroutine());
     }
 
@@ -66,5 +70,15 @@ public class FireLever : MonoBehaviour
             lightSources[i].enabled = true;
             yield return new WaitForSeconds(1f);
         }
+    }
+
+    public void UnlockFireLever()
+    {
+        lever.SetInteractionEnabled(true);
+    }
+
+    public void LockFireLever()
+    {
+        lever.SetInteractionEnabled(false);
     }
 }
