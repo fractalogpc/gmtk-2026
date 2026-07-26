@@ -115,6 +115,9 @@ public class EventManager : MonoBehaviour
         HeldExtinguisherObj.SetActive(false);
         InteractableExtinguisherObj.SetActive(true);
         InteractableExtinguisherScript.enabled = false;
+
+        // All fires are out — clear the fire tutorial lesson.
+        if (TutorialManager.Instance != null) TutorialManager.Instance.CompleteLesson("fire");
     }
 
     private bool AllFiresExtinguished()

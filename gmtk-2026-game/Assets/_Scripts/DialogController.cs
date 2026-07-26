@@ -1,6 +1,7 @@
 using UnityEngine;
 using TMPro;
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine.InputSystem;
 using GLTFast.Schema;
 using DG.Tweening;
@@ -38,6 +39,19 @@ public class DialogController : MonoBehaviour
     UnityEngine.UI.Image image;
     // Bool for preventing code from running when it shouldn't >
     bool dialogueVisible;
+    // If true, the player can advance lines but the final dismissal is blocked until ForceDismiss is called.
+    bool preventDismiss;
+    // Queue of dialogues waiting for the current one to finish.
+    readonly Queue<QueuedDialog> dialogueQueue = new();
+
+    public bool IsShowing => dialogueVisible;
+    public bool IsPreventingDismiss => preventDismiss;
+
+    private struct QueuedDialog
+    {
+        public DialogObject dialog;
+        public bool preventDismiss;
+    }
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -71,12 +85,59 @@ public class DialogController : MonoBehaviour
     // This is called by another script to start a dialogue
     public void StartDialogue(DialogObject dialogue)
     {
+        StartDialogue(dialogue, false);
+    }
+
+    /// <summary>
+    /// Overload that lets callers request the dialog stay on its final line until ForceDismiss()
+    /// is called (useful for tutorials that need the mechanic completed before advancing).
+    /// If a dialog is already visible, this queues behind it.
+    /// </summary>
+    public void StartDialogue(DialogObject dialogue, bool preventEarlyDismiss)
+    {
+        if (dialogue == null) return;
+        if (dialogueVisible)
+        {
+            dialogueQueue.Enqueue(new QueuedDialog { dialog = dialogue, preventDismiss = preventEarlyDismiss });
+            return;
+        }
+        ShowDialogue(dialogue, preventEarlyDismiss);
+    }
+
+    private void ShowDialogue(DialogObject dialogue, bool preventEarlyDismiss)
+    {
         dialogueVisible = true;
+        preventDismiss = preventEarlyDismiss;
         image.sprite = dialogue.sprite;
         lines = dialogue.dialogue;
         index = 0;
+        textComponent.text = string.Empty;
         dialogueBox.transform.DOMove(tweenDestination, dialogueAppearAnimSpeed);
+        StopAllCoroutines();
         StartCoroutine(TypewriterAnim());
+    }
+
+    /// <summary>
+    /// Dismiss the current dialog regardless of preventDismiss and pop the next queued one.
+    /// </summary>
+    public void ForceDismiss()
+    {
+        if (!dialogueVisible) return;
+        preventDismiss = false;
+        DismissAndAdvance();
+    }
+
+    private void DismissAndAdvance()
+    {
+        dialogueBox.transform.DOMove(new Vector3(tweenDestination.x, -1000, 0), 0.5f);
+        dialogueVisible = false;
+        preventDismiss = false;
+
+        if (dialogueQueue.Count > 0)
+        {
+            var next = dialogueQueue.Dequeue();
+            ShowDialogue(next.dialog, next.preventDismiss);
+        }
     }
 
     // This is called by StartDialogue(); to display text with a basic typewriter anim
@@ -106,8 +167,10 @@ public class DialogController : MonoBehaviour
         else
         {
             if (!dialogueVisible) return;
-            dialogueBox.transform.DOMove(new Vector3(tweenDestination.x, -1000, 0), 0.5f);
-            dialogueVisible = false;
+            // If a tutorial-style dialog is holding on its final line, don't let the player
+            // dismiss it — ForceDismiss() will be called once the mechanic is complete.
+            if (preventDismiss) return;
+            DismissAndAdvance();
         }
     }
 }
