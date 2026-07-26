@@ -4335,6 +4335,29 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 5230102868196399026, guid: 0728bdcb0358d774db2d861611635fa2, type: 3}
   m_PrefabInstance: {fileID: 528992615}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &539363269 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3332563795201689462, guid: 9bcfda04cb8b9c848aec614a86110382, type: 3}
+  m_PrefabInstance: {fileID: 4247042953601168270}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &539363270
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 539363269}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Outline
+  outlineMode: 0
+  outlineColor: {r: 1, g: 1, b: 1, a: 1}
+  outlineWidth: 2
+  precomputeOutline: 0
+  bakeKeys: []
+  bakeValues: []
 --- !u!1001 &545620630
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -13154,9 +13177,9 @@ MonoBehaviour:
     shown: 0
     completed: 0
   - id: fire
-    dialog: {fileID: 11400000, guid: f38c70cb607386c4c8b55a3682720e41, type: 2}
+    dialog: {fileID: 11400000, guid: 4fd3d01208d49254e8f4727986aa05fe, type: 2}
     outlines:
-    - {fileID: 1736036674}
+    - {fileID: 539363270}
     holdDialogUntilCompleted: 1
     onTriggered:
       m_PersistentCalls:
@@ -13183,6 +13206,19 @@ MonoBehaviour:
   - id: failure
     dialog: {fileID: 11400000, guid: f38c70cb607386c4c8b55a3682720e41, type: 2}
     outlines: []
+    holdDialogUntilCompleted: 0
+    onTriggered:
+      m_PersistentCalls:
+        m_Calls: []
+    onCompleted:
+      m_PersistentCalls:
+        m_Calls: []
+    shown: 0
+    completed: 0
+  - id: fire_event
+    dialog: {fileID: 11400000, guid: 6ef159bf87898974c9cc21c808027039, type: 2}
+    outlines:
+    - {fileID: 1736036674}
     holdDialogUntilCompleted: 0
     onTriggered:
       m_PersistentCalls:
@@ -24278,6 +24314,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 2602694511411495537, guid: 9bcfda04cb8b9c848aec614a86110382, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1193726229}
+    - targetCorrespondingSourceObject: {fileID: 3332563795201689462, guid: 9bcfda04cb8b9c848aec614a86110382, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 539363270}
   m_SourcePrefab: {fileID: 100100000, guid: 9bcfda04cb8b9c848aec614a86110382, type: 3}
 --- !u!114 &4247042953601168271 stripped
 MonoBehaviour:
