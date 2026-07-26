@@ -194,6 +194,12 @@ public class DragSlider : MonoBehaviour, IInteractable
         if (atMin && !wasAtMin) onReachedMin.Invoke();
         wasAtMax = atMax;
         wasAtMin = atMin;
+
+        float effectiveSpeed = overrideLerpSpeed ?? sliderSpeed;
+        if (effectiveSpeed <= 0f || !enabled || !gameObject.activeInHierarchy)
+        {
+            sliderHandle.localPosition = TargetLocalPosition();
+        }
     }
 
     private float SnapOffset(float offset)

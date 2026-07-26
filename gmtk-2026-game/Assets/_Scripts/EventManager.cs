@@ -52,7 +52,7 @@ public class EventManager : MonoBehaviour
         }
 
         // TriggerFireEvent(4); // Example trigger with intensity 2
-        // Invoke(nameof(TriggerPowerOutageEvent), 5f); // Example trigger after 5 seconds
+        Invoke(nameof(TriggerPowerOutageEvent), 5f); // Example trigger after 5 seconds
     }
 
     private void Update()
@@ -193,6 +193,38 @@ public class EventManager : MonoBehaviour
         {
             emergencyLight.SetActive(true);
             yield return new WaitForSeconds(Random.Range(0.2f, 0.25f)); // Adjust the delay as needed
+        }
+    }
+
+    public void RestorePower()
+    {
+        StopCoroutine(nameof(TurnOffLightsCoroutine));
+        StopCoroutine(nameof(RestorePowerCoroutine));
+
+        List<GameObject> lightsToTurnOnList = new List<GameObject>(lightsToTurnOff);
+        for (int i = lightsToTurnOnList.Count - 1; i > 0; i--)
+        {
+            int randomIndex = Random.Range(0, i + 1);
+            (lightsToTurnOnList[i], lightsToTurnOnList[randomIndex]) = (lightsToTurnOnList[randomIndex], lightsToTurnOnList[i]);
+        }
+
+        StartCoroutine(RestorePowerCoroutine(lightsToTurnOnList));
+    }
+
+    private IEnumerator RestorePowerCoroutine(List<GameObject> lightsToTurnOnList)
+    {
+        foreach (var emergencyLight in emergencyLightsToTurnOn)
+        {
+            emergencyLight.SetActive(false);
+            yield return new WaitForSeconds(Random.Range(0.2f, 0.25f));
+        }
+
+        yield return new WaitForSeconds(1f);
+
+        foreach (var light in lightsToTurnOnList)
+        {
+            light.SetActive(true);
+            yield return new WaitForSeconds(Random.Range(0.01f, 0.1f));
         }
     }
 

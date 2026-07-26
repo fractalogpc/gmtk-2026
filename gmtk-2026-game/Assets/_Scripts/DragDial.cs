@@ -218,6 +218,12 @@ public class DragDial : MonoBehaviour, IInteractable
             wasAtMax = atMax;
             wasAtMin = atMin;
         }
+
+        float effectiveSpeed = overrideLerpSpeed ?? dialSpeed;
+        if (effectiveSpeed <= 0f || !enabled || !gameObject.activeInHierarchy)
+        {
+            dialPivot.localRotation = TargetRotation();
+        }
     }
 
     private float SnapAngle(float angle)
