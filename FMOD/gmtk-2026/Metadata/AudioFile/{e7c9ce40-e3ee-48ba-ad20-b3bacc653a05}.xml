@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.03.00">
+	<object class="AudioFile" id="{e7c9ce40-e3ee-48ba-ad20-b3bacc653a05}">
+		<property name="assetPath">
+			<value>PowderFill/mattiamarcelli-pouring-grains-of-salt_heavy-534997.mp3</value>
+		</property>
+		<property name="frequencyInKHz">
+			<value>48</value>
+		</property>
+		<property name="channelCount">
+			<value>2</value>
+		</property>
+		<property name="length">
+			<value>7.8959999999999999</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{ebee0467-0437-4d67-b854-44db09358938}</destination>
+		</relationship>
+	</object>
+</objects>
