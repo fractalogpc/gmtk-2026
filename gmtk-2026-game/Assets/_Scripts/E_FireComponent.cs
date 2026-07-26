@@ -1,10 +1,11 @@
+using FMODUnity;
 using UnityEngine;
 using UnityEngine.Events;
 
 [RequireComponent(typeof(Collider))]
 public class E_FireComponent : MonoBehaviour
 {
-
+    [SerializeField] private StudioEventEmitter fireSoundEmitter;
     private GameObject smallFirePrefab;
     private GameObject mediumFirePrefab;
     private GameObject bigFirePrefab;
@@ -50,9 +51,11 @@ public class E_FireComponent : MonoBehaviour
         if (intensity < 1) intensity = 1;
 
         OnFireStarted.Invoke();
+        fireSoundEmitter.Play();
         isTriggered = true;
         currentFireIntensity = intensity;
 
+        fireSoundEmitter.SetParameter("Intensity", currentFireIntensity);
         internalFlameInfluence = 6f;
 
         GameObject explosion = Instantiate(explosionPrefab, transform.position, Quaternion.identity);
@@ -123,6 +126,8 @@ public class E_FireComponent : MonoBehaviour
         {
             fireAmount = 0f;
         }
+
+        fireSoundEmitter.SetParameter("Intensity", currentFireIntensity);
     }
 
     private void IncreaseFlame()
