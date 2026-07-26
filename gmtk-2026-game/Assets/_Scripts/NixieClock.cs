@@ -35,7 +35,7 @@ public class NixieClock : MonoBehaviour
 
     private void Start()
     {
-        StopTimer();
+        StartTimer(1f);
     }
 
     private void Update()
