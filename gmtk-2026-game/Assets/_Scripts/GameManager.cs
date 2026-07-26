@@ -202,7 +202,11 @@ public class GameManager : MonoBehaviour
                 else
                 {
                     LogState("Fire lever pulled");
-                    if (tutorialManager != null) tutorialManager.CompleteLesson("fire");
+                    if (tutorialManager != null) {
+                        tutorialManager.CompleteLesson("fire");
+                        tutorialManager.CompleteLesson("targeting");
+                    }
+
                 }
             }
 
@@ -394,7 +398,7 @@ public class GameManager : MonoBehaviour
         if (levelData.fireIntensity > 0)
         {
             eventManager.TriggerFireEvent(levelData.fireIntensity);
-            if (tutorialManager != null) tutorialManager.TriggerLesson("fire");
+            if (tutorialManager != null) tutorialManager.TriggerLesson("fire_event");
         }
         if (levelData.doBlackout)
         {
