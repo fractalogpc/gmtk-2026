@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections.Generic;
+using System.Collections;
 
 public class EventManager : MonoBehaviour
 {
@@ -20,6 +21,11 @@ public class EventManager : MonoBehaviour
 
     bool isExtinguisherHeld = false;
     bool isExtinguisherInteractable = false;
+
+    [Header("Power Outage Event")]
+    [SerializeField] private GameObject[] lightsToTurnOff;
+    [SerializeField] private GameObject[] emergencyLightsToTurnOn;
+
 
     float updateInterval = 0.25f; // Update every second
     float timer = 0f;
@@ -46,7 +52,25 @@ public class EventManager : MonoBehaviour
         }
 
         // TriggerFireEvent(4); // Example trigger with intensity 2
+        // Invoke(nameof(TriggerPowerOutageEvent), 5f); // Example trigger after 5 seconds
     }
+
+    private void Update()
+    {
+        timer += Time.deltaTime;
+        if (timer >= updateInterval)
+        {
+            timer = 0f;
+            HandleActiveFireComponents();
+
+            if (AllFiresExtinguished())
+            {
+                DropExtinguisher();
+            }
+        }
+    }
+
+    #region Fire
 
     public void TriggerFireEvent(int intensity)
     {
@@ -105,21 +129,6 @@ public class EventManager : MonoBehaviour
         return true;
     }
 
-    private void Update()
-    {
-        timer += Time.deltaTime;
-        if (timer >= updateInterval)
-        {
-            timer = 0f;
-            HandleActiveFireComponents();
-
-            if (AllFiresExtinguished())
-            {
-                DropExtinguisher();
-            }
-        }
-    }
-
     private void HandleActiveFireComponents()
     {
         for (int i = 0; i < fireComponents.Length; i++)
@@ -152,4 +161,40 @@ public class EventManager : MonoBehaviour
             fireComponents[i].SetExternalFlameInfluence(intensity);
         }
     }
+    #endregion
+
+    #region Power
+
+    public void TriggerPowerOutageEvent()
+    {
+        List<GameObject> lightsToTurnOffList = new List<GameObject>(lightsToTurnOff);
+        for (int i = lightsToTurnOffList.Count - 1; i > 0; i--)
+        {
+            int randomIndex = Random.Range(0, i + 1);
+            GameObject temp = lightsToTurnOffList[i];
+            lightsToTurnOffList[i] = lightsToTurnOffList[randomIndex];
+            lightsToTurnOffList[randomIndex] = temp;
+        }
+
+        StartCoroutine(TurnOffLightsCoroutine(lightsToTurnOffList));
+    }
+
+    private IEnumerator TurnOffLightsCoroutine(List<GameObject> lightsToTurnOffList)
+    {
+        foreach (var light in lightsToTurnOffList)
+        {
+            light.SetActive(false);
+            yield return new WaitForSeconds(Random.Range(0.01f, 0.1f)); // Adjust the delay as needed
+        }
+
+        yield return new WaitForSeconds(1f); // Wait for a moment before turning on emergency lights
+
+        foreach (var emergencyLight in emergencyLightsToTurnOn)
+        {
+            emergencyLight.SetActive(true);
+            yield return new WaitForSeconds(Random.Range(0.2f, 0.25f)); // Adjust the delay as needed
+        }
+    }
+
+    #endregion
 }
