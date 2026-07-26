@@ -321,6 +321,20 @@ public class TargetingConsole : MonoBehaviour
         }
     }
 
+    private float GetError()
+    {
+        // Account for the fact that azimuth is circular
+        float azimuthError = Mathf.Abs(gunAzimuth - pendingAzimuth);
+        if (azimuthError > 180f)
+        {
+            azimuthError = 360f - azimuthError;
+        }
+
+        float elevationError = Mathf.Abs(gunElevation - pendingElevation);
+
+        return Mathf.Max(azimuthError, elevationError);
+    }
+
     private void Update()
     {
         if (IsInteractable && !HasReceivedCoordinates
@@ -343,10 +357,10 @@ public class TargetingConsole : MonoBehaviour
         // Tutorial
         if (TutorialManager.Instance != null && !hasDoneTutorial && HasReceivedCoordinates)
         {
-            float maxError = Mathf.Max(Mathf.Abs(gunAzimuth - pendingAzimuth), Mathf.Abs(gunElevation - pendingElevation));
+            float maxError = GetError();
             if (maxError <= 5.0f)
             {
-                TutorialManager.Instance.CompleteLesson("target");
+                TutorialManager.Instance.CompleteLesson("targeting");
                 TutorialManager.Instance.TriggerLesson("fire");
                 hasDoneTutorial = true;
             }
