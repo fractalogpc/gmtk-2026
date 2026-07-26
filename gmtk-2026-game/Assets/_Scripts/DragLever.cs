@@ -59,8 +59,9 @@ public class DragLever : MonoBehaviour, IInteractable
     private bool wasAtMin;
     private bool isInteracting;
     private bool hardDisabled;
+    private bool _enabled = true;
 
-    public bool CanInteract => enabled && !hardDisabled;
+    public bool CanInteract => _enabled && !hardDisabled;
     public float Angle => currentAngle;
     public float NormalizedValue => Mathf.InverseLerp(minAngle, maxAngle, currentAngle);
 
@@ -93,7 +94,7 @@ public class DragLever : MonoBehaviour, IInteractable
 
     public InteractionSettings OnInteractStart(InteractionData data)
     {
-        if (!enabled || hardDisabled) return new InteractionSettings(lockCameraAndMovement: false);
+        if (!_enabled || hardDisabled) return new InteractionSettings(lockCameraAndMovement: false);
         isInteracting = true;
         dragCamera = Camera.main;
         savedCursorLockMode = Cursor.lockState;
@@ -142,7 +143,7 @@ public class DragLever : MonoBehaviour, IInteractable
     public void SetInteractionEnabled(bool value)
     {
         if (!value) SafeDisable();
-        else enabled = true;
+        else _enabled = true;
     }
 
     /// <summary>
@@ -172,7 +173,7 @@ public class DragLever : MonoBehaviour, IInteractable
             overrideLerpSpeed = null;
             isInteracting = false;
         }
-        enabled = false;
+        _enabled = false;
     }
 
     private void RestoreCursorPosition()

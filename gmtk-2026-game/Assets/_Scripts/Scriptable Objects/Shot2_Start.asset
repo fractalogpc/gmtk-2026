@@ -16,6 +16,5 @@ MonoBehaviour:
   dialogue:
   - The first one was a freebie. Consider it a welcome gift. Now you will have to
     load the shells yourself.
-  - Get your coordinates, then I'll explain.
-  - Don't forget to press the <color=red>red button</color> at the start of each
-    launch!
+  - Get your coordinates by pressing  the <color=red>red button</color>, then I'll
+    explain.
