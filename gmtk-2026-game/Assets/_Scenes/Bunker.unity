@@ -11864,7 +11864,7 @@ MonoBehaviour:
   - {fileID: 1246455260}
   - {fileID: 204490544}
   - {fileID: 1573066455}
-  - {fileID: 83246093}
+  blackoutSoundEmitter: {fileID: 0}
 --- !u!4 &1174991954 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 693b47c2cceadc048be3540c7000179f, type: 3}
